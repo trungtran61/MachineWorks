@@ -1,0 +1,55 @@
+<form class="form-inline form-group-sm" novalidate (ngSubmit)="onSubmit()" [formGroup]="searchForm">
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <div>
+            <mat-form-field class="form-control input-sm col-sm">
+              <input type="text" aria-label="Number" matInput formControlName="Code" [matAutocomplete]="autoSearchCode">
+            </mat-form-field>
+            <mat-autocomplete #autoSearchCode="matAutocomplete" style="position: relative;">
+              <mat-option *ngFor="let item of codeSearchResult" [value]="item">
+                {{ item }}
+              </mat-option>
+            </mat-autocomplete>
+          </div>
+        </div>
+    <div>
+      <mat-form-field class="form-control input-sm col-sm">
+        <input type="text" aria-label="Number" matInput formControlName="Name" [matAutocomplete]="autoSearchName">
+      </mat-form-field>
+      <mat-autocomplete #autoSearchName="matAutocomplete" style="position: relative;">
+        <mat-option *ngFor="let item of nameSearchResult" [value]="item">
+          {{ item }}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  </div>  
+
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+      <input type="text" class="form-control input-sm col-sm" placeholder="Item Number" formControlName="ItemNumber">
+    </div>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <input type="text" class="form-control input-sm col-sm" placeholder="Category" formControlName="CategoryID">
+  </div>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <input type="text" class="form-control" placeholder="MWID" formControlName="MWID">
+  </div>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <input type="text" class="form-control input-sm col-sm" placeholder="Radius" formControlName="Radius">
+  </div>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <input type="text" class="form-control"  placeholder="Number Of Cutters" formControlName="NumberOfCutters">
+  </div>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <input type="text" class="form-control input-sm col-sm"  placeholder="ChipBreaker" formControlName="ChipBreaker">
+  </div>
+
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <button type="button" class="btn btn-primary" (click)="GetSearchResults();">Search</button>
+  </div>
+
+  <table class="table">
+    <tr *ngFor="let item of searchResult">
+      <td>{{ item }}</td>
+    </tr>
+  </table>
+</form>
