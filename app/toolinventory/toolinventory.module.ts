@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 import { SearchToolinventoryComponent } from './search-toolinventory.component';
 import { ToolInventoryService } from './toolinventory.service';
+import { ToolSetupSheetComponent } from './tool-setup-sheet.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { ToolInventoryService } from './toolinventory.service';
     HttpModule    
   ],
   declarations: [
-    SearchToolinventoryComponent
+    SearchToolinventoryComponent,
+    ToolSetupSheetComponent
   ],
   providers: [ToolInventoryService]
 })
