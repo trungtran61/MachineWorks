@@ -7,6 +7,8 @@ import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 import { SearchToolinventoryComponent } from './search-toolinventory.component';
 import { ToolInventoryService } from './toolinventory.service';
 import { ToolSetupSheetComponent } from './tool-setup-sheet.component';
+import { OpenToolSetupSheetComponent } from './open-tool-setup-sheet.component';
+import { CuttingMethodTemplateEditorComponent } from './cutting-method-template-editor.component';
 
 @NgModule({
   imports: [
@@ -19,7 +21,9 @@ import { ToolSetupSheetComponent } from './tool-setup-sheet.component';
   ],
   declarations: [
     SearchToolinventoryComponent,
-    ToolSetupSheetComponent
+    ToolSetupSheetComponent,
+    OpenToolSetupSheetComponent,
+    CuttingMethodTemplateEditorComponent
   ],
   providers: [ToolInventoryService]
 })

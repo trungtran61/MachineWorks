@@ -1,0 +1,43 @@
+.table-borderless tbody tr td, .table-borderless tbody tr th, .table-borderless thead tr th {
+    border: none;
+}
+
+.ui-dialog-titlebar {
+    background-color: #0e4d09;
+    color: #ffffff;
+}
+
+.imgPart {
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.warningBackground {
+    background-color: crimson;
+    color: #ffffff;
+}
+
+textarea .dialog {
+    resize: none;
+    height: 600px !important;
+    overflow-y: auto !important;
+}
+
+.small
+{
+    width: 100px;
+    position: absolute;
+    z-index: 1;
+}
+
+.searchclear {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    bottom: 0;
+    height: 14px;
+    margin: auto;
+    font-size: 14px;
+    cursor: pointer;
+    color: #ccc;
+}
