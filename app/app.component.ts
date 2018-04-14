@@ -17,6 +17,7 @@ export class AppComponent {
   }
 
   logout(): void {
+    console.log ('logout');
     this.securityService.logout();   
   }   
 }

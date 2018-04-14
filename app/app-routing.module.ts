@@ -8,11 +8,13 @@ import { ToolSetupSheetComponent } from './toolinventory/tool-setup-sheet.compon
 import { OpenToolSetupSheetComponent } from './toolinventory/open-tool-setup-sheet.component';
 import { CuttingMethodTemplateEditorComponent } from './toolinventory/cutting-method-template-editor.component';
 import { LoginComponent } from './security/login.component';
+import { AuthGuardService } from './security/auth-guard.service';
 
 const routes: Routes = [
   {
     path: 'dashboard', 
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuardService]
   },
   { 
     path: 'login', 
@@ -20,22 +22,26 @@ const routes: Routes = [
   },
   { 
     path: 'searchtoolinventory', 
-    component: SearchToolinventoryComponent
+    component: SearchToolinventoryComponent,
+    canActivate: [AuthGuardService]
   },
   { 
     path: 'toolsetupsheet', 
-    component: ToolSetupSheetComponent
+    component: ToolSetupSheetComponent,
+    canActivate: [AuthGuardService]
   },
   { 
     path: 'opentoolsetupsheet', 
-    component: OpenToolSetupSheetComponent
+    component: OpenToolSetupSheetComponent,
+    canActivate: [AuthGuardService]
   },    
   { 
     path: 'cuttingmethodtemplateeditor', 
-    component: CuttingMethodTemplateEditorComponent
+    component: CuttingMethodTemplateEditorComponent,
+    canActivate: [AuthGuardService]
   },     
   {
-    path: '', redirectTo: 'login', pathMatch: 'full'
+    path: '', redirectTo: 'dashboard', pathMatch: 'full'
   },
   {
     path: '**', component: DashboardComponent

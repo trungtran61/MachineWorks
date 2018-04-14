@@ -10,6 +10,7 @@ import { ToolInventoryModule } from './toolinventory/toolinventory.module';
 import { LoginComponent } from './security/login.component';
 
 import { SecurityService } from './security/security.service';
+import { AuthGuardService } from './security/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { SecurityService } from './security/security.service';
     HttpClientModule,
     AppRoutingModule,
     ToolInventoryModule],
-  providers: [SecurityService],
+  providers: [SecurityService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
