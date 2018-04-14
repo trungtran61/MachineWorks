@@ -9,6 +9,7 @@ import { OpenToolSetupSheetComponent } from './toolinventory/open-tool-setup-she
 import { CuttingMethodTemplateEditorComponent } from './toolinventory/cutting-method-template-editor.component';
 import { LoginComponent } from './security/login.component';
 import { AuthGuardService } from './security/auth-guard.service';
+import { PagenotfoundComponent } from './pagenotfound.component';
 
 const routes: Routes = [
   {
@@ -44,7 +45,7 @@ const routes: Routes = [
     path: '', redirectTo: 'dashboard', pathMatch: 'full'
   },
   {
-    path: '**', component: DashboardComponent
+    path: '**', component: PagenotfoundComponent
   }
 ];
 
