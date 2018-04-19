@@ -1,12 +1,12 @@
 <nav class="navbar nav-justified navbar-fixed-top 
             navbar-inverse" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <a routerLink="/dashboard" class="navbar-brand">
-        Home
-      </a>
-    </div>
+  <div class="container">    
     <ul class="nav navbar-nav dropdown">
+        <li class="nav-item dropdown">
+            <a routerLink="/dashboard" class="navbar-brand">
+              Home
+            </a>
+          </li>
       <li class="nav-item dropdown" *ngIf="securityObject.canAccessToolInventory">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
@@ -15,9 +15,9 @@
         </a>
         <ul class="dropdown-menu" role="menu">
           <li role="presentation">
-            <a class="dropdown-item" routerLink="searchtoolinventory">Search Tool Inventory</a>
-            <a class="dropdown-item" routerLink="searchspec">Search Specification</a>
-            <a class="dropdown-item" routerLink="searchmaterial">Search Material</a>
+            <a class="dropdown-item" routerLink="/searchtoolinventory">Search Tool Inventory</a>
+            <a class="dropdown-item" routerLink="/searchspec">Search Specification</a>
+            <a class="dropdown-item" routerLink="/searchmaterial">Search Material</a>
           </li>
         </ul>
       </li>
@@ -29,9 +29,9 @@
         </a>
         <ul class="dropdown-menu" role="menu">
           <li role="presentation">
-            <a class="dropdown-item" routerLink="toolsetupsheet">New</a>
-            <a class="dropdown-item" routerLink="opentoolsetupsheet">Open</a>
-            <a class="dropdown-item" routerLink="cuttingmethodtemplateeditor">Cutting Method Template Editor</a>
+            <a class="dropdown-item" routerLink="/toolsetupsheet">New</a>
+            <a class="dropdown-item" routerLink="/opentoolsetupsheet">Open</a>
+            <a class="dropdown-item" routerLink="/cuttingmethodtemplateeditor">Cutting Method Template Editor</a>
           </li>
         </ul>
       </li>
@@ -43,9 +43,9 @@
         </a>
         <ul class="dropdown-menu" role="menu">
           <li role="presentation">
-            <a class="dropdown-item" routerLink="managevendors">Vendors</a>
-            <a class="dropdown-item" routerLink="managecustomers">Customers</a>
-            <a class="dropdown-item" routerLink="managemachines">Machines</a>
+            <a class="dropdown-item" routerLink="/managevendors">Vendors</a>
+            <a class="dropdown-item" routerLink="/managecustomers">Customers</a>
+            <a class="dropdown-item" routerLink="/managemachines">Machines</a>
           </li>
         </ul>
       </li>

@@ -14,6 +14,10 @@ export class AppComponent {
 
   constructor(private securityService: SecurityService, private router: Router) {
     this.securityObject = securityService.securityObject;
+    if (localStorage.getItem('securityObject'))
+    {
+      this.securityObject = JSON.parse(localStorage.getItem('securityObject'));    
+    } 
   }
 
   logout(): void {

@@ -40,7 +40,7 @@ const routes: Routes = [
     path: 'cuttingmethodtemplateeditor', 
     component: CuttingMethodTemplateEditorComponent,
     canActivate: [AuthGuardService]
-  },     
+  },      
   {
     path: '', redirectTo: 'dashboard', pathMatch: 'full'
   },

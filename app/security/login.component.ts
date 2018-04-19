@@ -24,12 +24,14 @@ export class LoginComponent implements OnInit {
   login() {
     this.securityService.login(this.user)
       .subscribe(resp => { 
-        this.securityObject = resp;
-        console.log (this.securityObject);        
+        this.securityObject = resp;        
+            
         if (this.returnUrl) {
           this.router.navigateByUrl(this.returnUrl);
         }
-        this.router.navigateByUrl('/dashboard');
+        else {
+          this.router.navigateByUrl('/dashboard');
+        }        
       });
   }  
 }

@@ -13,18 +13,15 @@ export class SecurityService {
 
   login(entity: AppUser): Observable<AppUserAuth> {
     // Initialize security object
-    this.resetSecurityObject();
-  
-    // Use object assign to update the current object
-    // NOTE: Don't create a new AppUserAuth object
-    //       because that destroys all references to object
+    this.resetSecurityObject();    
     Object.assign(this.securityObject,
       LOGIN_MOCKS.find(user => user.userName.toLowerCase() ===
                                entity.userName.toLowerCase()));
+    
     if (this.securityObject.userName !== "") {
       // Store into local storage
-      localStorage.setItem("bearerToken",
-         this.securityObject.bearerToken);
+      localStorage.setItem("bearerToken", this.securityObject.bearerToken);
+      localStorage.setItem('securityObject', JSON.stringify(this.securityObject));
     }
   
     return of<AppUserAuth>(this.securityObject);
@@ -42,6 +39,7 @@ export class SecurityService {
     this.securityObject.canAccessToolInventory = false;
     this.securityObject.canAccessAdmin = false;    
   
-    localStorage.removeItem("bearerToken");    
+    localStorage.removeItem("bearerToken");   
+    localStorage.removeItem("securityObject");    
   }
 }
