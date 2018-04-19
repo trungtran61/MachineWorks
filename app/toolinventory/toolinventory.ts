@@ -447,3 +447,33 @@
         Email: string;
         Website: string;
     }
+
+    export interface Lookup
+    {
+        Id: number;
+        Text: string;
+        Value: string;
+        Category: string;
+        Active: boolean;
+        Sequence: string;
+    }
+
+    export interface APIResponse
+    {
+        ResponseCode: number;
+        ResponseText: string;
+    }
+
+    export interface CuttingMethodTemplate
+    {
+        Id: number;
+        CuttingMethod: string;
+        Template: string;        
+    }
+
+    export interface DBResponse
+    {
+        ReturnCode: number;
+        RecordsAffected: number;
+        Message: string;
+    }

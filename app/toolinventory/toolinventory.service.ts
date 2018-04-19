@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import { ToolInventorySearch, ToolInventorySearchResults } from './toolinventory';
+import { ToolInventorySearch, ToolInventorySearchResults, LookUpRequest, Lookup } from './toolinventory';
 import { Observable } from 'rxjs/observable';
 
 import { environment } from '../../environments/environment';
@@ -9,9 +9,10 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class ToolInventoryService {
     toolInventorySearch : ToolInventorySearch;
+    lookUpRequest : LookUpRequest;
     apiUrl: string = environment.apiUrl;
     url: string = '';
-  
+    
     constructor(private http : HttpClient){        
     }   
 
@@ -32,4 +33,18 @@ export class ToolInventoryService {
         });
     }
     
+    LookUp(lookUpRequest:LookUpRequest) : Observable<Lookup[]>
+    {       
+        this.url = this.apiUrl + 'LookUp';        
+        
+        let params = new HttpParams().set("Category",lookUpRequest.Category).set("SearchTerm", lookUpRequest.SearchTerm);
+        
+        return this.http.get<Lookup[]>(this.url, {
+            headers: new HttpHeaders({
+                'Accept':'application/json',
+                'Authorization': 'my-auth-token'
+            }),
+            params : params            
+        });
+    }
 }
