@@ -114,7 +114,7 @@
         ToSnippet: string;
         ModifiedBy: string;
     }
-
+    
     export class ConvertedProgramRequest
     {
         SetUpSheetID: number;
@@ -448,6 +448,7 @@
         Website: string;
     }
 
+
     export interface Lookup
     {
         Id: number;
@@ -476,4 +477,10 @@
         ReturnCode: number;
         RecordsAffected: number;
         Message: string;
+    }
+
+    export interface CuttingMethodSnippet
+    {
+        CuttingMethod: number;
+        Snippet: string;
     }
