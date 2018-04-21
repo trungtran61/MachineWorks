@@ -465,7 +465,7 @@
         ResponseText: string;
     }
 
-    export interface CuttingMethodTemplate
+    export class CuttingMethodTemplate
     {
         Id: number;
         CuttingMethod: string;

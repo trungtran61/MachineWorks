@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import { ToolInventorySearch, ToolInventorySearchResults, LookUpRequest, Lookup } from './toolinventory';
+import { ToolInventorySearch, ToolInventorySearchResults, LookUpRequest, Lookup, CuttingMethodTemplate, APIResponse } from './toolinventory';
 import { Observable } from 'rxjs/observable';
 
 import { environment } from '../../environments/environment';
@@ -45,6 +45,30 @@ export class ToolInventoryService {
                 'Authorization': 'my-auth-token'
             }),
             params : params            
+        });
+    }
+
+    GetCuttingMethodTemplate(cuttingMethod: string ) : Observable<CuttingMethodTemplate>
+    {       
+        this.url = this.apiUrl + 'getCuttingMethodtemplate/' + cuttingMethod ;        
+        
+        return this.http.get<CuttingMethodTemplate>(this.url, {
+            headers: new HttpHeaders({
+                'Accept':'application/json',
+                'Authorization': 'my-auth-token'
+            })
+        });
+    }
+
+    SaveTemplate(cuttingMethodTemplate:CuttingMethodTemplate) : Observable<APIResponse>
+    {       
+        this.url = this.apiUrl + 'cuttingmethodtemplate/update';                
+        
+        return this.http.post<APIResponse>(this.url, cuttingMethodTemplate, {
+            headers: new HttpHeaders({
+                'Accept':'application/json',
+                'Authorization': 'my-auth-token'
+            })
         });
     }
 }
