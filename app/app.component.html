@@ -1,11 +1,7 @@
-<nav class="navbar nav-justified navbar-fixed-top 
-            navbar-inverse" role="navigation">
-  <div class="container">    
-    <ul class="nav navbar-nav dropdown">
-        <li class="nav-item dropdown">
-            <a routerLink="/dashboard" class="navbar-brand">
-              Home
-            </a>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+            <a routerLink="/dashboard" class="nav-link">Home</a>
           </li>
       <li class="nav-item dropdown" *ngIf="securityObject.canAccessToolInventory">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -50,12 +46,11 @@
         </ul>
       </li>
       <li class="nav-item dropdown">
-        <a href (onclick)="logout()" *ngIf="securityObject.isAuthenticated">
+        <a href (onclick)="logout()" *ngIf="securityObject.isAuthenticated" class="nav-link">
           Logout {{securityObject.userName}}
         </a>
       </li>
-    </ul>
-  </div>
+    </ul>  
 </nav>
 <div class="container body-content">
   <router-outlet></router-outlet>
