@@ -27,6 +27,10 @@ export class SecurityService {
     return of<AppUserAuth>(this.securityObject);
   }
   
+  getSecurityObject(){
+    return JSON.parse( localStorage.getItem('securityObject'));
+  }
+
   logout(): void {
     this.resetSecurityObject();
   }
@@ -39,7 +43,8 @@ export class SecurityService {
     this.securityObject.canAccessToolInventory = false;
     this.securityObject.canAccessAdmin = false;    
   
+    localStorage.setItem('securityObject',null);
     localStorage.removeItem("bearerToken");   
-    localStorage.removeItem("securityObject");    
+    localStorage.removeItem("securityObject");        
   }
 }

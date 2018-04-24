@@ -21,7 +21,7 @@
     <button type="button" class="btn btn-default btn-primary" (click)='SaveTemplate()'>Save</button>       
   </div>
   <div>
-    <input type="text" class="mw-info" formControlName="message" readonly style="border:0">
+    <input type="text" class="alert alert-success" formControlName="message" readonly style="border:0" [hidden]="entryForm.controls.message.value == ''">
   </div>
 </div>
 </div>

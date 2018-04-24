@@ -1,57 +1,69 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-            <a routerLink="/dashboard" class="nav-link">Home</a>
-          </li>
-      <li class="nav-item dropdown" *ngIf="securityObject.canAccessToolInventory">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          Tool Inventory
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li role="presentation">
-            <a class="dropdown-item" routerLink="/searchtoolinventory">Search Tool Inventory</a>
-            <a class="dropdown-item" routerLink="/searchspec">Search Specification</a>
-            <a class="dropdown-item" routerLink="/searchmaterial">Search Material</a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" *ngIf="securityObject.isAuthenticated" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Tool Setup Sheet
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li role="presentation">
-            <a class="dropdown-item" routerLink="/toolsetupsheet">New</a>
-            <a class="dropdown-item" routerLink="/opentoolsetupsheet">Open</a>
-            <a class="dropdown-item" routerLink="/cuttingmethodtemplateeditor">Cutting Method Template Editor</a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item dropdown" *ngIf="securityObject.canAccessAdmin">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          Manage
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li role="presentation">
-            <a class="dropdown-item" routerLink="/managevendors">Vendors</a>
-            <a class="dropdown-item" routerLink="/managecustomers">Customers</a>
-            <a class="dropdown-item" routerLink="/managemachines">Machines</a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item dropdown">
-        <a href (onclick)="logout()" *ngIf="securityObject.isAuthenticated" class="nav-link">
-          Logout {{securityObject.userName}}
-        </a>
-      </li>
-    </ul>  
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a routerLink="/dashboard" class="nav-link">Home</a>
+    </li>
+    <li class="nav-item dropdown" *ngIf="securityObject.canAccessToolInventory">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        Tool Inventory
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li role="presentation">
+          <a class="dropdown-item" routerLink="/searchtoolinventory">Search Tool Inventory</a>
+          <a class="dropdown-item" routerLink="/searchspec">Search Specification</a>
+          <a class="dropdown-item" routerLink="/searchmaterial">Search Material</a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" *ngIf="securityObject.isAuthenticated" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Tool Setup Sheet
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li role="presentation">
+          <a class="dropdown-item" routerLink="/toolsetupsheet">New</a>
+          <a class="dropdown-item" routerLink="/opentoolsetupsheet">Open</a>
+          <a class="dropdown-item" routerLink="/cuttingmethodtemplateeditor">Cutting Method Template Editor</a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown" *ngIf="securityObject.canAccessAdmin">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        Manage
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li role="presentation">
+          <a class="dropdown-item" routerLink="/managevendors">Vendors</a>
+          <a class="dropdown-item" routerLink="/managecustomers">Customers</a>
+          <a class="dropdown-item" routerLink="/managemachines">Machines</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <ul class="navbar-nav ml-auto mr-auto">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" *ngIf="securityObject.isAuthenticated" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Welcome {{securityObject.firstName}}
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href (click)="logout()" class="dropdown-item">Logout</a>
+          <a href (click)="logout()" class="dropdown-item">Change Password</a>
+          <a href (click)="logout()" class="dropdown-item">Update Profile</a>
+        </li>
+      </ul>
+    </li>
+    </ul>
 </nav>
 <div class="container body-content">
   <router-outlet></router-outlet>
+  <ng4-loading-spinner> </ng4-loading-spinner>
 </div>

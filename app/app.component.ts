@@ -9,14 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string = "MachineWorks"  
+  title: string = "MachineWork"  
   securityObject: AppUserAuth = null;
 
   constructor(private securityService: SecurityService, private router: Router) {
     this.securityObject = securityService.securityObject;
     if (localStorage.getItem('securityObject'))
     {
-      this.securityObject = JSON.parse(localStorage.getItem('securityObject'));    
+      this.securityObject = securityService.getSecurityObject();    
     } 
   }
 

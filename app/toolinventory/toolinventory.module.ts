@@ -9,6 +9,7 @@ import { ToolInventoryService } from './toolinventory.service';
 import { ToolSetupSheetComponent } from './tool-setup-sheet.component';
 import { OpenToolSetupSheetComponent } from './open-tool-setup-sheet.component';
 import { CuttingMethodTemplateEditorComponent } from './cutting-method-template-editor.component';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @NgModule({
   imports: [
@@ -25,6 +26,6 @@ import { CuttingMethodTemplateEditorComponent } from './cutting-method-template-
     OpenToolSetupSheetComponent,
     CuttingMethodTemplateEditorComponent
   ],
-  providers: [ToolInventoryService]
+  providers: [ToolInventoryService, Ng4LoadingSpinnerService]
 })
 export class ToolInventoryModule { }

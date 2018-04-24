@@ -4,6 +4,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import { ToolInventoryService } from './toolinventory.service';
 import { LookUpRequest, Lookup, CuttingMethodTemplate } from './toolinventory';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   templateUrl: './cutting-method-template-editor.component.html',
@@ -16,7 +17,7 @@ export class CuttingMethodTemplateEditorComponent implements OnInit {
   cuttingMethodTemplate: CuttingMethodTemplate = new CuttingMethodTemplate();
   errorMessage: string;
 
-  constructor(private fb: FormBuilder, private toolInventoryService: ToolInventoryService) { }
+  constructor(private fb: FormBuilder, private toolInventoryService: ToolInventoryService, private spinnerService: Ng4LoadingSpinnerService) { }
 
   createFormGroup(): void {
     this.entryForm = this.fb.group({
@@ -41,8 +42,10 @@ export class CuttingMethodTemplateEditorComponent implements OnInit {
       .subscribe(data => {
         this.lookUpRequest.Category = 'CuttingMethod';
         this.lookUpRequest.SearchTerm = data;
+        this.spinnerService.show();
         this.toolInventoryService.LookUp(this.lookUpRequest).subscribe(response => {
-          this.cuttingMethodSearchResult = response
+          this.spinnerService.hide();
+          this.cuttingMethodSearchResult = response;
         })
       })
   }
@@ -79,5 +82,6 @@ export class CuttingMethodTemplateEditorComponent implements OnInit {
 
   ngOnInit() {
     this.createFormGroup();
+    this.entryForm.get('message')
   }
 }
