@@ -5,13 +5,13 @@
   <div class="btn-group" style="width: 250px">
     <mat-form-field class="form-control input-sm col-sm btn-group">
       <input type="text" matInput formControlName="cuttingMethod" [matAutocomplete]="autoCuttingMethod" #cuttingMethod>
-      <span id="searchclear" class="glyphicon glyphicon-remove-circle" (click)="cuttingMethod.value=''"></span>          
-    </mat-form-field>
+      <span id="searchclear" class="glyphicon glyphicon-remove-circle" (click)="cuttingMethod.value=''"></span>              
     <mat-autocomplete #autoCuttingMethod="matAutocomplete" [displayWith]="displayFn" >
-      <mat-option *ngFor="let item of cuttingMethodSearchResult" [value]="item" (onSelectionChange)="GetCuttingMethodTemplate(item)">
+      <mat-option *ngFor="let item of cuttingMethodSearchResult" [value]="item" (onSelectionChange)="GetCuttingMethodTemplate(item)" >
         {{ item.Text }}
       </mat-option>
     </mat-autocomplete>    
+  </mat-form-field>
   </div>
 </div>
 <div class="form-group col-md-9">

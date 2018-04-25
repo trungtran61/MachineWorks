@@ -48,7 +48,7 @@
   </ul>
   <ul class="navbar-nav ml-auto mr-auto">
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" *ngIf="securityObject.isAuthenticated" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+      <a class="nav-link dropdown-toggle" *ngIf="securityObject.isAuthenticated" href="#" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         Welcome {{securityObject.firstName}}
         <b class="caret"></b>
@@ -56,12 +56,27 @@
       <ul class="dropdown-menu" role="menu">
         <li>
           <a href (click)="logout()" class="dropdown-item">Logout</a>
+        </li>
+        <li>
           <a href (click)="logout()" class="dropdown-item">Change Password</a>
+        </li>
+        <li>
           <a href (click)="logout()" class="dropdown-item">Update Profile</a>
+        </li>
+        <div class="dropdown-divider"></div>
+        <li class="dropdown-item dropdown-submenu">
+          <a data-toggle="dropdown">Admin</a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" routerLink="/security/manageusers">Manage Users</a>
+              <a class="dropdown-item" routerLink="/security/manageroles">Manage Roles</a>
+              <a class="dropdown-item" routerLink="/security/managepermissions">Manage Permissions</a>
+            </li>
+          </ul>
         </li>
       </ul>
     </li>
-    </ul>
+  </ul>
 </nav>
 <div class="container body-content">
   <router-outlet></router-outlet>
