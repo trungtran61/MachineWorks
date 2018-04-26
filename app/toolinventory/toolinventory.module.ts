@@ -9,7 +9,31 @@ import { ToolInventoryService } from './toolinventory.service';
 import { ToolSetupSheetComponent } from './tool-setup-sheet.component';
 import { OpenToolSetupSheetComponent } from './open-tool-setup-sheet.component';
 import { CuttingMethodTemplateEditorComponent } from './cutting-method-template-editor.component';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from '../security/auth-guard.service';
+
+const routes = [
+  { 
+    path: 'searchtoolinventory', 
+    component: SearchToolinventoryComponent,
+    canActivate: [AuthGuardService]
+  },
+  { 
+    path: 'toolsetupsheet', 
+    component: ToolSetupSheetComponent,
+    canActivate: [AuthGuardService]
+  },
+  { 
+    path: 'opentoolsetupsheet', 
+    component: OpenToolSetupSheetComponent,
+    canActivate: [AuthGuardService]
+  },    
+  { 
+    path: 'cuttingmethodtemplateeditor', 
+    component: CuttingMethodTemplateEditorComponent,
+    canActivate: [AuthGuardService]
+  }      
+];
 
 @NgModule({
   imports: [
@@ -18,7 +42,8 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
     MatAutocompleteModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule    
+    HttpModule,
+    RouterModule.forChild(routes)    
   ],
   declarations: [
     SearchToolinventoryComponent,
@@ -26,6 +51,6 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
     OpenToolSetupSheetComponent,
     CuttingMethodTemplateEditorComponent
   ],
-  providers: [ToolInventoryService, Ng4LoadingSpinnerService]
+  providers: [ToolInventoryService]
 })
 export class ToolInventoryModule { }

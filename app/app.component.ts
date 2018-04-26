@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppUserAuth } from './security/app-user-auth';
+import { SecurityUserAuth } from './security/security-user-auth';
 import { SecurityService } from './security/security.service';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title: string = "MachineWork"  
-  securityObject: AppUserAuth = null;
+  securityObject: SecurityUserAuth = null;
 
   constructor(private securityService: SecurityService, private router: Router) {
     this.securityObject = securityService.securityObject;

@@ -1,0 +1,26 @@
+<div class="table-responsive">
+    <table class="table"
+           *ngIf="users && users.length">
+        <thead>
+            <tr>               
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Active</th>                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">                
+                <td><a routerLink="/manageuser, user.ID"                       >
+                    {{user.FirstName + ' ' + user.LastName}}
+                    </a>
+                </td>
+                <td>{{ user.UserName }}</td>
+                <td>{{ user.Email }}</td> 
+                <td>
+                    <input type="checkbox" name="chkActive" checked="{{user.Active=='True' ? 'Checked':''}}" /> 
+                </td>                               
+            </tr>
+        </tbody>
+    </table>
+</div>
