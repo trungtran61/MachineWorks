@@ -1,4 +1,4 @@
-export class AppUserAuth {
+export class SecurityUserAuth {
   userName: string = "";
   bearerToken: string = "";
   firstName: string = "";

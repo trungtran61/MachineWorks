@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +12,8 @@ import { LoginComponent } from './security/login.component';
 import { SecurityService } from './security/security.service';
 import { AuthGuardService } from './security/auth-guard.service';
 import { PagenotfoundComponent } from './pagenotfound.component';
+import { SecurityModule } from './security/security.module';
+import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module'; 
 
 @NgModule({
   declarations: [
@@ -25,12 +26,16 @@ import { PagenotfoundComponent } from './pagenotfound.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule,
+    HttpClientModule,    
+    NgHttpLoaderModule,
     ToolInventoryModule,
-    Ng4LoadingSpinnerModule.forRoot() ],
+    SecurityModule,
+    AppRoutingModule
+  ],
 
-  providers: [SecurityService, AuthGuardService],
+  providers: [
+    SecurityService, AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

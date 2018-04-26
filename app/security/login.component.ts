@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppUser } from './app-user';
-import { AppUserAuth } from './app-user-auth';
+import { SecurityUser } from './security-user';
+import { SecurityUserAuth } from './security-user-auth';
 import { SecurityService } from './security.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,8 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: AppUser = new AppUser();
-  securityObject: AppUserAuth = null;
+  user: SecurityUser = new SecurityUser();
+  securityObject: SecurityUserAuth = null;
   returnUrl: string;
   
   constructor(private securityService: SecurityService,
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');   
   }  
 
-  login() {
+  login() { 
     this.securityService.login(this.user)
       .subscribe(resp => { 
         this.securityObject = resp;        

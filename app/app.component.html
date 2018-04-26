@@ -10,7 +10,7 @@
         <b class="caret"></b>
       </a>
       <ul class="dropdown-menu" role="menu">
-        <li role="presentation">
+        <li role="presentation">            
           <a class="dropdown-item" routerLink="/searchtoolinventory">Search Tool Inventory</a>
           <a class="dropdown-item" routerLink="/searchspec">Search Specification</a>
           <a class="dropdown-item" routerLink="/searchmaterial">Search Material</a>
@@ -68,9 +68,9 @@
           <a data-toggle="dropdown">Admin</a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" routerLink="/security/manageusers">Manage Users</a>
-              <a class="dropdown-item" routerLink="/security/manageroles">Manage Roles</a>
-              <a class="dropdown-item" routerLink="/security/managepermissions">Manage Permissions</a>
+              <a class="dropdown-item" routerLink="manageusers">Manage Users</a>
+              <a class="dropdown-item" routerLink="manageroles">Manage Roles</a>
+              <a class="dropdown-item" routerLink="managepermissions">Manage Permissions</a>
             </li>
           </ul>
         </li>
@@ -79,6 +79,6 @@
   </ul>
 </nav>
 <div class="container body-content">
-  <router-outlet></router-outlet>
-  <ng4-loading-spinner> </ng4-loading-spinner>
+  <router-outlet></router-outlet> 
+  <spinner spinner='sk-three-bounce'></spinner>
 </div>

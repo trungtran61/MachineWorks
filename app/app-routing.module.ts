@@ -20,27 +20,7 @@ const routes: Routes = [
   { 
     path: 'login', 
     component: LoginComponent
-  },
-  { 
-    path: 'searchtoolinventory', 
-    component: SearchToolinventoryComponent,
-    canActivate: [AuthGuardService]
-  },
-  { 
-    path: 'toolsetupsheet', 
-    component: ToolSetupSheetComponent,
-    canActivate: [AuthGuardService]
-  },
-  { 
-    path: 'opentoolsetupsheet', 
-    component: OpenToolSetupSheetComponent,
-    canActivate: [AuthGuardService]
-  },    
-  { 
-    path: 'cuttingmethodtemplateeditor', 
-    component: CuttingMethodTemplateEditorComponent,
-    canActivate: [AuthGuardService]
-  },      
+  },  
   {
     path: '', redirectTo: 'dashboard', pathMatch: 'full'
   },
