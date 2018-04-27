@@ -55,7 +55,7 @@ export class CuttingMethodTemplateEditorComponent implements OnInit {
     console.log(item.Text);
     this.toolInventoryService.GetCuttingMethodTemplate(item.Text).subscribe(response => {
       this.entryForm.get('snippet').setValue(response[0]);
-    })
+    });
   }
 
   SaveTemplate(): void {
