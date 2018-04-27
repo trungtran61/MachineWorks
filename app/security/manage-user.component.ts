@@ -15,21 +15,20 @@ export class ManageUserComponent implements OnInit {
   user: User;
   errorMessage: string;
   userId: number;
+  pageTitle: string = 'New User';
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private secSvc: SecurityService) { }
 
   createFormGroup(): void {
-    this.entryForm = this.fb.group({
-      pageTitle: 'New User',
+    this.entryForm = this.fb.group({     
       userName: '',
       active: '',
       firstName: '',
       lastName: '',
       email: '',
       address: '',
-    });
-   
-    this.entryForm.get('pageTitle').disable();
+    });   
+    
   }
 
   ngOnInit() {
@@ -41,7 +40,7 @@ export class ManageUserComponent implements OnInit {
     if (userId != 0)
     {
       this.entryForm.get('userName').disable() ;     
-      this.entryForm.get('pageTitle').setValue('Manage User');
+      this.pageTitle = 'Manage User';
 
       this.secSvc.getUser(userId)
         .subscribe(user => {
@@ -59,7 +58,7 @@ export class ManageUserComponent implements OnInit {
       }
     else
     {
-      this.entryForm.get('pageTitle').setValue('New User');
+      this.pageTitle = 'New User';
     }
   }
 }
