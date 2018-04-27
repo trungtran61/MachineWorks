@@ -1,28 +1,28 @@
 export class User
 {
-    ID: number;
+    Id: number;
     UserName: string;
     FirstName: string;
     LastName: string;
     Email: string;
     DateCreated?: string;
-    Active: string;
+    Active: boolean;
 }
 
 export class Role
 {
-    ID: number;
+    Id: number;
     Name: string;
     DisplayName: string;
-    Active: string;
+    Active: boolean;
 }
 
 export class Permission
 {
-    ID: number;
+    Id: number;
     Name: string;
     DisplayName: string;
-    Active: string;
+    Active: boolean;
 }
 
 export class GetListRequest
