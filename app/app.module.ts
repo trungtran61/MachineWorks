@@ -31,8 +31,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
     ToolInventoryModule,
     SecurityModule,
     AppRoutingModule
-  ],
-
+  ],  
   providers: [
     SecurityService, AuthGuardService
   ],

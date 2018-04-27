@@ -11,6 +11,7 @@ import { ManagePermissionsComponent } from './manage-permissions.component';
 import { ManageUserComponent } from './manage-user.component';
 import { ManageRoleComponent } from './manage-role.component';
 import { ManagePermissionComponent } from './manage-permission.component';
+import { IconsModule } from '../icons/icons.module';
 
 const routes = [
   {
@@ -30,7 +31,8 @@ const routes = [
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    IconsModule
   ],
   declarations: [
     ChangePasswordComponent,
