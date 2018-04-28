@@ -3,8 +3,9 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import { SecurityService } from './security.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from './security';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   templateUrl: './manage-user.component.html',
@@ -36,7 +37,10 @@ export class ManageUserComponent implements OnInit {
     });
   }
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private secSvc: SecurityService) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private fb: FormBuilder,
+    private secSvc: SecurityService) { }
 
   createFormGroup(): void {
     this.entryForm = this.fb.group({
@@ -94,18 +98,36 @@ export class ManageUserComponent implements OnInit {
     this.entryForm.setControl('roles', this._roles);
   }
 
-  setRole(roleIndex: number)
-  {
-    console.log(this.userId);
-    var roles = this.entryForm.get('roles') as FormArray;
-    var item = roles.at(roleIndex) as FormGroup;
-    //console.log(roles);
+  setRole(roleIndex: number) {
+    //console.log(this.userId);
+    //var roles = this.entryForm.get('roles') as FormArray;
+    var roles = this.roles;
+    var arrRoles = [];
+    this.roles.value.forEach(roleElement => {
+      if (roleElement.chkRole)
+         arrRoles.push(roleElement.role);
+    });  
+  
     //console.log(item.controls.role.value);
-    
-    this.secSvc.setUserRole(this.userId, roles.value)
+    this.secSvc.setUserRole(this.userId, arrRoles)
     .subscribe(
-      (user: User) => this.onUserRetrieved(user),
-      error => this.errorMessage = <any>error
-    );    
+      res => {
+        console.log(res);
+      },
+      err => {
+        this.handleError(err);
+      }
+    );;     
+  }
+
+  onSaveComplete(): void {
+    // Reset the form to clear the flags
+    this.entryForm.reset();
+    this.router.navigate(['/users']);
+  }
+
+  private handleError(error: Response): Observable<any> {
+    console.error(error);
+    return Observable.throw(error || 'Server error');
   }
 }
