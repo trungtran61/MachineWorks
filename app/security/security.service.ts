@@ -54,9 +54,24 @@ export class SecurityService {
     if (id === 0) {
       return Observable.of(this.initializeUser());
     };
-    let params = new HttpParams().set("ID", id.toString());
+    let params = new HttpParams().set("id", id.toString());
 
     return this.http.get<User>(this.apiUrl + 'GetUser', {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Authorization': 'my-auth-token'
+      }),
+      params: params
+    });
+  }
+
+  setUserRole(id:number, roles): Observable<User>
+  {
+    console.log(roles[1]);
+
+    let params = new HttpParams().set("id", id.toString());
+
+    return this.http.get<User>(this.apiUrl + 'SetUserRole', {
       headers: new HttpHeaders({
         'Accept': 'application/json',
         'Authorization': 'my-auth-token'
@@ -73,7 +88,9 @@ export class SecurityService {
       FirstName: null,
       LastName: null,
       Email: null,
-      Active: false
+      Active: false,
+      Roles: '',
+      Permissions: ''
     };
   }
   logout(): void {

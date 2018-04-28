@@ -7,6 +7,8 @@ export class User
     Email: string;
     DateCreated?: string;
     Active: boolean;
+    Roles: string;
+    Permissions: string;
 }
 
 export class Role
