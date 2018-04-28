@@ -9,6 +9,8 @@ import { LOGIN_MOCKS } from './login-mocks';
 import { SecurityUser } from './security-user';
 import { GetListRequest, User } from './security';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
+import { Headers, RequestOptions } from '@angular/http';
+import { Subscription } from 'rxjs/Subscription';
 
 @Injectable()
 export class SecurityService {
@@ -65,20 +67,14 @@ export class SecurityService {
     });
   }
 
-  setUserRole(id:number, roles): Observable<User>
-  {
-    console.log(roles[1]);
-
-    let params = new HttpParams().set("id", id.toString());
-
-    return this.http.get<User>(this.apiUrl + 'SetUserRole', {
-      headers: new HttpHeaders({
-        'Accept': 'application/json',
-        'Authorization': 'my-auth-token'
-      }),
-      params: params
-    });
+  setUserRole(id: number, roles) {
+    return (this.http.post(this.apiUrl + 'SetUserRoles', { id: id, roles: JSON.stringify(roles) }));          
   }
+
+  private extractData(response: Response) {
+    let body = response.json();
+    return body || {};
+  }  
 
   initializeUser(): User {
     // Return an initialized object
