@@ -13,7 +13,7 @@ import { SecurityService } from './security/security.service';
 import { AuthGuardService } from './security/auth-guard.service';
 import { PagenotfoundComponent } from './pagenotfound.component';
 import { SecurityModule } from './security/security.module';
-import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module'; 
+import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 
 @NgModule({
   declarations: [

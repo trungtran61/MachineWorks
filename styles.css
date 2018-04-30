@@ -20,3 +20,8 @@ to {
   transform: translate(0px);
 }
 }
+
+validation-messages div {
+  color: #E82C0C;
+  margin: 3px 0;
+}
