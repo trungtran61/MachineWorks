@@ -17,7 +17,7 @@
                     <table class="table table-bordered">
                       <tr [formGroupName]="i" *ngFor="let role of roles.controls; let i=index">
                         <td>                          
-                          <input id="{{ 'chk'+i }}" type="checkbox" formControlName="chkRole" (change)="setRole(i)" />
+                          <input id="{{ 'chk'+i }}" type="checkbox" formControlName="chkRole" (change)="updateUserRoles(i)" />
                           <label style="height: 1px;">
                             <input style="border: 0;" [id]="i" type="text" formControlName="role" value="{{ roles.get(i + '.role')?.value }}" />                            
                           </label>
@@ -44,7 +44,7 @@
                     <input type="text" class="form-control" id="username" formControlName='userName' placeholder="User Name">
                   </div>
                   <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="Active" formControlName='active'>
+                    <input type="checkbox" class="form-check-input" id="Active" formControlName='active' (change)="updateUserStatus()" >                       
                     <label class="form-check-label" for="Active">Active</label>
                   </div>
                 </div>
@@ -103,3 +103,4 @@
     <br>Touched: {{ entryForm.touched }}
     <br>Valid: {{ entryForm.valid }}
     <br>Value: {{ entryForm.value | json }}
+    <br>Value: {{ entryForm.get('active').value ? 'checked':''  }}

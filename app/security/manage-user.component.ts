@@ -80,13 +80,15 @@ export class ManageUserComponent implements OnInit {
     }
     this.user = user;
     console.log(JSON.parse(user.Roles));
+    console.log(user.Active);
+
     this.entryForm.patchValue({
       userName: user.UserName,
       firstName: user.FirstName,
       lastName: user.LastName,
-      active: user.Active,
-      email: user.Email
-    });
+      email: user.Email,
+      active: user.Active
+    });    
 
     let roles = JSON.parse(this.user.Roles);
     var i: number;
@@ -98,7 +100,7 @@ export class ManageUserComponent implements OnInit {
     this.entryForm.setControl('roles', this._roles);
   }
 
-  setRole(roleIndex: number) {
+  updateUserRoles(roleIndex: number) {
     //console.log(this.userId);
     //var roles = this.entryForm.get('roles') as FormArray;
     var roles = this.roles;
@@ -109,7 +111,19 @@ export class ManageUserComponent implements OnInit {
     });  
   
     //console.log(item.controls.role.value);
-    this.secSvc.setUserRole(this.userId, arrRoles)
+    this.secSvc.updateUserRoles(this.userId, arrRoles)
+    .subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        this.handleError(err);
+      }
+    );;     
+  }
+
+  updateUserStatus() {    
+    this.secSvc.updateUserStatus(this.userId, this.entryForm.get('active').value)
     .subscribe(
       res => {
         console.log(res);

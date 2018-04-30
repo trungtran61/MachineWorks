@@ -67,8 +67,12 @@ export class SecurityService {
     });
   }
 
-  setUserRole(id: number, roles) {
-    return (this.http.post(this.apiUrl + 'SetUserRoles', { id: id, roles: JSON.stringify(roles) }));          
+  updateUserRoles(id: number, roles) {
+    return (this.http.post(this.apiUrl + 'UpdateUserRoles', { id: id, roles: JSON.stringify(roles) }));          
+  }
+
+  updateUserStatus(id: number, active: boolean) {
+    return (this.http.post(this.apiUrl + 'UpdateUserStatus', { id: id, active: active }));          
   }
 
   private extractData(response: Response) {
