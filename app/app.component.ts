@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener  } from '@angular/core';
 import { SecurityUserAuth } from './security/security-user-auth';
 import { SecurityService } from './security/security.service';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @HostListener("window:onbeforeunload",["$event"])
   title: string = "MachineWork"  
   securityObject: SecurityUserAuth = null;
 
@@ -19,6 +20,10 @@ export class AppComponent {
       this.securityObject = securityService.getSecurityObject();    
     } 
   }
+
+  clearLocalStorage(event){
+    localStorage.clear();
+}
 
   logout(): void {
     console.log ('logout');
