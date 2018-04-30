@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import { SecurityService } from './security.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from './security';
 import { Observable } from 'rxjs/Observable';
+import { ValidationService } from '../shared/validation.service';
 
 @Component({
   templateUrl: './manage-user.component.html',
@@ -40,15 +41,17 @@ export class ManageUserComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private secSvc: SecurityService) { }
+    private secSvc: SecurityService) {     
+    }
 
   createFormGroup(): void {
     this.entryForm = this.fb.group({
-      userName: '',
-      active: '',
-      firstName: '',
-      lastName: '',
-      email: '',
+      UserName:  ['', Validators.required],
+      Password: ['', [Validators.required, ValidationService.passwordValidator]],
+      Active: '',
+      FirstName:  ['', Validators.required],
+      LastName:  ['', Validators.required],
+      Email: ['', [Validators.required, ValidationService.emailValidator]],
       roles: this.fb.array([this.buildRole()])
     });
   }
@@ -60,7 +63,7 @@ export class ManageUserComponent implements OnInit {
     this.userId = userId;
 
     if (userId != 0) {
-      this.entryForm.get('userName').disable();
+      this.entryForm.get('UserName').disable();
       this.pageTitle = 'Manage User';
     }
     else {
@@ -79,15 +82,13 @@ export class ManageUserComponent implements OnInit {
       this.entryForm.reset();
     }
     this.user = user;
-    console.log(JSON.parse(user.Roles));
-    console.log(user.Active);
-
+   
     this.entryForm.patchValue({
-      userName: user.UserName,
-      firstName: user.FirstName,
-      lastName: user.LastName,
-      email: user.Email,
-      active: user.Active
+      UserName: user.UserName,
+      FirstName: user.FirstName,
+      LastName: user.LastName,
+      Email: user.Email,
+      Active: user.Active
     });    
 
     let roles = JSON.parse(this.user.Roles);
@@ -123,7 +124,20 @@ export class ManageUserComponent implements OnInit {
   }
 
   updateUserStatus() {    
-    this.secSvc.updateUserStatus(this.userId, this.entryForm.get('active').value)
+    this.secSvc.updateUserStatus(this.userId, this.entryForm.get('Active').value)
+    .subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        this.handleError(err);
+      }
+    );;     
+  }
+
+  updateUserProfile() {    
+    let user = Object.assign({}, this.user, this.entryForm.value);    
+    this.secSvc.updateUserProfile(user)
     .subscribe(
       res => {
         console.log(res);

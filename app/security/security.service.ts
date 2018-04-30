@@ -12,11 +12,14 @@ import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Subscription } from 'rxjs/Subscription';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable()
 export class SecurityService {
   securityObject: SecurityUserAuth = new SecurityUserAuth();
-
-  apiUrl: string = environment.secApiUrl;
+  apiUrl: string = environment.secApiUrl;  
 
   constructor(private http: HttpClient) { }
 
@@ -73,6 +76,11 @@ export class SecurityService {
 
   updateUserStatus(id: number, active: boolean) {
     return (this.http.post(this.apiUrl + 'UpdateUserStatus', { id: id, active: active }));          
+  }
+
+  updateUserProfile(user: User) {
+    console.log(JSON.stringify(user));
+    return (this.http.post(this.apiUrl + 'UpdateUserProfile', JSON.stringify(user), httpOptions));          
   }
 
   private extractData(response: Response) {

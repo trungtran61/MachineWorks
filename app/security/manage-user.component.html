@@ -17,7 +17,7 @@
                     <table class="table table-bordered">
                       <tr [formGroupName]="i" *ngFor="let role of roles.controls; let i=index">
                         <td>                          
-                          <input id="{{ 'chk'+i }}" type="checkbox" formControlName="chkRole" (change)="updateUserRoles(i)" />
+                          <input id="{{ 'chk'+i }}" type="checkbox" formControlName="chkRole"  />
                           <label style="height: 1px;">
                             <input style="border: 0;" [id]="i" type="text" formControlName="role" value="{{ roles.get(i + '.role')?.value }}" />                            
                           </label>
@@ -41,28 +41,30 @@
                 <div class="col-md-6 mb-3">
                   <label for="username">Username</label>
                   <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="username" formControlName='userName' placeholder="User Name">
-                  </div>
+                    <input type="text" class="form-control" id="username" formControlName='UserName' placeholder="User Name">
+                    <validation-messages [control]="entryForm.controls.UserName"></validation-messages>
+                  </div>                  
                   <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="Active" formControlName='active' (change)="updateUserStatus()" >                       
+                    <input type="checkbox" class="form-check-input" id="Active" formControlName='Active' >                       
                     <label class="form-check-label" for="Active">Active</label>
                   </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" required formControlName='Password'>
+                  <validation-messages [control]="entryForm.controls.Password"></validation-messages>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label for="firstName">First Name</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="First Name" required formControlName='firstName'>
-                  <div class="invalid-feedback">
-                    First name is required.
-                  </div>
+                  <input type="text" class="form-control" id="firstName" placeholder="First Name" required formControlName='FirstName'>
+                  <validation-messages [control]="entryForm.controls.FirstName"></validation-messages>
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="lastName">Last Name</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="Last Name" required formControlName='lastName'>
-                  <div class="invalid-feedback">
-                    Last name is required.
-                  </div>
+                  <input type="text" class="form-control" id="lastName" placeholder="Last Name" required formControlName='LastName'>
+                  <validation-messages [control]="entryForm.controls.LastName"></validation-messages>
                 </div>
               </div>
 
@@ -72,17 +74,17 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">@</span>
                   </div>
-                  <input type="email" class="form-control" id="email" placeholder="you@example.com" formControlName='email'>
-                  <div class="invalid-feedback">
-                    Please enter a valid email address.
-                  </div>
+                  <input type="email" class="form-control" id="email" placeholder="you@example.com" formControlName='Email'>                  
                 </div>
+                <validation-messages [control]="entryForm.controls.Email" ></validation-messages>
               </div>
             </div>
           </div>
           <div class="panel-footer">
             <div class="row col-md-8 mb-2">
-              <button class="btn btn-primary btn-md btn-block" type="button">{{userId != '0' ? 'Update User': 'Create User'}}</button>
+              <button class="btn btn-primary btn-md btn-block" type="button"
+                [disabled]="!entryForm.valid"
+                 (click)="updateUserProfile()">{{userId != '0' ? 'Update User': 'Create User'}}</button>
             </div>
             <div class="row col-md-3">
               <div class="input-group" [routerLink]="['/manageusers']" [queryParamsHandling]="true">
@@ -97,10 +99,4 @@
           </div>
         </div>
       </form>
-    </div>
-    <br>
-    <br>Dirty: {{ entryForm.dirty }}
-    <br>Touched: {{ entryForm.touched }}
-    <br>Valid: {{ entryForm.valid }}
-    <br>Value: {{ entryForm.value | json }}
-    <br>Value: {{ entryForm.get('active').value ? 'checked':''  }}
+    </div> 
