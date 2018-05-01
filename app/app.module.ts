@@ -14,6 +14,7 @@ import { AuthGuardService } from './security/auth-guard.service';
 import { PagenotfoundComponent } from './pagenotfound.component';
 import { SecurityModule } from './security/security.module';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
+import { RouterExtService } from './router-ext.service';
 
 @NgModule({
   declarations: [
@@ -33,8 +34,10 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
     AppRoutingModule
   ],  
   providers: [
-    SecurityService, AuthGuardService
+    SecurityService, AuthGuardService,RouterExtService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private routerExtService: RouterExtService){}
+}

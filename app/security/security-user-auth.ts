@@ -1,4 +1,5 @@
 export class SecurityUserAuth {
+  userId: number = 0;
   userName: string = "";
   bearerToken: string = "";
   firstName: string = "";
