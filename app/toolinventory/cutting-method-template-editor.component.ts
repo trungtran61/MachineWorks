@@ -14,15 +14,14 @@ export class CuttingMethodTemplateEditorComponent implements OnInit {
   cuttingMethodSearchResult = [{}];
   lookUpRequest: LookUpRequest = new LookUpRequest();
   cuttingMethodTemplate: CuttingMethodTemplate = new CuttingMethodTemplate();
-  errorMessage: string;
+  errorMessage: string = '';
 
   constructor(private fb: FormBuilder, private toolInventoryService: ToolInventoryService) { }
 
   createFormGroup(): void {
     this.entryForm = this.fb.group({
       cuttingMethod: '',
-      snippet: '',
-      message: '',
+      snippet: '',     
       hdnCuttingMethodID: '',
       autoCuttingMethod: ''
     });
@@ -74,11 +73,10 @@ export class CuttingMethodTemplateEditorComponent implements OnInit {
 
   onSaveComplete(): void {    
     //this.entryForm.reset();
-    this.entryForm.get('message').setValue('Template Updated.')
+    this.errorMessage= 'Template Updated.'
   }
 
   ngOnInit() {
-    this.createFormGroup();
-    this.entryForm.get('message')
+    this.createFormGroup();   
   }
 }
