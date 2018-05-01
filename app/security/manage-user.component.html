@@ -12,9 +12,10 @@
                 <div class="card-header bg-secondary text-white">
                   Roles
                 </div>
-                <div class="card-body">
-                  <div formArrayName="roles">
-                    <table class="table table-bordered">
+                <div class="card-body" style="height: 400px;overflow-y:auto;">
+                  <div formArrayName="roles" >
+                    <table>
+                      <tbody>
                       <tr [formGroupName]="i" *ngFor="let role of roles.controls; let i=index">
                         <td>                          
                           <input id="{{ 'chk'+i }}" type="checkbox" formControlName="chkRole"  />
@@ -23,15 +24,9 @@
                           </label>
                         </td>
                       </tr>
+                    </tbody>
                     </table>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="input-group">
-                        <button type="button" class="btn btn-secondary btn-sm btn-block">Add Roles</button>
-                      </div>
-                    </div>
-                  </div>
+                  </div>                 
                 </div>
               </div>
             </div>

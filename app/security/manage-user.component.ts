@@ -4,9 +4,10 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import { SecurityService } from './security.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from './security';
+import { User, UserRole } from './security';
 import { Observable } from 'rxjs/Observable';
 import { ValidationService } from '../shared/validation.service';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   templateUrl: './manage-user.component.html',
@@ -31,10 +32,10 @@ export class ManageUserComponent implements OnInit {
     });
   }
 
-  addRole(role: string): FormGroup {
+  addRole(role: UserRole): FormGroup {
     return this.fb.group({
-      role: role,
-      chkRole: true
+      role: role.Name,
+      chkRole: role.Assigned
     });
   }
 
@@ -45,6 +46,7 @@ export class ManageUserComponent implements OnInit {
     }
 
   createFormGroup(): void {
+    /*
     this.entryForm = this.fb.group({
       UserName:  ['', Validators.required],
       Password: ['', [Validators.required, ValidationService.passwordValidator]],
@@ -54,6 +56,16 @@ export class ManageUserComponent implements OnInit {
       Email: ['', [Validators.required, ValidationService.emailValidator]],
       roles: this.fb.array([this.buildRole()])
     });
+    */
+   this.entryForm = this.fb.group({
+    UserName:  '',
+    Password: '',
+    Active: '',
+    FirstName:  '',
+    LastName: '',
+    Email: '',
+    roles: this.fb.array([this.buildRole()])
+  });
   }
 
   ngOnInit() {
@@ -73,7 +85,11 @@ export class ManageUserComponent implements OnInit {
     this.secSvc.getUser(userId)
       .subscribe(
         (user: User) => this.onUserRetrieved(user),
-        error => this.errorMessage = <any>error
+        error => 
+        {
+          console.log(error);
+          this.errorMessage = <any>error;
+        }
       );
   }
 
@@ -82,7 +98,8 @@ export class ManageUserComponent implements OnInit {
       this.entryForm.reset();
     }
     this.user = user;
-   
+    console.log(user);
+
     this.entryForm.patchValue({
       UserName: user.UserName,
       FirstName: user.FirstName,
@@ -91,11 +108,14 @@ export class ManageUserComponent implements OnInit {
       Active: user.Active
     });    
 
-    let roles = JSON.parse(this.user.Roles);
-    var i: number;
+    let roles = this.user.Roles;
+    //let roles = this.user.Roles;
+    console.log(roles);    
+    var i: number;    
 
     for (i = 0; i < roles.length; i++) {
-      this._roles.push(this.addRole(roles[i]));
+      console.log(roles[i]);
+      this._roles.push(this.addRole(Object.assign(new UserRole,roles[i])));
     }
 
     this.entryForm.setControl('roles', this._roles);

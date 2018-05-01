@@ -19,6 +19,12 @@ export class Role
     Active: boolean;
 }
 
+export class UserRole
+{
+    Name: string;
+    Assigned: boolean;
+}
+
 export class Permission
 {
     Id: number;
