@@ -13,11 +13,12 @@ import { ManageRoleComponent } from './manage-role.component';
 import { ManagePermissionComponent } from './manage-permission.component';
 import { IconsModule } from '../icons/icons.module';
 import { ValidationMessagesComponent } from '../shared/validation-messages.component';
+import { UpdateProfileComponent } from './update-profile.component';
 
 const routes = [
   {
-    path: 'changepassword',
-    component: ChangePasswordComponent,
+    path: 'updateprofile',
+    component: UpdateProfileComponent,
     canActivate: [AuthGuardService]
   },
   { path: 'manageusers', component: ManageUsersComponent, canActivate: [AuthGuardService] },
@@ -43,7 +44,8 @@ const routes = [
     ManageUserComponent,
     ManageRoleComponent,
     ManagePermissionComponent,
-    ValidationMessagesComponent
+    ValidationMessagesComponent,
+    UpdateProfileComponent
   ]
 })
 export class SecurityModule { }
