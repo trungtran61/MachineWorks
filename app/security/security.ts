@@ -2,13 +2,15 @@ export class User
 {
     Id: number;
     UserName: string;
+    Password: string;
     FirstName: string;
     LastName: string;
     Email: string;
     DateCreated?: string;
     Active: boolean;
-    Roles: string;
+    Roles: UserRole[];
     Permissions: string;
+    UpdateRoles: boolean;
 }
 
 export class Role

@@ -18,9 +18,9 @@
                       <tbody>
                       <tr [formGroupName]="i" *ngFor="let role of roles.controls; let i=index">
                         <td>                          
-                          <input id="{{ 'chk'+i }}" type="checkbox" formControlName="chkRole"  />
+                          <input id="{{ 'chk'+i }}" type="checkbox" formControlName="Assigned"  />
                           <label style="height: 1px;">
-                            <input style="border: 0;" [id]="i" type="text" formControlName="role" value="{{ roles.get(i + '.role')?.value }}" />                            
+                            <input style="border: 0;" [id]="i" type="text" formControlName="Name" value="{{ roles.get(i + '.Name')?.value }}" />                            
                           </label>
                         </td>
                       </tr>
