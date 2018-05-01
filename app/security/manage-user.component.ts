@@ -27,15 +27,15 @@ export class ManageUserComponent implements OnInit {
 
   buildRole(): FormGroup {
     return this.fb.group({
-      role: '',
-      chkRole: ''
+      Name: '',
+      Assigned: ''
     });
   }
 
   addRole(role: UserRole): FormGroup {
     return this.fb.group({
-      role: role.Name,
-      chkRole: role.Assigned
+      Name: role.Name,
+      Assigned: role.Assigned
     });
   }
 
@@ -98,19 +98,17 @@ export class ManageUserComponent implements OnInit {
       this.entryForm.reset();
     }
     this.user = user;
-    console.log(user);
 
     this.entryForm.patchValue({
       UserName: user.UserName,
+      Password: user.Password,
       FirstName: user.FirstName,
       LastName: user.LastName,
       Email: user.Email,
       Active: user.Active
-    });    
+    });       
 
     let roles = this.user.Roles;
-    //let roles = this.user.Roles;
-    console.log(roles);    
     var i: number;    
 
     for (i = 0; i < roles.length; i++) {
@@ -119,6 +117,7 @@ export class ManageUserComponent implements OnInit {
     }
 
     this.entryForm.setControl('roles', this._roles);
+    console.log(this.entryForm.value);
   }
 
   updateUserRoles(roleIndex: number) {
@@ -155,12 +154,16 @@ export class ManageUserComponent implements OnInit {
     );;     
   }
 
-  updateUserProfile() {    
+  updateUserProfile() {           
     let user = Object.assign({}, this.user, this.entryForm.value);    
+    console.log(this.entryForm.value);
+    user.UpdateRoles = this.entryForm.get("roles").dirty;
+    console.log(user.UpdateRoles);
+
     this.secSvc.updateUserProfile(user)
     .subscribe(
       res => {
-        console.log(res);
+        this.onSaveComplete();
       },
       err => {
         this.handleError(err);

@@ -79,7 +79,7 @@ export class SecurityService {
   }
 
   updateUserProfile(user: User) {
-    console.log(JSON.stringify(user));
+    //console.log(JSON.stringify(user));
     return (this.http.post(this.apiUrl + 'UpdateUserProfile', JSON.stringify(user), httpOptions));          
   }
 
@@ -93,12 +93,14 @@ export class SecurityService {
     return {
       Id: 0,
       UserName: null,
+      Password: null,
       FirstName: null,
       LastName: null,
       Email: null,
       Active: false,
-      Roles: '',
-      Permissions: ''
+      Roles: null,
+      Permissions: '',
+      UpdateRoles: false
     };
   }
   logout(): void {
