@@ -10,7 +10,6 @@ export class User
     Active: boolean;
     Roles: UserRole[];
     Permissions: string;
-    UpdateRoles: boolean;
 }
 
 export class Role
