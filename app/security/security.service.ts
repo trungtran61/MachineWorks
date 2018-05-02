@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { SecurityUserAuth } from './security-user-auth';
 import { LOGIN_MOCKS } from './login-mocks';
 import { SecurityUser } from './security-user';
-import { GetListRequest, User } from './security';
+import { GetListRequest, User, Role, GetRolesResponse } from './security';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Subscription } from 'rxjs/Subscription';
@@ -37,6 +37,10 @@ export class SecurityService {
     }
 
     return of<SecurityUserAuth>(this.securityObject);
+  }
+
+  getToken(): string {
+    return localStorage.getItem('bearerToken');
   }
 
   getSecurityObject() {
@@ -81,6 +85,21 @@ export class SecurityService {
   updateUserProfile(user: User) {
     //console.log(user);
     return (this.http.post(this.apiUrl + 'UpdateUserProfile', JSON.stringify(user), httpOptions));          
+  }
+
+  getRoles(getListRequest: GetListRequest): Observable<GetRolesResponse> {
+    let params = new HttpParams().append("SearchParm", getListRequest.SearchParm)
+    .append("PageSize", getListRequest.PageSize.toString())
+    .append("PageNumber", getListRequest.PageNumber.toString())
+    ;
+
+    return this.http.get<GetRolesResponse>(this.apiUrl + 'GetRoles', {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Authorization': 'my-auth-token'
+      }),
+      params: params
+    });
   }
 
   private extractData(response: Response) {

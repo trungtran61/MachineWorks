@@ -14,6 +14,7 @@ import { ManagePermissionComponent } from './manage-permission.component';
 import { IconsModule } from '../icons/icons.module';
 import { ValidationMessagesComponent } from '../shared/validation-messages.component';
 import { UpdateProfileComponent } from './update-profile.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes = [
   {
@@ -34,7 +35,8 @@ const routes = [
     CommonModule,
     FormsModule, ReactiveFormsModule,
     RouterModule.forChild(routes),
-    IconsModule
+    IconsModule,
+    NgxPaginationModule
   ],
   declarations: [
     ChangePasswordComponent,

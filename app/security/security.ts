@@ -1,5 +1,4 @@
-export class User
-{
+export class User {
     Id: number;
     UserName: string;
     Password: string;
@@ -12,30 +11,31 @@ export class User
     Permissions: string;
 }
 
-export class Role
-{
+export class Role {
     Id: number;
     Name: string;
     DisplayName: string;
     Active: boolean;
 }
 
-export class UserRole
-{
+export class GetRolesResponse {
+    RecordCount: number;
+    Roles: Role[];
+}
+
+export class UserRole {
     Name: string;
     Assigned: boolean;
 }
 
-export class Permission
-{
+export class Permission {
     Id: number;
     Name: string;
     DisplayName: string;
     Active: boolean;
 }
 
-export class GetListRequest
-{
+export class GetListRequest {
     SearchParm?: string = '';
     SortColumn?: string = '';
     SortDirection?: string = 'ASC';
