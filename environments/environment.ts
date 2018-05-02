@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost/mwwebapi/api/',
-  secApiUrl: 'http://localhost/mwwebapi/api/security/'
+  secApiUrl: 'http://localhost/mwwebapi/api/security/',
+  pageSize: 5
 };

@@ -89,7 +89,7 @@ export class SecurityService {
 
   getRoles(getListRequest: GetListRequest): Observable<GetRolesResponse> {
     let params = new HttpParams().append("SearchParm", getListRequest.SearchParm)
-    .append("PageSize", getListRequest.PageSize.toString())
+    .append("PageSize", environment.pageSize.toString())
     .append("PageNumber", getListRequest.PageNumber.toString())
     ;
 

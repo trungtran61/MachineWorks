@@ -19,7 +19,6 @@ export class ManageRolesComponent implements OnInit {
 
   ngOnInit() {    
     let getListRequest: GetListRequest = new GetListRequest();
-    getListRequest.PageSize = 5;
     this.getPage(1);
   }
 
@@ -27,7 +26,6 @@ export class ManageRolesComponent implements OnInit {
   {
     this.currentPage = page;
     let getListRequest: GetListRequest = new GetListRequest();
-    getListRequest.PageSize = 5;
     getListRequest.PageNumber = page;
 
     this.secSvc.getRoles(getListRequest)
