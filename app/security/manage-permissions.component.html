@@ -1,3 +1,37 @@
-<p>
-  manage-permissions works!
-</p>
+<div class="panel panel-primary">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped" *ngIf="permissions && permissions.length">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Display Name</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let permission of permissions | paginate: { 
+              itemsPerPage: pageSize,
+              currentPage: currentPage,
+              totalItems: recordCount }">
+            <td>
+              <a [routerLink]="['/managepermissions', permission.Id]">{{ permission.Name }}</a>
+            </td>
+            <td>
+              {{ permission.DisplayName }}
+            </td>
+            <td>
+              <input type="checkbox" name="chkActive" checked="{{permission.Active ? 'Checked':''}}" (click)="UpdatePermissionStatus()" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div [hidden]="recordCount == 0">
+        <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <button class="btn btn-primary btn-md btn-block" type="button" routerLink="/managepermissions/0">Add Permission</button>
+      </div>
+    </div>
+  </div>

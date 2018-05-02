@@ -10,7 +10,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of users">
+                <tr *ngFor="let user of users | paginate: { 
+                    itemsPerPage: pageSize,
+                    currentPage: currentPage,
+                    totalItems: recordCount } ">
                     <td>
                         {{user.FirstName + ' ' + user.LastName}}
                     </td>
@@ -25,9 +28,12 @@
             </tbody>
         </table>
     </div>
+    <div [hidden]="recordCount == 0">
+        <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+    </div>
     <div class="row">
-            <div class="col-md-2">
-              <button class="btn btn-primary btn-md btn-block" type="button" routerLink="/manageusers/0">Add User</button>
-            </div>
-          </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary btn-md btn-block" type="button" routerLink="/manageusers/0">Add User</button>
+        </div>
+    </div>
 </div>

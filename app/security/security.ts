@@ -18,9 +18,19 @@ export class Role {
     Active: boolean;
 }
 
+export class GetUsersResponse {
+    RecordCount: number;
+    Users: User[];
+}
+
 export class GetRolesResponse {
     RecordCount: number;
     Roles: Role[];
+}
+
+export class GetPermissionsResponse {
+    RecordCount: number;
+    Permissions: Permission[];
 }
 
 export class UserRole {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../environments/environment';
 
-import { GetListRequest, User, Role } from './security';
+import { GetListRequest, Role } from './security';
 import { SecurityService } from './security.service';
 
 @Component({
@@ -10,15 +11,15 @@ import { SecurityService } from './security.service';
 })
 export class ManageRolesComponent implements OnInit {  
 
-  roles : Role[];
-  recordCount : number;
+  roles : Role[];   
   errorMessage: string;
+  recordCount : number;
   currentPage: number = 1;
+  pageSize: number = environment.pageSize;
   
   constructor(private secSvc: SecurityService) { }
 
   ngOnInit() {    
-    let getListRequest: GetListRequest = new GetListRequest();
     this.getPage(1);
   }
 
@@ -31,8 +32,7 @@ export class ManageRolesComponent implements OnInit {
     this.secSvc.getRoles(getListRequest)
       .subscribe(getRolesResponse => {
         this.roles = getRolesResponse.Roles;
-        this.recordCount = getRolesResponse.RecordCount
-        console.log(getRolesResponse);
+        this.recordCount = getRolesResponse.RecordCount        
       },
         error => this.errorMessage = <any>error
       );
