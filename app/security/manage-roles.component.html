@@ -1,3 +1,37 @@
-<p>
-  manage-roles works!
-</p>
+<div class="panel panel-primary">
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped" *ngIf="roles && roles.length">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Display Name</th>
+          <th>Active</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of roles | paginate: { 
+            itemsPerPage: 5,
+            currentPage: currentPage,
+            totalItems: recordCount }">
+          <td>
+            <a [routerLink]="['/manageroles', role.Id]">{{ role.Name }}</a>
+          </td>
+          <td>
+            {{ role.DisplayName }}
+          </td>
+          <td>
+            <input type="checkbox" name="chkActive" checked="{{role.Active ? 'Checked':''}}" (click)="UpdateRoleStatus()" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+      <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <button class="btn btn-primary btn-md btn-block" type="button" routerLink="/manageroles/0">Add Role</button>
+    </div>
+  </div>
+</div>

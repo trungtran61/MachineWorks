@@ -15,6 +15,8 @@ import { PagenotfoundComponent } from './pagenotfound.component';
 import { SecurityModule } from './security/security.module';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { RouterExtService } from './router-ext.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './security/token-interceptor';
 
 @NgModule({
   declarations: [
@@ -31,10 +33,15 @@ import { RouterExtService } from './router-ext.service';
     NgHttpLoaderModule,
     ToolInventoryModule,
     SecurityModule,
-    AppRoutingModule
+    AppRoutingModule    
   ],  
   providers: [
-    SecurityService, AuthGuardService,RouterExtService
+    SecurityService, AuthGuardService, RouterExtService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
