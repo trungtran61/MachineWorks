@@ -87,7 +87,8 @@
                   <input class="form-control" value="back" />
                 </div>
                 <div class="col-md-9">
-                  <label class="alert alert-success" [hidden]="errorMessage == ''">{{ errorMessage }}</label>
+                  <label class="alert alert-success" [hidden]="infoMessage == ''">{{ infoMessage }}</label>
+                  <label class="alert alert-danger" [hidden]="errorMessage == ''">{{ errorMessage }}</label>
                 </div>
               </div>
             </div>
