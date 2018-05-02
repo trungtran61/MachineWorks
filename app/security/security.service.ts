@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { SecurityUserAuth } from './security-user-auth';
 import { LOGIN_MOCKS } from './login-mocks';
 import { SecurityUser } from './security-user';
-import { GetListRequest, User, Role, GetRolesResponse } from './security';
+import { GetListRequest, User, Role, GetRolesResponse, GetPermissionsResponse, GetUsersResponse } from './security';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Subscription } from 'rxjs/Subscription';
@@ -47,10 +47,12 @@ export class SecurityService {
     return JSON.parse(localStorage.getItem('securityObject'));
   }
 
-  getUsers(getListRequest: GetListRequest): Observable<User[]> {
-    let params = new HttpParams().set("SearchParm", getListRequest.SearchParm);
+  getUsers(getListRequest: GetListRequest): Observable<GetUsersResponse> {
+    let params = new HttpParams().append("SearchParm", getListRequest.SearchParm)
+    .append("PageSize", environment.pageSize.toString())
+    .append("PageNumber", getListRequest.PageNumber.toString());
 
-    return this.http.get<User[]>(this.apiUrl + 'GetUsers', {
+    return this.http.get<GetUsersResponse>(this.apiUrl + 'GetUsers', {
       headers: new HttpHeaders({
         'Accept': 'application/json',
         'Authorization': 'my-auth-token'
@@ -90,10 +92,23 @@ export class SecurityService {
   getRoles(getListRequest: GetListRequest): Observable<GetRolesResponse> {
     let params = new HttpParams().append("SearchParm", getListRequest.SearchParm)
     .append("PageSize", environment.pageSize.toString())
-    .append("PageNumber", getListRequest.PageNumber.toString())
-    ;
+    .append("PageNumber", getListRequest.PageNumber.toString());
 
     return this.http.get<GetRolesResponse>(this.apiUrl + 'GetRoles', {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Authorization': 'my-auth-token'
+      }),
+      params: params
+    });
+  }
+
+  getPermissions(getListRequest: GetListRequest): Observable<GetPermissionsResponse> {
+    let params = new HttpParams().append("SearchParm", getListRequest.SearchParm)
+    .append("PageSize", environment.pageSize.toString())
+    .append("PageNumber", getListRequest.PageNumber.toString());
+
+    return this.http.get<GetPermissionsResponse>(this.apiUrl + 'GetPermissions', {
       headers: new HttpHeaders({
         'Accept': 'application/json',
         'Authorization': 'my-auth-token'

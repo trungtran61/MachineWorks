@@ -10,7 +10,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let role of roles | paginate: { 
-            itemsPerPage: 5,
+            itemsPerPage: pageSize,
             currentPage: currentPage,
             totalItems: recordCount }">
           <td>
@@ -26,7 +26,7 @@
       </tbody>
     </table>
   </div>
-  <div>
+  <div [hidden]="recordCount == 0">
       <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
   </div>
   <div class="row">
