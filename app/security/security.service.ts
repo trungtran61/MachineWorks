@@ -62,9 +62,11 @@ export class SecurityService {
   }
 
   getUser(id: number): Observable<User> {
+   /*
     if (id === 0) {
       return Observable.of(this.initializeUser());
     };
+    */
     let params = new HttpParams().set("id", id.toString());
 
     return this.http.get<User>(this.apiUrl + 'GetUser', {

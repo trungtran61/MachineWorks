@@ -17,6 +17,7 @@ export class ManageUserComponent implements OnInit {
   entryForm: FormGroup;
   user: User;
   errorMessage: string = '';
+  infoMessage: string = '';
   userId: number;
   pageTitle: string = 'New User';
   _roles: FormArray = this.fb.array([]);
@@ -95,60 +96,58 @@ export class ManageUserComponent implements OnInit {
       Email: user.Email,
       Active: user.Active
     });
-    
+
     // FormArray needs to be iterated
     let roles = this.user.Roles;
     var i: number;
 
-    for (i = 0; i < roles.length; i++) {      
+    for (i = 0; i < roles.length; i++) {
       this._roles.push(this.addRole(Object.assign(new UserRole, roles[i])));
     }
-
-    this.entryForm.setControl('Roles', this._roles);    
-    
+    this.entryForm.setControl('Roles', this._roles);
   }
-/*
-  updateUserRoles(roleIndex: number) {
-    var roles = this.roles;
-    var arrRoles = [];
-    this.roles.value.forEach(roleElement => {
-      if (roleElement.chkRole)
-        arrRoles.push(roleElement.role);
-    });
-
-    this.secSvc.updateUserRoles(this.userId, arrRoles)
-      .subscribe(
-        res => {
-          console.log(res);
-        },
-        err => {
-          this.handleError(err);
-        }
-      );;
-  }
-
-  updateUserStatus() {
-    this.secSvc.updateUserStatus(this.userId, this.entryForm.get('Active').value)
-      .subscribe(
-        res => {
-          console.log(res);
-        },
-        err => {
-          this.handleError(err);
-        }
-      );;
-  }
-*/
+  /*
+    updateUserRoles(roleIndex: number) {
+      var roles = this.roles;
+      var arrRoles = [];
+      this.roles.value.forEach(roleElement => {
+        if (roleElement.chkRole)
+          arrRoles.push(roleElement.role);
+      });
+  
+      this.secSvc.updateUserRoles(this.userId, arrRoles)
+        .subscribe(
+          res => {
+            console.log(res);
+          },
+          err => {
+            this.handleError(err);
+          }
+        );;
+    }
+  
+    updateUserStatus() {
+      this.secSvc.updateUserStatus(this.userId, this.entryForm.get('Active').value)
+        .subscribe(
+          res => {
+            console.log(res);
+          },
+          err => {
+            this.handleError(err);
+          }
+        );;
+    }
+  */
   updateUserProfile() {
     let user = Object.assign({}, this.user, this.entryForm.value);
-    
+
     if (!this.entryForm.get("Roles").dirty)
       user.Roles = null;
 
     this.secSvc.updateUserProfile(user)
       .subscribe(
         res => {
-          this.onSaveComplete();
+          this.onSaveComplete(res);
         },
         err => {
           this.handleError(err);
@@ -156,14 +155,15 @@ export class ManageUserComponent implements OnInit {
       );;
   }
 
-  onSaveComplete(): void {
+  onSaveComplete(userId): void {
     this.entryForm.markAsPristine();
-    this.errorMessage = 'User Profile updated.'
-    this.router.navigate(['/manageusers/' + this.userId]);
+    this.infoMessage = 'User Profile updated.'
+    this.errorMessage = '';
+    this.router.navigate(['/manageusers/' + userId]);
   }
 
   private handleError(error: Response): Observable<any> {
-    console.error(error);
+    this.errorMessage = error.statusText;
     return Observable.throw(error || 'Server error');
   }
 }
