@@ -9,10 +9,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let role of roles | paginate: { 
-            itemsPerPage: pageSize,
-            currentPage: currentPage,
-            totalItems: recordCount }">
+        <tr *ngFor="let role of roles">
           <td>
             <a [routerLink]="['/manageroles', role.Id]">{{ role.Name }}</a>
           </td>
@@ -27,7 +24,7 @@
     </table>
   </div>
   <div [hidden]="recordCount == 0">
-      <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+      <pagination [totalItems]="recordCount" [(ngModel)]="currentPage" (pageChanged)="getPage($event.page)" [itemsPerPage]="pageSize"></pagination>
   </div>
   <div class="row">
     <div class="col-md-2">

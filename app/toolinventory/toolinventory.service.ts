@@ -30,13 +30,13 @@ export class ToolInventoryService {
                 'Authorization': 'my-auth-token'
             })             
         });
-    }
+    }  
     
-    LookUp(lookUpRequest:LookUpRequest) : Observable<Lookup[]>
+    LookUp(category: string, searchTerm: string) : Observable<Lookup[]>
     {       
         this.url = this.apiUrl + 'LookUp';        
         
-        let params = new HttpParams().set("Category",lookUpRequest.Category).set("SearchTerm", lookUpRequest.SearchTerm);
+        let params = new HttpParams().set("Category",category).set("SearchTerm", searchTerm);
         
         return this.http.get<Lookup[]>(this.url, {
             headers: new HttpHeaders({
@@ -49,7 +49,7 @@ export class ToolInventoryService {
 
     GetCuttingMethodTemplate(cuttingMethod: string ) : Observable<CuttingMethodTemplate>
     {       
-        this.url = this.apiUrl + 'getCuttingMethodtemplate/' + cuttingMethod ;        
+        this.url = this.apiUrl + 'getCuttingMethodtemplate/' + cuttingMethod.replace('.','|') ;        
         
         return this.http.get<CuttingMethodTemplate>(this.url, {
             headers: new HttpHeaders({

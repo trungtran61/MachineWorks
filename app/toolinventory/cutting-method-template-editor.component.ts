@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import 'rxjs/add/operator/debounceTime';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { ToolInventoryService } from './toolinventory.service';
 import { LookUpRequest, Lookup, CuttingMethodTemplate } from './toolinventory';
+import { Observable } from 'rxjs/Observable';
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
+import { Observer } from 'rxjs/Observer';
 
 @Component({
   templateUrl: './cutting-method-template-editor.component.html',
@@ -15,44 +17,36 @@ export class CuttingMethodTemplateEditorComponent implements OnInit {
   lookUpRequest: LookUpRequest = new LookUpRequest();
   cuttingMethodTemplate: CuttingMethodTemplate = new CuttingMethodTemplate();
   errorMessage: string = '';
+  selectedCuttingMethod: string;
+  typeaheadLoading: boolean;
+  typeaheadNoResults: boolean;
+  cuttingMethodDataSource = [{}];
 
   constructor(private fb: FormBuilder, private toolInventoryService: ToolInventoryService) { }
 
   createFormGroup(): void {
+
     this.entryForm = this.fb.group({
       cuttingMethod: '',
-      snippet: '',     
-      hdnCuttingMethodID: '',
-      autoCuttingMethod: ''
+      snippet: ''
     });
 
     const cuttingMethodControl = this.entryForm.get('cuttingMethod');
-    const hdnCuttingMethodID = this.entryForm.get('hdnCuttingMethodID');
-    const autoCuttingMethod = this.entryForm.get('autoCuttingMethod');
-
-    //const searchClearControl = this.entryForm.get('searchClear');
     const snippetControl = this.entryForm.get('snippet');
-    //const btnSaveControl = this.entryForm.get('btnSave');
     const lblMessageControl = this.entryForm.get('lblMessage');
 
-    cuttingMethodControl.valueChanges
-      .debounceTime(400)
-      .subscribe(data => {
-        this.lookUpRequest.Category = 'CuttingMethod';
-        this.lookUpRequest.SearchTerm = data;
-        this.toolInventoryService.LookUp(this.lookUpRequest).subscribe(response => {
-          this.cuttingMethodSearchResult = response;
-        })
-      })
+    this.cuttingMethodDataSource = Observable.create((observer: Observer<string>) => observer.next(this.selectedCuttingMethod))
+      .mergeMap((searchTerm: string) =>
+        this.toolInventoryService.LookUp('CuttingMethod', searchTerm));
   }
 
-  displayFn(item) {
-    return item.Text;
+  cuttingMethodLoading(e: boolean): void {
+    this.typeaheadLoading = e;
   }
 
-  GetCuttingMethodTemplate(item: Lookup) {
-    console.log(item.Text);
-    this.toolInventoryService.GetCuttingMethodTemplate(item.Text).subscribe(response => {
+  cuttingMethodOnSelect(e: TypeaheadMatch): void {
+    this.errorMessage = '';
+    this.toolInventoryService.GetCuttingMethodTemplate(e.item.Text).subscribe(response => {
       this.entryForm.get('snippet').setValue(response[0]);
     });
   }
@@ -61,8 +55,8 @@ export class CuttingMethodTemplateEditorComponent implements OnInit {
     if (this.entryForm.dirty && this.entryForm.valid) {
       let cuttingMethodTemplate = new CuttingMethodTemplate();
       let cm = this.entryForm.get('cuttingMethod');
-      cuttingMethodTemplate.CuttingMethod = this.entryForm.get('cuttingMethod').value.Text;
-      cuttingMethodTemplate.Template =  this.entryForm.get('snippet').value;
+      cuttingMethodTemplate.CuttingMethod = this.selectedCuttingMethod;
+      cuttingMethodTemplate.Template = this.entryForm.get('snippet').value;
       this.toolInventoryService.SaveTemplate(cuttingMethodTemplate)
         .subscribe(
           () => this.onSaveComplete(),
@@ -71,12 +65,12 @@ export class CuttingMethodTemplateEditorComponent implements OnInit {
     }
   }
 
-  onSaveComplete(): void {    
+  onSaveComplete(): void {
     //this.entryForm.reset();
-    this.errorMessage= 'Template Updated.'
+    this.errorMessage = 'Template Updated.'
   }
 
   ngOnInit() {
-    this.createFormGroup();   
+    this.createFormGroup();
   }
 }
