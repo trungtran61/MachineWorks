@@ -17,6 +17,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { RouterExtService } from './router-ext.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './security/token-interceptor';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { TokenInterceptor } from './security/token-interceptor';
     NgHttpLoaderModule,
     ToolInventoryModule,
     SecurityModule,
-    AppRoutingModule    
+    AppRoutingModule,
+    Ng4LoadingSpinnerModule.forRoot()    
   ],  
   providers: [
     SecurityService, AuthGuardService, RouterExtService,
