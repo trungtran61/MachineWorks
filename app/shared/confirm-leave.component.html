@@ -1,0 +1,18 @@
+<div class="modal-header bg-primary text-white">
+  <h4 class="modal-title pull-left">Confirmation</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="action(false)">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body clearfix">
+  <div class="modal-icon">
+    <i class="fa fa-question-circle"></i>
+  </div>
+  <div class="modal-text">
+    <p>Changes not saved, do you really want to exit?</p>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" tooltip="stay on page" (click)="action(false)">No</button>
+  <button class="btn btn-primary right"  tooltip="exit without saving" (click)="action(true)">Yes</button>
+</div>

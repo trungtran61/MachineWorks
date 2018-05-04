@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
@@ -8,12 +8,13 @@ import { User, UserRole } from './security';
 import { Observable } from 'rxjs/Observable';
 import { ValidationService } from '../shared/validation.service';
 import { forEach } from '@angular/router/src/utils/collection';
+import { ComponentCanDeactivate } from '../component-can-deactivate';
 
 @Component({
   templateUrl: './manage-user.component.html',
   styleUrls: ['./manage-user.component.css']
 })
-export class ManageUserComponent implements OnInit {
+export class ManageUserComponent implements OnInit, ComponentCanDeactivate  {
   entryForm: FormGroup;
   user: User;
   errorMessage: string = '';
@@ -21,6 +22,12 @@ export class ManageUserComponent implements OnInit {
   userId: number;
   pageTitle: string = 'New User';
   _roles: FormArray = this.fb.array([]);
+  
+  @HostListener('window:beforeunload')
+
+  canDeactivate(): boolean {
+    return !this.entryForm.dirty;
+  }
 
   get roles(): FormArray {
     return <FormArray>this.entryForm.get('Roles');

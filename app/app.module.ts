@@ -18,13 +18,17 @@ import { RouterExtService } from './router-ext.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './security/token-interceptor';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-
+import { ConfirmLeaveComponent } from './shared/confirm-leave.component';
+import { PendingChangesGuard } from './pending-changes-guard';
+import { BsModalService, ModalModule } from 'ngx-bootstrap';
+ 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    ConfirmLeaveComponent        
   ],
   imports: [
     BrowserModule,
@@ -35,16 +39,18 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     ToolInventoryModule,
     SecurityModule,
     AppRoutingModule,
-    Ng4LoadingSpinnerModule.forRoot()    
+    Ng4LoadingSpinnerModule.forRoot(),
+    ModalModule.forRoot(), 
   ],  
   providers: [
-    SecurityService, AuthGuardService, RouterExtService,
+    SecurityService, AuthGuardService, RouterExtService,PendingChangesGuard, BsModalService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
     }
   ],
+  entryComponents: [ ConfirmLeaveComponent ], 
   bootstrap: [AppComponent]
 })
 export class AppModule { 

@@ -15,6 +15,7 @@ import { IconsModule } from '../icons/icons.module';
 import { ValidationMessagesComponent } from '../shared/validation-messages.component';
 import { UpdateProfileComponent } from './update-profile.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { PendingChangesGuard } from '../pending-changes-guard';
 
 const routes = [
   {
@@ -23,7 +24,7 @@ const routes = [
     canActivate: [AuthGuardService]
   },
   { path: 'manageusers', component: ManageUsersComponent, canActivate: [AuthGuardService] },
-  { path: 'manageusers/:id', component: ManageUserComponent, canActivate: [AuthGuardService] },
+  { path: 'manageusers/:id', component: ManageUserComponent, canActivate: [AuthGuardService],canDeactivate: [PendingChangesGuard] },
   { path: 'manageroles', component: ManageRolesComponent, canActivate: [AuthGuardService] },
   { path: 'manageroles/:id', component: ManageRoleComponent, canActivate: [AuthGuardService] },
   { path: 'managepermissions', component: ManagePermissionsComponent, canActivate: [AuthGuardService] },

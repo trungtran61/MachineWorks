@@ -40,7 +40,7 @@ const routes = [
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
+    HttpModule,    
     TypeaheadModule.forRoot(),
     RouterModule.forChild(routes)    
   ],
@@ -48,7 +48,7 @@ const routes = [
     SearchToolinventoryComponent,
     ToolSetupSheetComponent,
     OpenToolSetupSheetComponent,
-    CuttingMethodTemplateEditorComponent
+    CuttingMethodTemplateEditorComponent    
   ],
   providers: [ToolInventoryService]
 })
