@@ -3,6 +3,9 @@ import { environment } from '../../environments/environment';
 
 import { GetListRequest, Permission } from './security';
 import { SecurityService } from './security.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { EditPermissionComponent } from './edit-permission.component';
+import { ModalDataService } from '../shared/modal-data.service';
 
 @Component({
   selector: 'app-manage-permissions',
@@ -17,7 +20,9 @@ export class ManagePermissionsComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = environment.pageSize;
   
-  constructor(private secSvc: SecurityService) { }
+  constructor(private secSvc: SecurityService, 
+    private modalService: BsModalService, 
+    private modalDataService:ModalDataService ) { }
 
   ngOnInit() {    
     let getListRequest: GetListRequest = new GetListRequest();
@@ -40,4 +45,9 @@ export class ManagePermissionsComponent implements OnInit {
       );
   }
 
+  openEditPermission(id: number)
+  {
+    this.modalDataService.data = 0;
+    const modal = this.modalService.show(EditPermissionComponent, {'class': 'modal-dialog-primary'});        
+  }
 }

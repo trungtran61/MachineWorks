@@ -86,6 +86,7 @@ export class SecurityService {
   }
 
   getPermission(id: number): Observable<Permission> {   
+
     let params = new HttpParams().set("id", id.toString());
 
     return this.http.get<Permission>(this.apiUrl + 'GetPermission', {
@@ -112,6 +113,10 @@ export class SecurityService {
 
   updateRole(role: Role) {
     return (this.http.post(this.apiUrl + 'UpdateRole', JSON.stringify(role), httpOptions));          
+  }
+
+  updatePermission(permission: Permission) {
+    return (this.http.post(this.apiUrl + 'UpdatePermission', JSON.stringify(permission), httpOptions));          
   }
 
   getRoles(getListRequest: GetListRequest): Observable<GetRolesResponse> {
@@ -160,7 +165,8 @@ export class SecurityService {
       Roles: null,
       Permissions: ''
     };
-  }
+  }  
+
   logout(): void {
     this.resetSecurityObject();
   }

@@ -16,6 +16,7 @@ import { ValidationMessagesComponent } from '../shared/validation-messages.compo
 import { UpdateProfileComponent } from './update-profile.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PendingChangesGuard } from '../pending-changes-guard';
+import { EditPermissionComponent } from './edit-permission.component';
 
 const routes = [
   {
@@ -48,7 +49,9 @@ const routes = [
     ManageRoleComponent,
     ManagePermissionComponent,
     ValidationMessagesComponent,
-    UpdateProfileComponent    
-  ]
+    UpdateProfileComponent,
+    EditPermissionComponent    
+  ],
+  entryComponents: [ EditPermissionComponent ], 
 })
 export class SecurityModule { }
