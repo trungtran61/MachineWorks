@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { SecurityUserAuth } from './security-user-auth';
 import { LOGIN_MOCKS } from './login-mocks';
 import { SecurityUser } from './security-user';
-import { GetListRequest, User, Role, GetRolesResponse, GetPermissionsResponse, GetUsersResponse } from './security';
+import { GetListRequest, User, Role, GetRolesResponse, GetPermissionsResponse, GetUsersResponse, Permission } from './security';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Subscription } from 'rxjs/Subscription';
@@ -61,15 +61,34 @@ export class SecurityService {
     });
   }
 
-  getUser(id: number): Observable<User> {
-   /*
-    if (id === 0) {
-      return Observable.of(this.initializeUser());
-    };
-    */
+  getUser(id: number): Observable<User> {   
     let params = new HttpParams().set("id", id.toString());
 
     return this.http.get<User>(this.apiUrl + 'GetUser', {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Authorization': 'my-auth-token'
+      }),
+      params: params
+    });
+  }
+
+  getRole(id: number): Observable<Role> {   
+    let params = new HttpParams().set("id", id.toString());
+
+    return this.http.get<Role>(this.apiUrl + 'GetRole', {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Authorization': 'my-auth-token'
+      }),
+      params: params
+    });
+  }
+
+  getPermission(id: number): Observable<Permission> {   
+    let params = new HttpParams().set("id", id.toString());
+
+    return this.http.get<Permission>(this.apiUrl + 'GetPermission', {
       headers: new HttpHeaders({
         'Accept': 'application/json',
         'Authorization': 'my-auth-token'
@@ -89,6 +108,10 @@ export class SecurityService {
   updateUserProfile(user: User) {
     //console.log(user);
     return (this.http.post(this.apiUrl + 'UpdateUserProfile', JSON.stringify(user), httpOptions));          
+  }
+
+  updateRole(role: Role) {
+    return (this.http.post(this.apiUrl + 'UpdateRole', JSON.stringify(role), httpOptions));          
   }
 
   getRoles(getListRequest: GetListRequest): Observable<GetRolesResponse> {
