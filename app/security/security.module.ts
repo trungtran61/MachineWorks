@@ -48,7 +48,7 @@ const routes = [
     ManageRoleComponent,
     ManagePermissionComponent,
     ValidationMessagesComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent    
   ]
 })
 export class SecurityModule { }

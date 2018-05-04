@@ -16,6 +16,7 @@ export class Role {
     Name: string;
     DisplayName: string;
     Active: boolean;
+    Permissions: RolePermission[];
 }
 
 export class GetUsersResponse {
@@ -42,7 +43,12 @@ export class Permission {
     Id: number;
     Name: string;
     DisplayName: string;
-    Active: boolean;
+    Active: boolean;   
+}
+
+export class RolePermission {    
+    Name: string;
+    Assigned: boolean;    
 }
 
 export class GetListRequest {
