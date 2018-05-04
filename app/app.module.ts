@@ -21,6 +21,7 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { ConfirmLeaveComponent } from './shared/confirm-leave.component';
 import { PendingChangesGuard } from './pending-changes-guard';
 import { BsModalService, ModalModule } from 'ngx-bootstrap';
+import { ModalDataService } from './shared/modal-data.service';
  
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap';
     ModalModule.forRoot(), 
   ],  
   providers: [
-    SecurityService, AuthGuardService, RouterExtService,PendingChangesGuard, BsModalService,
+    SecurityService, AuthGuardService, RouterExtService,PendingChangesGuard, BsModalService, ModalDataService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

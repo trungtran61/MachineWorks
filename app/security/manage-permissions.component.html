@@ -23,12 +23,12 @@
         </tbody>
       </table>
     </div>
-    <div [hidden]="recordCount == 0">
+    <div [hidden]="recordCount <= pageSize">
       <pagination [totalItems]="recordCount" [(ngModel)]="currentPage" (pageChanged)="getPage($event.page)" [itemsPerPage]="pageSize"></pagination>
     </div>
     <div class="row">
       <div class="col-md-2">
-        <button class="btn btn-primary btn-md btn-block" type="button" routerLink="/managepermissions/0">Add Permission</button>
+        <button class="btn btn-primary btn-md btn-block" type="button" (click)="openEditPermission(0)" >Add Permission</button>
       </div>
     </div>
   </div>
