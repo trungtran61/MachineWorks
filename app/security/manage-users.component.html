@@ -19,7 +19,7 @@
                     </td>
                     <td>{{ user.Email }}</td>
                     <td>
-                        <input type="checkbox" name="chkActive" checked="{{user.Active ? 'Checked':''}}" />
+                        <input type="checkbox" checked="{{user.Active ? 'Checked':''}}" (change)="updateUserStatus(user)" [(ngModel)]="user.Active" />
                     </td>
                 </tr>
             </tbody>
