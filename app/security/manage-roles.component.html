@@ -17,7 +17,7 @@
             {{ role.DisplayName }}
           </td>
           <td>
-            <input type="checkbox" name="chkActive" checked="{{role.Active ? 'Checked':''}}" (click)="UpdateRoleStatus()" />
+            <input type="checkbox" checked="{{role.Active ? 'Checked':''}}" (change)="updateRoleStatus(role)" [(ngModel)]="role.Active" />
           </td>
         </tr>
       </tbody>

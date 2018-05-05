@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { ValidationService } from '../shared/validation.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { ComponentCanDeactivate } from '../component-can-deactivate';
+import { HandleErrorService } from '../shared/handle-error.service';
 
 @Component({
   templateUrl: './manage-role.component.html',
@@ -50,7 +51,8 @@ export class ManageRoleComponent implements OnInit, ComponentCanDeactivate  {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private secSvc: SecurityService) {
+    private secSvc: SecurityService,
+    private handleErrorService: HandleErrorService) {
   }
 
   createFormGroup(): void {
@@ -79,8 +81,7 @@ export class ManageRoleComponent implements OnInit, ComponentCanDeactivate  {
       .subscribe(
         (role: Role) => this.onRoleRetrieved(role),
         error => {
-          console.log(error);
-          this.errorMessage = <any>error;
+          this.errorMessage = this.handleErrorService.handleError(error);
         }
       );
   }
@@ -118,8 +119,8 @@ export class ManageRoleComponent implements OnInit, ComponentCanDeactivate  {
         res => {
           this.onSaveComplete(res);
         },
-        err => {
-          this.handleError(err);
+        error => {
+          this.errorMessage = this.handleErrorService.handleError(error);
         }
       );;
   }
@@ -129,10 +130,5 @@ export class ManageRoleComponent implements OnInit, ComponentCanDeactivate  {
     this.infoMessage = 'Role updated.'
     this.errorMessage = '';
     this.router.navigate(['/manageroles/' + roleId]);
-  }
-
-  private handleError(error: Response): Observable<any> {
-    this.errorMessage = error.statusText;
-    return Observable.throw(error || 'Server error');
-  }
+  }  
 }

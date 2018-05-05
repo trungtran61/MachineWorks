@@ -3,28 +3,29 @@ import { environment } from '../../environments/environment';
 
 import { GetListRequest, Role } from './security';
 import { SecurityService } from './security.service';
+import { HandleErrorService } from '../shared/handle-error.service';
 
 @Component({
   selector: 'app-manage-roles',
   templateUrl: './manage-roles.component.html',
   styleUrls: ['./manage-roles.component.css']
 })
-export class ManageRolesComponent implements OnInit {  
+export class ManageRolesComponent implements OnInit {
 
-  roles : Role[];   
+  roles: Role[];
   errorMessage: string;
-  recordCount : number;
+  recordCount: number;
   currentPage: number = 1;
   pageSize: number = environment.pageSize;
-  
-  constructor(private secSvc: SecurityService) { }
 
-  ngOnInit() {    
+  constructor(private secSvc: SecurityService,
+    private handleErrorService: HandleErrorService) { }
+
+  ngOnInit() {
     this.getPage(1);
   }
 
-  getPage(page: number)
-  {
+  getPage(page: number) {
     this.currentPage = page;
     let getListRequest: GetListRequest = new GetListRequest();
     getListRequest.PageNumber = page;
@@ -32,10 +33,22 @@ export class ManageRolesComponent implements OnInit {
     this.secSvc.getRoles(getListRequest)
       .subscribe(getRolesResponse => {
         this.roles = getRolesResponse.Roles;
-        this.recordCount = getRolesResponse.RecordCount        
+        this.recordCount = getRolesResponse.RecordCount
       },
-        error => this.errorMessage = <any>error
+        error => {
+          this.errorMessage = this.handleErrorService.handleError(error);
+        }
       );
   }
 
+  updateRoleStatus(role: Role) {
+    this.secSvc.updateRoleStatus(role)
+      .subscribe(res => { },
+        error => {
+          this.errorMessage = this.handleErrorService.handleError(error);
+        }
+      );
+  }
 }
+
+
