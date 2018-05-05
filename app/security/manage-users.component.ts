@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GetListRequest, User } from './security';
 import { SecurityService } from './security.service';
 import { environment } from '../../environments/environment';
+import { HandleErrorService } from '../shared/handle-error.service';
 
 @Component({
   selector: 'app-manage-users',
@@ -16,7 +17,7 @@ export class ManageUsersComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = environment.pageSize;
   
-  constructor(private secSvc: SecurityService) { }
+  constructor(private secSvc: SecurityService, private handleErrorService: HandleErrorService) { }
 
   ngOnInit() {    
     this.getPage(1);    
@@ -34,6 +35,16 @@ export class ManageUsersComponent implements OnInit {
         this.recordCount = getUsersResponse.RecordCount        
       },
         error => this.errorMessage = <any>error
+      );
+  }
+
+  updateUserStatus(user: User)
+  {      
+    this.secSvc.updateUserStatus(user.Id, user.Active)
+      .subscribe(res => {},             
+        error => {
+          this.errorMessage = this.handleErrorService.handleError(error);
+        }
       );
   }
 }
