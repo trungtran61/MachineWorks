@@ -13,7 +13,7 @@ import { SecurityService } from './security/security.service';
 import { AuthGuardService } from './security/auth-guard.service';
 import { PagenotfoundComponent } from './pagenotfound.component';
 import { SecurityModule } from './security/security.module';
-import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
+//import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 import { RouterExtService } from './router-ext.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './security/token-interceptor';
@@ -22,6 +22,7 @@ import { ConfirmLeaveComponent } from './shared/confirm-leave.component';
 import { PendingChangesGuard } from './pending-changes-guard';
 import { BsModalService, ModalModule } from 'ngx-bootstrap';
 import { ModalDataService } from './shared/modal-data.service';
+import { HandleErrorService } from './shared/handle-error.service';
  
 @NgModule({
   declarations: [
@@ -36,15 +37,15 @@ import { ModalDataService } from './shared/modal-data.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,    
-    NgHttpLoaderModule,
+    //NgHttpLoaderModule,
     ToolInventoryModule,
     SecurityModule,
-    AppRoutingModule,
+    AppRoutingModule,    
     Ng4LoadingSpinnerModule.forRoot(),
     ModalModule.forRoot(), 
   ],  
   providers: [
-    SecurityService, AuthGuardService, RouterExtService,PendingChangesGuard, BsModalService, ModalDataService,
+    SecurityService, AuthGuardService, RouterExtService,PendingChangesGuard, BsModalService, ModalDataService, HandleErrorService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

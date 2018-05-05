@@ -106,6 +106,14 @@ export class SecurityService {
     return (this.http.post(this.apiUrl + 'UpdateUserStatus', { id: id, active: active }));          
   }
 
+  updateRoleStatus(role: Role) {
+    return (this.http.post(this.apiUrl + 'UpdateRoleStatus', { id: role.Id, active: role.Active }));          
+  }
+
+  updatePermissionStatus(permission: Permission) {
+    return (this.http.post(this.apiUrl + 'UpdatePermissionStatus', { id: permission.Id, active: permission.Active }));          
+  }
+
   updateUserProfile(user: User) {
     //console.log(user);
     return (this.http.post(this.apiUrl + 'UpdateUserProfile', JSON.stringify(user), httpOptions));          

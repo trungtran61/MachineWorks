@@ -4,6 +4,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { SecurityService } from './security.service';
 import { ModalDataService } from '../shared/modal-data.service';
 import { Observable } from 'rxjs/Observable';
+import { Route, Router } from '@angular/router';
+import { HandleErrorService } from '../shared/handle-error.service';
 
 @Component({
   selector: 'app-edit-permission',
@@ -19,12 +21,13 @@ export class EditPermissionComponent implements OnInit {
 
   constructor(private bsModalRef: BsModalRef,
     private secSvc: SecurityService,
-    private modalDataService: ModalDataService) { }
+    private modalDataService: ModalDataService,
+    private router: Router,
+    private handleErrorService: HandleErrorService) { }
 
   ngOnInit() {
 
     this.permissionId = this.modalDataService.data;
-    console.log(this.permissionId);
 
     if (this.permissionId == 0) {
       this.pageTitle = 'New Permission';
@@ -36,8 +39,7 @@ export class EditPermissionComponent implements OnInit {
         .subscribe(
           (permission: Permission) => this.onPermissionRetrieved(permission),
           error => {
-            console.log(error);
-            this.errorMessage = <any>error;
+            this.errorMessage = this.handleErrorService.handleError(error);
           }
         );
     }
@@ -60,23 +62,19 @@ export class EditPermissionComponent implements OnInit {
         res => {
           this.onSaveComplete(res);
         },
-        err => {
-          this.handleError(err);
+        error => {
+          this.errorMessage = this.handleErrorService.handleError(error);
         }
       );;
   }
 
   closeModal() {
     this.bsModalRef.hide();
+    this.router.navigate(['/managepermissions']);
   }
 
   onSaveComplete(permissionId): void {
-    this.infoMessage = this.permissionId == 0 ? 'Permission added.' : 'Permission updated.';
-    this.errorMessage = '';
-  }
-
-  private handleError(error: Response): Observable<any> {
-    this.errorMessage = error.statusText;
-    return Observable.throw(error || 'Server error');
+    this.bsModalRef.hide();
+    this.router.navigate(['/managepermissions']);
   }
 }

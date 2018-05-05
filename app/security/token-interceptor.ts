@@ -31,16 +31,14 @@ export class TokenInterceptor implements HttpInterceptor {
     });
     return next.handle(request).do((event: HttpEvent<any>) => {      
       if (event instanceof HttpResponse) {
-        this.turnOffModal();
-        // do stuff with response if you want
+        this.turnOffModal();        
       }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
+        console.log(err);
         this.turnOffModal();
-        if (err.status === 401) {
-          // redirect to the login route
-          this.router.navigate(['/login']);
-          // or show a modal
+        if (err.status === 401) {          
+          this.router.navigate(['/login']);          
         }
       }
     });

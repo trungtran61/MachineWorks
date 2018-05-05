@@ -38,8 +38,7 @@ export class ManagePermissionsComponent implements OnInit {
     this.secSvc.getPermissions(getListRequest)
       .subscribe(getPermissionsResponse => {
         this.permissions = getPermissionsResponse.Permissions;
-        this.recordCount = getPermissionsResponse.RecordCount;
-        console.log(this.recordCount);        
+        this.recordCount = getPermissionsResponse.RecordCount;        
       },
         error => this.errorMessage = <any>error
       );
@@ -47,7 +46,16 @@ export class ManagePermissionsComponent implements OnInit {
 
   openEditPermission(id: number)
   {
-    this.modalDataService.data = 0;
+    this.modalDataService.data = id;
     const modal = this.modalService.show(EditPermissionComponent, {'class': 'modal-dialog-primary'});        
+  }
+
+  updatePermissionStatus(permission: Permission)
+  {
+    console.log(permission);    
+    this.secSvc.updatePermissionStatus(permission)
+      .subscribe(res => {},             
+        error => this.errorMessage = <any>error
+      );
   }
 }

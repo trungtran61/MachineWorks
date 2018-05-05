@@ -9,12 +9,13 @@ import { Observable } from 'rxjs/Observable';
 import { ValidationService } from '../shared/validation.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { ComponentCanDeactivate } from '../component-can-deactivate';
+import { HandleErrorService } from '../shared/handle-error.service';
 
 @Component({
   templateUrl: './manage-user.component.html',
   styleUrls: ['./manage-user.component.css']
 })
-export class ManageUserComponent implements OnInit, ComponentCanDeactivate  {
+export class ManageUserComponent implements OnInit, ComponentCanDeactivate {
   entryForm: FormGroup;
   user: User;
   errorMessage: string = '';
@@ -22,7 +23,7 @@ export class ManageUserComponent implements OnInit, ComponentCanDeactivate  {
   userId: number;
   pageTitle: string = 'New User';
   _roles: FormArray = this.fb.array([]);
-  
+
   @HostListener('window:beforeunload')
 
   canDeactivate(): boolean {
@@ -50,7 +51,8 @@ export class ManageUserComponent implements OnInit, ComponentCanDeactivate  {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private secSvc: SecurityService) {
+    private secSvc: SecurityService,
+    private handleErrorService: HandleErrorService) {
   }
 
   createFormGroup(): void {
@@ -83,8 +85,7 @@ export class ManageUserComponent implements OnInit, ComponentCanDeactivate  {
       .subscribe(
         (user: User) => this.onUserRetrieved(user),
         error => {
-          console.log(error);
-          this.errorMessage = <any>error;
+          this.errorMessage = this.handleErrorService.handleError(error);
         }
       );
   }
@@ -156,8 +157,8 @@ export class ManageUserComponent implements OnInit, ComponentCanDeactivate  {
         res => {
           this.onSaveComplete(res);
         },
-        err => {
-          this.handleError(err);
+        error => {
+          this.errorMessage = this.handleErrorService.handleError(error);
         }
       );;
   }
@@ -167,10 +168,5 @@ export class ManageUserComponent implements OnInit, ComponentCanDeactivate  {
     this.infoMessage = 'User Profile updated.'
     this.errorMessage = '';
     this.router.navigate(['/manageusers/' + userId]);
-  }
-
-  private handleError(error: Response): Observable<any> {
-    this.errorMessage = error.statusText;
-    return Observable.throw(error || 'Server error');
   }
 }
