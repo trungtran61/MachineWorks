@@ -6,6 +6,7 @@ import { ModalDataService } from '../shared/modal-data.service';
 import { Observable } from 'rxjs/Observable';
 import { Route, Router } from '@angular/router';
 import { HandleErrorService } from '../shared/handle-error.service';
+import { CommunicationService } from '../shared/communication.service';
 
 @Component({
   selector: 'app-edit-permission',
@@ -23,7 +24,8 @@ export class EditPermissionComponent implements OnInit {
     private secSvc: SecurityService,
     private modalDataService: ModalDataService,
     private router: Router,
-    private handleErrorService: HandleErrorService) { }
+    private handleErrorService: HandleErrorService,
+    private communicationService: CommunicationService) { }
 
   ngOnInit() {
 
@@ -50,6 +52,10 @@ export class EditPermissionComponent implements OnInit {
     this.permission.DisplayName = '';
     this.permission.Active = true;
   }
+
+  onSomething() {
+    this.communicationService.emitChange({proprty: 'value'});
+}
 
   onPermissionRetrieved(permission: Permission) {
     this.permission = Object.assign(new Permission, permission);

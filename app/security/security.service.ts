@@ -3,11 +3,11 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/observable/of';
 import { environment } from '../../environments/environment';
+import { tap } from 'rxjs/operators/tap';
 
-import { SecurityUserAuth } from './security-user-auth';
-import { LOGIN_MOCKS } from './login-mocks';
+//import { LOGIN_MOCKS } from './login-mocks';
 import { SecurityUser } from './security-user';
-import { GetListRequest, User, Role, GetRolesResponse, GetPermissionsResponse, GetUsersResponse, Permission } from './security';
+import { GetListRequest, User, Role, GetRolesResponse, GetPermissionsResponse, GetUsersResponse, Permission, SecurityUserAuth, UserAuthRequest } from './security';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Subscription } from 'rxjs/Subscription';
@@ -19,24 +19,25 @@ const httpOptions = {
 @Injectable()
 export class SecurityService {
   securityObject: SecurityUserAuth = new SecurityUserAuth();
-  apiUrl: string = environment.secApiUrl;  
-
+  apiUrl: string = environment.secApiUrl;
   constructor(private http: HttpClient) { }
 
-  login(entity: SecurityUser): Observable<SecurityUserAuth> {
+  login(user: SecurityUser): Observable<SecurityUserAuth> {
     // Initialize security object
     this.resetSecurityObject();
-    Object.assign(this.securityObject,
-      LOGIN_MOCKS.find(user => user.userName.toLowerCase() ===
-        entity.userName.toLowerCase()));
-
-    if (this.securityObject.userName !== "") {
-      // Store into local storage
-      localStorage.setItem("bearerToken", this.securityObject.bearerToken);
-      localStorage.setItem('securityObject', JSON.stringify(this.securityObject));
-    }
-
-    return of<SecurityUserAuth>(this.securityObject);
+    //return (this.http.post<SecurityUserAuth>(this.apiUrl + 'ValidateUser', user));
+    return this.http.post<SecurityUserAuth>(this.apiUrl + 'ValidateUser',
+      user, httpOptions).pipe(
+      tap(resp => {
+        // Use object assign to update the current object
+        // NOTE: Don't create a new AppUserAuth object
+        //       because that destroys all references to object
+        Object.assign(this.securityObject, resp);
+        // Store into local storage
+        localStorage.setItem('securityObject', JSON.stringify(this.securityObject));
+        localStorage.setItem("bearerToken",
+          this.securityObject.bearerToken);
+      }));
   }
 
   getToken(): string {
@@ -49,8 +50,8 @@ export class SecurityService {
 
   getUsers(getListRequest: GetListRequest): Observable<GetUsersResponse> {
     let params = new HttpParams().append("SearchParm", getListRequest.SearchParm)
-    .append("PageSize", environment.pageSize.toString())
-    .append("PageNumber", getListRequest.PageNumber.toString());
+      .append("PageSize", environment.pageSize.toString())
+      .append("PageNumber", getListRequest.PageNumber.toString());
 
     return this.http.get<GetUsersResponse>(this.apiUrl + 'GetUsers', {
       headers: new HttpHeaders({
@@ -61,7 +62,7 @@ export class SecurityService {
     });
   }
 
-  getUser(id: number): Observable<User> {   
+  getUser(id: number): Observable<User> {
     let params = new HttpParams().set("id", id.toString());
 
     return this.http.get<User>(this.apiUrl + 'GetUser', {
@@ -73,7 +74,7 @@ export class SecurityService {
     });
   }
 
-  getRole(id: number): Observable<Role> {   
+  getRole(id: number): Observable<Role> {
     let params = new HttpParams().set("id", id.toString());
 
     return this.http.get<Role>(this.apiUrl + 'GetRole', {
@@ -85,7 +86,7 @@ export class SecurityService {
     });
   }
 
-  getPermission(id: number): Observable<Permission> {   
+  getPermission(id: number): Observable<Permission> {
 
     let params = new HttpParams().set("id", id.toString());
 
@@ -99,38 +100,38 @@ export class SecurityService {
   }
 
   updateUserRoles(id: number, roles) {
-    return (this.http.post(this.apiUrl + 'UpdateUserRoles', { id: id, roles: JSON.stringify(roles) }));          
+    return (this.http.post(this.apiUrl + 'UpdateUserRoles', { id: id, roles: JSON.stringify(roles) }));
   }
 
   updateUserStatus(id: number, active: boolean) {
-    return (this.http.post(this.apiUrl + 'UpdateUserStatus', { id: id, active: active }));          
+    return (this.http.post(this.apiUrl + 'UpdateUserStatus', { id: id, active: active }));
   }
 
   updateRoleStatus(role: Role) {
-    return (this.http.post(this.apiUrl + 'UpdateRoleStatus', { id: role.Id, active: role.Active }));          
+    return (this.http.post(this.apiUrl + 'UpdateRoleStatus', { id: role.Id, active: role.Active }));
   }
 
   updatePermissionStatus(permission: Permission) {
-    return (this.http.post(this.apiUrl + 'UpdatePermissionStatus', { id: permission.Id, active: permission.Active }));          
+    return (this.http.post(this.apiUrl + 'UpdatePermissionStatus', { id: permission.Id, active: permission.Active }));
   }
 
   updateUserProfile(user: User) {
     //console.log(user);
-    return (this.http.post(this.apiUrl + 'UpdateUserProfile', JSON.stringify(user), httpOptions));          
+    return (this.http.post(this.apiUrl + 'UpdateUserProfile', JSON.stringify(user), httpOptions));
   }
 
   updateRole(role: Role) {
-    return (this.http.post(this.apiUrl + 'UpdateRole', JSON.stringify(role), httpOptions));          
+    return (this.http.post(this.apiUrl + 'UpdateRole', JSON.stringify(role), httpOptions));
   }
 
   updatePermission(permission: Permission) {
-    return (this.http.post(this.apiUrl + 'UpdatePermission', JSON.stringify(permission), httpOptions));          
+    return (this.http.post(this.apiUrl + 'UpdatePermission', JSON.stringify(permission), httpOptions));
   }
 
   getRoles(getListRequest: GetListRequest): Observable<GetRolesResponse> {
     let params = new HttpParams().append("SearchParm", getListRequest.SearchParm)
-    .append("PageSize", environment.pageSize.toString())
-    .append("PageNumber", getListRequest.PageNumber.toString());
+      .append("PageSize", environment.pageSize.toString())
+      .append("PageNumber", getListRequest.PageNumber.toString());
 
     return this.http.get<GetRolesResponse>(this.apiUrl + 'GetRoles', {
       headers: new HttpHeaders({
@@ -143,8 +144,8 @@ export class SecurityService {
 
   getPermissions(getListRequest: GetListRequest): Observable<GetPermissionsResponse> {
     let params = new HttpParams().append("SearchParm", getListRequest.SearchParm)
-    .append("PageSize", environment.pageSize.toString())
-    .append("PageNumber", getListRequest.PageNumber.toString());
+      .append("PageSize", environment.pageSize.toString())
+      .append("PageNumber", getListRequest.PageNumber.toString());
 
     return this.http.get<GetPermissionsResponse>(this.apiUrl + 'GetPermissions', {
       headers: new HttpHeaders({
@@ -158,7 +159,7 @@ export class SecurityService {
   private extractData(response: Response) {
     let body = response.json();
     return body || {};
-  }  
+  }
 
   initializeUser(): User {
     // Return an initialized object
@@ -173,7 +174,7 @@ export class SecurityService {
       Roles: null,
       Permissions: ''
     };
-  }  
+  }
 
   logout(): void {
     this.resetSecurityObject();
@@ -183,12 +184,10 @@ export class SecurityService {
     this.securityObject.userName = "";
     this.securityObject.bearerToken = "";
     this.securityObject.isAuthenticated = false;
-
-    this.securityObject.canAccessToolInventory = false;
-    this.securityObject.canAccessAdmin = false;
-
-    localStorage.setItem('securityObject', null);
-    localStorage.removeItem("bearerToken");
-    localStorage.removeItem("securityObject");
+    this.securityObject.firstName = "";
+    this.securityObject.permissions = [];
+    
+    localStorage.removeItem("bearerToken");  
+    localStorage.removeItem("securityObject");    
   }
 }

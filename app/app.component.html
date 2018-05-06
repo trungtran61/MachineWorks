@@ -3,7 +3,7 @@
     <li class="nav-item active">
       <a routerLink="/dashboard" class="nav-link">Home</a>
     </li>
-    <li class="nav-item dropdown" *ngIf="securityObject.canAccessToolInventory">
+    <li class="nav-item dropdown" *ngIf="securityObject.isAuthenticated && securityObject.permissions.includes('ToolInventory')">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         Tool Inventory
@@ -31,7 +31,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item dropdown" *ngIf="securityObject.canAccessAdmin">
+    <li class="nav-item dropdown" *ngIf="securityObject.isAuthenticated && securityObject.permissions.includes('ManageResources')">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         Manage
@@ -60,8 +60,8 @@
         <li>
           <a href routerLink="updateprofile" class="dropdown-item">Update Profile</a>
         </li>
-        <div class="dropdown-divider"></div>
-        <li class="dropdown-item dropdown-submenu">
+        <div class="dropdown-divider" ></div>
+        <li class="dropdown-item dropdown-submenu"  >
           <a data-toggle="dropdown">Admin</a>
           <ul class="dropdown-menu">
             <li>

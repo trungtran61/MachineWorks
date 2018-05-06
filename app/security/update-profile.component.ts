@@ -4,11 +4,10 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import { SecurityService } from './security.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User, UserRole } from './security';
+import { User, UserRole, SecurityUserAuth } from './security';
 import { Observable } from 'rxjs/Observable';
 import { ValidationService } from '../shared/validation.service';
 import { forEach } from '@angular/router/src/utils/collection';
-import { SecurityUserAuth } from './security-user-auth';
 
 @Component({
   templateUrl: './update-profile.component.html',

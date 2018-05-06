@@ -11,6 +11,21 @@ export class User {
     Permissions: string;
 }
 
+export class UserAuthRequest {
+    UserName: string;
+    Password: string;
+}
+
+export class SecurityUserAuth {
+    userId: number;
+    userName: string = "";
+    bearerToken: string = "";
+    firstName: string = "";
+    email: string = "";
+    isAuthenticated: boolean = false;
+    permissions: String[];
+}
+
 export class Role {
     Id: number;
     Name: string;
@@ -43,12 +58,12 @@ export class Permission {
     Id: number;
     Name: string;
     DisplayName: string;
-    Active: boolean;   
+    Active: boolean;
 }
 
-export class RolePermission {    
+export class RolePermission {
     Name: string;
-    Assigned: boolean;    
+    Assigned: boolean;
 }
 
 export class GetListRequest {
