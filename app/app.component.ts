@@ -1,7 +1,7 @@
 import { Component, HostListener  } from '@angular/core';
-import { SecurityUserAuth } from './security/security-user-auth';
 import { SecurityService } from './security/security.service';
 import { Router } from '@angular/router';
+import { SecurityUserAuth } from './security/security';
 
 @Component({
   selector: 'mw-root',
@@ -18,6 +18,7 @@ export class AppComponent {
     if (localStorage.getItem('securityObject'))
     {
       this.securityObject = securityService.getSecurityObject();    
+      console.log (this.securityObject);
     } 
   }
 
@@ -25,8 +26,7 @@ export class AppComponent {
     localStorage.clear();
 }
 
-  logout(): void {
-    console.log ('logout');
+  logout(): void {    
     this.securityService.logout();   
   }   
 }

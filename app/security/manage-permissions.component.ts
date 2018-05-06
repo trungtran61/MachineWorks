@@ -7,6 +7,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { EditPermissionComponent } from './edit-permission.component';
 import { ModalDataService } from '../shared/modal-data.service';
 import { HandleErrorService } from '../shared/handle-error.service';
+import { CommunicationService } from '../shared/communication.service';
 
 @Component({
   selector: 'app-manage-permissions',
@@ -24,13 +25,18 @@ export class ManagePermissionsComponent implements OnInit {
   constructor(private secSvc: SecurityService,
     private modalService: BsModalService,
     private modalDataService: ModalDataService,
-    private handleErrorService: HandleErrorService) { }
+    private handleErrorService: HandleErrorService,
+  private communicationService: CommunicationService) { }
 
   ngOnInit() {
+    this.communicationService.changeEmitted$.subscribe(data => {
+      // ...
+      })
     let getListRequest: GetListRequest = new GetListRequest();
     this.getPage(1);
   }
 
+  
   getPage(page: number) {
     this.currentPage = page;
     let getListRequest: GetListRequest = new GetListRequest();

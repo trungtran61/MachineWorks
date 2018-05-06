@@ -1,3 +1,4 @@
+/*
 export class SecurityUserAuth {
   userId: number = 0;
   userName: string = "";
@@ -7,5 +8,6 @@ export class SecurityUserAuth {
   email: string = "";
   isAuthenticated: boolean = false;
   canAccessAdmin: boolean = false;
-  canAccessToolInventory: boolean = false;  
+  canAccessToolInventory: boolean = false;   
 }
+*/

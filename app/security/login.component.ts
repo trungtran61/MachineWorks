@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityUser } from './security-user';
-import { SecurityUserAuth } from './security-user-auth';
 import { SecurityService } from './security.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SecurityUserAuth, UserAuthRequest } from './security';
 
 @Component({
   templateUrl: './login.component.html',
@@ -18,20 +18,29 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');   
+    // for testing
+    this.user.userName = 'TienPhan';
+    this.user.password = 'Password';
+    //
+    this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');       
   }  
 
-  login() { 
+  login() {         
     this.securityService.login(this.user)
-      .subscribe(resp => { 
-        this.securityObject = resp;        
-            
-        if (this.returnUrl) {
-          this.router.navigateByUrl(this.returnUrl);
-        }
-        else {
-          this.router.navigateByUrl('/dashboard');
-        }        
+    .subscribe(resp => {
+      this.securityObject = resp;
+      if (this.returnUrl) {
+        console.log(this.securityObject);
+        this.router.navigateByUrl(this.returnUrl);
+      }
+      else {
+        this.router.navigateByUrl('/dashboard');        
+      }  
+    },
+      () => {
+        // Initialize security object to display error message
+        this.securityObject = new SecurityUserAuth();
       });
+    
   }  
 }
