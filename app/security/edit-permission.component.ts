@@ -52,11 +52,7 @@ export class EditPermissionComponent implements OnInit {
     this.permission.DisplayName = '';
     this.permission.Active = true;
   }
-
-  onSomething() {
-    this.communicationService.emitChange({proprty: 'value'});
-}
-
+  
   onPermissionRetrieved(permission: Permission) {
     this.permission = Object.assign(new Permission, permission);
   }
@@ -80,6 +76,7 @@ export class EditPermissionComponent implements OnInit {
   }
 
   onSaveComplete(permissionId): void {
+    this.communicationService.emitChange({property: 'value'});  // update parent permissions list
     this.bsModalRef.hide();
     this.router.navigate(['/managepermissions']);
   }
