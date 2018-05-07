@@ -17,6 +17,7 @@ import { UpdateProfileComponent } from './update-profile.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PendingChangesGuard } from '../pending-changes-guard';
 import { EditPermissionComponent } from './edit-permission.component';
+import { CommunicationService } from '../shared/communication.service';
 
 const routes = [
   {
@@ -51,6 +52,9 @@ const routes = [
     ValidationMessagesComponent,
     UpdateProfileComponent,
     EditPermissionComponent    
+  ],
+  providers: [
+    CommunicationService,
   ],
   entryComponents: [ EditPermissionComponent ], 
 })

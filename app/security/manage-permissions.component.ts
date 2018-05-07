@@ -26,17 +26,16 @@ export class ManagePermissionsComponent implements OnInit {
     private modalService: BsModalService,
     private modalDataService: ModalDataService,
     private handleErrorService: HandleErrorService,
-  private communicationService: CommunicationService) { }
+    private communicationService: CommunicationService) { }
 
   ngOnInit() {
     this.communicationService.changeEmitted$.subscribe(data => {
-      // ...
-      })
+      this.getPage(1);
+    })
     let getListRequest: GetListRequest = new GetListRequest();
     this.getPage(1);
   }
 
-  
   getPage(page: number) {
     this.currentPage = page;
     let getListRequest: GetListRequest = new GetListRequest();
