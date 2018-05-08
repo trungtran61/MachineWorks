@@ -41,20 +41,20 @@ export class ManageUsersComponent implements OnInit {
   getPage(page: number) {
     this.currentPage = page;
     let getListRequest: GetListRequest = new GetListRequest();
-    getListRequest.PageNumber = page;
-    getListRequest.SearchParm = this._listFilter;
+    getListRequest.pageNumber = page;
+    getListRequest.searchParm = this._listFilter;
 
     this.secSvc.getUsers(getListRequest)
-      .subscribe(getUsersResponse => {
-        this.users = getUsersResponse.Users;
-        this.recordCount = getUsersResponse.RecordCount
+      .subscribe(getUsersResponse => {       
+        this.users = getUsersResponse.users;
+        this.recordCount = getUsersResponse.recordCount       
       },
         error => this.errorMessage = <any>error
       );
   }
 
   updateUserStatus(user: User) {
-    this.secSvc.updateUserStatus(user.Id, user.Active)
+    this.secSvc.updateUserStatus(user.id, user.active)
       .subscribe(res => { },
         error => {
           this.errorMessage = this.handleErrorService.handleError(error);

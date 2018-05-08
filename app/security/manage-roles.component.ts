@@ -28,12 +28,12 @@ export class ManageRolesComponent implements OnInit {
   getPage(page: number) {
     this.currentPage = page;
     let getListRequest: GetListRequest = new GetListRequest();
-    getListRequest.PageNumber = page;
+    getListRequest.pageNumber = page;
 
     this.secSvc.getRoles(getListRequest)
       .subscribe(getRolesResponse => {
-        this.roles = getRolesResponse.Roles;
-        this.recordCount = getRolesResponse.RecordCount
+        this.roles = getRolesResponse.roles;
+        this.recordCount = getRolesResponse.recordCount
       },
         error => {
           this.errorMessage = this.handleErrorService.handleError(error);

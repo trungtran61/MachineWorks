@@ -39,12 +39,12 @@ export class ManagePermissionsComponent implements OnInit {
   getPage(page: number) {
     this.currentPage = page;
     let getListRequest: GetListRequest = new GetListRequest();
-    getListRequest.PageNumber = page;
+    getListRequest.pageNumber = page;
 
     this.secSvc.getPermissions(getListRequest)
       .subscribe(getPermissionsResponse => {
-        this.permissions = getPermissionsResponse.Permissions;
-        this.recordCount = getPermissionsResponse.RecordCount;
+        this.permissions = getPermissionsResponse.permissions;
+        this.recordCount = getPermissionsResponse.recordCount;
       },
         error => {
           this.errorMessage = this.handleErrorService.handleError(error);

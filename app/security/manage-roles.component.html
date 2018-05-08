@@ -11,13 +11,13 @@
       <tbody>
         <tr *ngFor="let role of roles">
           <td>
-            <a [routerLink]="['/manageroles', role.Id]">{{ role.Name }}</a>
+            <a [routerLink]="['/manageroles', role.id]">{{ role.name }}</a>
           </td>
           <td>
-            {{ role.DisplayName }}
+            {{ role.displayName }}
           </td>
           <td>
-            <input type="checkbox" checked="{{role.Active ? 'Checked':''}}" (change)="updateRoleStatus(role)" [(ngModel)]="role.Active" />
+            <input type="checkbox" checked="{{role.active ? 'Checked':''}}" (change)="updateRoleStatus(role)" [(ngModel)]="role.active" />
           </td>
         </tr>
       </tbody>

@@ -43,8 +43,8 @@ export class ManageUserComponent implements OnInit, ComponentCanDeactivate {
 
   addRole(role: UserRole): FormGroup {
     return this.fb.group({
-      Name: role.Name,
-      Assigned: role.Assigned
+      Name: role.name,
+      Assigned: role.assigned
     });
   }
 
@@ -97,16 +97,16 @@ export class ManageUserComponent implements OnInit, ComponentCanDeactivate {
     this.user = user;
 
     this.entryForm.patchValue({
-      UserName: user.UserName,
-      Password: user.Password,
-      FirstName: user.FirstName,
-      LastName: user.LastName,
-      Email: user.Email,
-      Active: user.Active
+      UserName: user.userName,
+      Password: user.password,
+      FirstName: user.firstName,
+      LastName: user.lastName,
+      Email: user.email,
+      Active: user.active
     });
 
     // FormArray needs to be iterated
-    let roles = this.user.Roles;
+    let roles = this.user.roles;
     var i: number;
 
     for (i = 0; i < roles.length; i++) {

@@ -43,8 +43,8 @@ export class ManageRoleComponent implements OnInit, ComponentCanDeactivate  {
 
   addPermission(permission: RolePermission): FormGroup {
     return this.fb.group({
-      Name: permission.Name,
-      Assigned: permission.Assigned
+      Name: permission.name,
+      Assigned: permission.assigned
     });
   }
 
@@ -93,13 +93,13 @@ export class ManageRoleComponent implements OnInit, ComponentCanDeactivate  {
     this.role = role;
 
     this.entryForm.patchValue({
-      Name: role.Name,
-      DisplayName: role.DisplayName,
-      Active: role.Active
+      Name: role.name,
+      DisplayName: role.displayName,
+      Active: role.active
     });
 
     // FormArray needs to be iterated
-    let permissions = this.role.Permissions;
+    let permissions = this.role.permissions;
     var i: number;
 
     for (i = 0; i < permissions.length; i++) {
