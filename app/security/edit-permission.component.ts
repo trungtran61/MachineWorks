@@ -30,6 +30,7 @@ export class EditPermissionComponent implements OnInit {
   ngOnInit() {
 
     this.permissionId = this.modalDataService.data;
+console.log(this.permissionId );
 
     if (this.permissionId == 0) {
       this.pageTitle = 'New Permission';
@@ -48,18 +49,18 @@ export class EditPermissionComponent implements OnInit {
   }
 
   initializePermission(): void {
-    this.permission.Name = '';
-    this.permission.DisplayName = '';
-    this.permission.Active = true;
+    this.permission.name = '';
+    this.permission.displayName = '';
+    this.permission.active = true;
   }
   
-  onPermissionRetrieved(permission: Permission) {
-    this.permission = Object.assign(new Permission, permission);
+  onPermissionRetrieved(permission: Permission) {    
+    this.permission = Object.assign(new Permission, permission);   
   }
 
   updatePermission() {
 
-    this.secSvc.updatePermission(Object.assign({}, this.permission))
+    this.secSvc.updatePermission(this.permission)
       .subscribe(
         res => {
           this.onSaveComplete(res);

@@ -57,11 +57,11 @@ export class UpdateProfileComponent implements OnInit {
     this.user = user;
 
     this.entryForm.patchValue({
-      UserName: user.UserName,
-      Password: user.Password,
-      FirstName: user.FirstName,
-      LastName: user.LastName,
-      Email: user.Email
+      UserName: user.userName,
+      Password: user.password,
+      FirstName: user.firstName,
+      LastName: user.lastName,
+      Email: user.email
     });  
     
   }

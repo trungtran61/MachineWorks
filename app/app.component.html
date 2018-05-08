@@ -3,7 +3,7 @@
     <li class="nav-item active">
       <a routerLink="/dashboard" class="nav-link">Home</a>
     </li>
-    <li class="nav-item dropdown" *ngIf="securityObject.isAuthenticated && securityObject.permissions.includes('ToolInventory')">
+    <li class="nav-item dropdown" *ngIf="securityObject.isAuthenticated">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         Tool Inventory
@@ -31,7 +31,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item dropdown" *ngIf="securityObject.isAuthenticated && securityObject.permissions.includes('ManageResources')">
+    <li class="nav-item dropdown" *ngIf="securityObject.isAuthenticated">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         Manage

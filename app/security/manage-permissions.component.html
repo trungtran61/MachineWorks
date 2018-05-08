@@ -11,13 +11,13 @@
         <tbody>
           <tr *ngFor="let permission of permissions">
             <td>
-              <a href='javascript:void(0)' (click)="openEditPermission(permission.Id)">{{ permission.Name }}</a>
+              <a href='javascript:void(0)' (click)="openEditPermission(permission.id)">{{ permission.name }}</a>
             </td>
             <td>
-              {{ permission.DisplayName }}
+              {{ permission.displayName }}
             </td>
             <td>
-              <input type="checkbox" [(ngModel)]="permission.Active" checked="{{permission.Active ? 'Checked':''}}" (change)="updatePermissionStatus(permission)" />
+              <input type="checkbox" [(ngModel)]="permission.active" checked="{{permission.Active ? 'Checked':''}}" (change)="updatePermissionStatus(permission)" />
             </td>
           </tr>
         </tbody>

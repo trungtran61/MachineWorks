@@ -1,19 +1,26 @@
 export class User {
-    Id: number;
-    UserName: string;
-    Password: string;
-    FirstName: string;
-    LastName: string;
-    Email: string;
-    DateCreated?: string;
-    Active: boolean;
-    Roles: UserRole[];
-    Permissions: string;
+    id: number;
+    userName: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    dateCreated?: string;
+    active: boolean;
+    roles: UserRole[];
+    permissions: string;
+}
+
+export class UserClaim {
+    claimId: string='';
+    userId: string='';
+    claimType: string='';
+    claimValue: string='';    
 }
 
 export class UserAuthRequest {
-    UserName: string;
-    Password: string;
+    userName: string;
+    password: string;
 }
 
 export class SecurityUserAuth {
@@ -24,53 +31,54 @@ export class SecurityUserAuth {
     email: string = "";
     isAuthenticated: boolean = false;
     permissions: String[];
+    claims: UserClaim[] = [];   
 }
 
 export class Role {
-    Id: number;
-    Name: string;
-    DisplayName: string;
-    Active: boolean;
-    Permissions: RolePermission[];
+    id: number;
+    name: string;
+    displayName: string;
+    active: boolean;
+    permissions: RolePermission[];
 }
 
 export class GetUsersResponse {
-    RecordCount: number;
-    Users: User[];
+    recordCount: number;
+    users: User[];
 }
 
 export class GetRolesResponse {
-    RecordCount: number;
-    Roles: Role[];
+    recordCount: number;
+    roles: Role[];
 }
 
 export class GetPermissionsResponse {
-    RecordCount: number;
-    Permissions: Permission[];
+    recordCount: number;
+    permissions: Permission[];
 }
 
 export class UserRole {
-    Name: string;
-    Assigned: boolean;
+    name: string;
+    assigned: boolean;
 }
 
 export class Permission {
-    Id: number;
-    Name: string;
-    DisplayName: string;
-    Active: boolean;
+    id: number;
+    name: string;
+    displayName: string;
+    active: boolean;
 }
 
 export class RolePermission {
-    Name: string;
-    Assigned: boolean;
+    name: string;
+    assigned: boolean;
 }
 
 export class GetListRequest {
-    SearchParm?: string = '';
-    SortColumn?: string = '';
-    SortDirection?: string = 'ASC';
-    ActiveOnly?: number = 0;
-    PageSize?: number = 50;
-    PageNumber?: number = 1;
+    searchParm?: string = '';
+    sortColumn?: string = '';
+    sortDirection?: string = 'ASC';
+    activeOnly?: number = 0;
+    pageSize?: number = 50;
+    pageNumber?: number = 1;
 }

@@ -26,7 +26,7 @@ export class SecurityService {
     // Initialize security object
     this.resetSecurityObject();
     //return (this.http.post<SecurityUserAuth>(this.apiUrl + 'ValidateUser', user));
-    return this.http.post<SecurityUserAuth>(this.apiUrl + 'ValidateUser',
+    return this.http.post<SecurityUserAuth>(environment.apiUrl + 'ValidateUser',
       user, httpOptions).pipe(
       tap(resp => {
         // Use object assign to update the current object
@@ -49,15 +49,11 @@ export class SecurityService {
   }
 
   getUsers(getListRequest: GetListRequest): Observable<GetUsersResponse> {
-    let params = new HttpParams().append("SearchParm", getListRequest.SearchParm)
+    let params = new HttpParams().append("searchParm", getListRequest.searchParm)
       .append("PageSize", environment.pageSize.toString())
-      .append("PageNumber", getListRequest.PageNumber.toString());
+      .append("PageNumber", getListRequest.pageNumber.toString());
 
-    return this.http.get<GetUsersResponse>(this.apiUrl + 'GetUsers', {
-      headers: new HttpHeaders({
-        'Accept': 'application/json',
-        'Authorization': 'my-auth-token'
-      }),
+    return this.http.get<GetUsersResponse>(this.apiUrl + 'GetUsers', {     
       params: params
     });
   }
@@ -90,11 +86,7 @@ export class SecurityService {
 
     let params = new HttpParams().set("id", id.toString());
 
-    return this.http.get<Permission>(this.apiUrl + 'GetPermission', {
-      headers: new HttpHeaders({
-        'Accept': 'application/json',
-        'Authorization': 'my-auth-token'
-      }),
+    return this.http.get<Permission>(this.apiUrl + 'GetPermission', {     
       params: params
     });
   }
@@ -108,30 +100,31 @@ export class SecurityService {
   }
 
   updateRoleStatus(role: Role) {
-    return (this.http.post(this.apiUrl + 'UpdateRoleStatus', { id: role.Id, active: role.Active }));
+    return (this.http.post(this.apiUrl + 'UpdateRoleStatus', { id: role.id, active: role.active }));
   }
 
   updatePermissionStatus(permission: Permission) {
-    return (this.http.post(this.apiUrl + 'UpdatePermissionStatus', { id: permission.Id, active: permission.Active }));
+    return (this.http.post(this.apiUrl + 'UpdatePermissionStatus', { id: permission.id, active: permission.active }));
   }
 
   updateUserProfile(user: User) {
     //console.log(user);
-    return (this.http.post(this.apiUrl + 'UpdateUserProfile', JSON.stringify(user), httpOptions));
+    return (this.http.post(this.apiUrl + 'UpdateUserProfile', user));
   }
 
   updateRole(role: Role) {
-    return (this.http.post(this.apiUrl + 'UpdateRole', JSON.stringify(role), httpOptions));
+    return (this.http.post(this.apiUrl + 'UpdateRole', role));
   }
 
   updatePermission(permission: Permission) {
-    return (this.http.post(this.apiUrl + 'UpdatePermission', JSON.stringify(permission), httpOptions));
+    console.log(permission);
+    return this.http.post(this.apiUrl + 'UpdatePermission', permission);
   }
 
   getRoles(getListRequest: GetListRequest): Observable<GetRolesResponse> {
-    let params = new HttpParams().append("SearchParm", getListRequest.SearchParm)
+    let params = new HttpParams().append("searchParm", getListRequest.searchParm)
       .append("PageSize", environment.pageSize.toString())
-      .append("PageNumber", getListRequest.PageNumber.toString());
+      .append("PageNumber", getListRequest.pageNumber.toString());
 
     return this.http.get<GetRolesResponse>(this.apiUrl + 'GetRoles', {
       headers: new HttpHeaders({
@@ -143,9 +136,9 @@ export class SecurityService {
   }
 
   getPermissions(getListRequest: GetListRequest): Observable<GetPermissionsResponse> {
-    let params = new HttpParams().append("SearchParm", getListRequest.SearchParm)
+    let params = new HttpParams().append("searchParm", getListRequest.searchParm)
       .append("PageSize", environment.pageSize.toString())
-      .append("PageNumber", getListRequest.PageNumber.toString());
+      .append("PageNumber", getListRequest.pageNumber.toString());
 
     return this.http.get<GetPermissionsResponse>(this.apiUrl + 'GetPermissions', {
       headers: new HttpHeaders({
@@ -164,15 +157,15 @@ export class SecurityService {
   initializeUser(): User {
     // Return an initialized object
     return {
-      Id: 0,
-      UserName: null,
-      Password: null,
-      FirstName: null,
-      LastName: null,
-      Email: null,
-      Active: false,
-      Roles: null,
-      Permissions: ''
+      id: 0,
+      userName: null,
+      password: null,
+      firstName: null,
+      lastName: null,
+      email: null,
+      active: false,
+      roles: null,
+      permissions: ''
     };
   }
 
@@ -186,6 +179,7 @@ export class SecurityService {
     this.securityObject.isAuthenticated = false;
     this.securityObject.firstName = "";
     this.securityObject.permissions = [];
+    this.securityObject.claims = [];
     
     localStorage.removeItem("bearerToken");  
     localStorage.removeItem("securityObject");    

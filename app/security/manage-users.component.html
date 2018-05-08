@@ -1,6 +1,6 @@
 <div class='panel panel-primary'>
     <div class='table-responsive'>
-        <table class='table table-bordered table-striped' *ngIf='users && users.length'>
+        <table class='table table-bordered table-striped' *ngIf='(users && users.length) || listFilter != "" '>
             <thead>
                 <tr>
                     <th>Full Name
@@ -14,14 +14,14 @@
             <tbody>
                 <tr *ngFor='let user of users'>
                     <td>
-                        {{user.FirstName + ' ' + user.LastName}}
+                        {{user.firstName + ' ' + user.lastName}}
                     </td>
                     <td>
-                        <a [routerLink]="['/manageusers', user.Id]">{{ user.UserName }}</a>
+                        <a [routerLink]="['/manageusers', user.id]">{{ user.userName }}</a>
                     </td>
                     <td>{{ user.Email }}</td>
                     <td>
-                        <input type='checkbox' checked="{{user.Active ? 'Checked':''}}" (change)='updateUserStatus(user)' [(ngModel)]='user.Active' />
+                        <input type='checkbox' checked="{{user.active ? 'Checked':''}}" (change)='updateUserStatus(user)' [(ngModel)]='user.active' />
                     </td>
                 </tr>
             </tbody>
