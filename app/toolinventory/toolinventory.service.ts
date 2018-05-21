@@ -70,4 +70,11 @@ export class ToolInventoryService {
             })
         });
     }
+
+    UploadToolImage(formData: FormData) 
+    {       
+        this.url = this.apiUrl + 'UploadToolImage';                                
+        console.log(formData);
+        return this.http.post(this.url, formData);
+    }
 }
