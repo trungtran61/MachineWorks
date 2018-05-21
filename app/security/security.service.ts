@@ -60,7 +60,7 @@ export class SecurityService {
 
   getUser(id: number): Observable<User> {
     let params = new HttpParams().set("id", id.toString());
-
+console.log(id);
     return this.http.get<User>(this.apiUrl + 'GetUser', {
       headers: new HttpHeaders({
         'Accept': 'application/json',
@@ -183,5 +183,57 @@ export class SecurityService {
     
     localStorage.removeItem("bearerToken");  
     localStorage.removeItem("securityObject");    
+  }
+
+  hasClaim(claimType: any, claimValue?: any) {
+    let ret: boolean = false;
+
+    // See if an array of values was passed in.
+    if (typeof claimType === "string") {
+      ret = this.isClaimValid(claimType, claimValue);
+    }
+    else {
+      let claims: string[] = claimType;
+      if (claims) {
+        for (let index = 0; index < claims.length; index++) {
+          ret = this.isClaimValid(claims[index]);
+          // If one is successful, then let them in
+          if (ret) {
+            break;
+          }
+        }
+      }
+    }
+
+    return ret;
+  }
+
+  private isClaimValid(claimType: string, claimValue?: string): boolean {
+    let ret: boolean = false;
+    let auth: SecurityUserAuth = null;
+
+    // Retrieve security object
+    auth = this.getSecurityObject(); // this.securityObject;  
+
+    if (auth) {
+      // See if the claim type has a value
+      // *hasClaim="'claimType:value'"
+      if (claimType.indexOf(":") >= 0) {
+        let words: string[] = claimType.split(":");
+        claimType = words[0].toLowerCase();
+        claimValue = words[1];
+      }
+      else {
+        claimType = claimType.toLowerCase();
+        // Either get the claim value, or assume 'true'
+        claimValue = claimValue ? claimValue : "true";
+      }
+      // Attempt to find the claim
+      ret = auth.claims.find(c =>
+        c.claimType.toLowerCase() == claimType &&
+        c.claimValue.toLowerCase() == claimValue) != null;
+    }
+    
+    return ret;
   }
 }

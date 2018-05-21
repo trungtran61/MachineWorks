@@ -11,14 +11,15 @@
       </a>
       <ul class="dropdown-menu" role="menu">
         <li role="presentation">            
-          <a class="dropdown-item" routerLink="/searchtoolinventory">Search Tool Inventory</a>
+          <a class="dropdown-item" routerLink="/searchtoolinventory">Search Tool Inventory</a>          
           <a class="dropdown-item" routerLink="/searchspec">Search Specification</a>
           <a class="dropdown-item" routerLink="/searchmaterial">Search Material</a>
+          <a class="dropdown-item" routerLink="/tooldetail">Tool Detail</a>
         </li>
       </ul>
     </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" *ngIf="securityObject.isAuthenticated" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+    <li class="nav-item dropdown" *ngIf="securityObject.isAuthenticated">      
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" *hasClaim="'ManageResources'"
         aria-haspopup="true" aria-expanded="false">
         Tool Setup Sheet
         <b class="caret"></b>
@@ -30,7 +31,7 @@
           <a class="dropdown-item" routerLink="/cuttingmethodtemplateeditor">Cutting Method Template Editor</a>
         </li>
       </ul>
-    </li>
+    </li>  
     <li class="nav-item dropdown" *ngIf="securityObject.isAuthenticated">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
@@ -65,9 +66,9 @@
           <a data-toggle="dropdown">Admin</a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" routerLink="manageusers">Manage Users</a>
-              <a class="dropdown-item" routerLink="manageroles">Manage Roles</a>
-              <a class="dropdown-item" routerLink="managepermissions">Manage Permissions</a>
+              <a class="dropdown-item" routerLink="manageusers" *hasClaim="'ManageUsers'" >Manage Users</a>
+              <a class="dropdown-item" routerLink="manageroles" *hasClaim="'ManageRoles'">Manage Roles</a>
+              <a class="dropdown-item" routerLink="managepermissions" *hasClaim="'ManagePermisions'">Manage Permissions</a>
             </li>
           </ul>
         </li>

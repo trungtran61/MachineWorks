@@ -11,6 +11,8 @@ import { CuttingMethodTemplateEditorComponent } from './cutting-method-template-
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from '../security/auth-guard.service';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { ToolDetailComponent } from './tool-detail.component';
+import { FileDropModule } from 'ngx-file-drop';
 
 const routes = [
   { 
@@ -32,6 +34,11 @@ const routes = [
     path: 'cuttingmethodtemplateeditor', 
     component: CuttingMethodTemplateEditorComponent,
     canActivate: [AuthGuardService]
+  },
+  { 
+    path: 'tooldetail', 
+    component: ToolDetailComponent,
+    canActivate: [AuthGuardService]
   }      
 ];
 
@@ -41,6 +48,7 @@ const routes = [
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,    
+    FileDropModule,
     TypeaheadModule.forRoot(),
     RouterModule.forChild(routes)    
   ],
@@ -48,7 +56,8 @@ const routes = [
     SearchToolinventoryComponent,
     ToolSetupSheetComponent,
     OpenToolSetupSheetComponent,
-    CuttingMethodTemplateEditorComponent    
+    CuttingMethodTemplateEditorComponent,
+    ToolDetailComponent    
   ],
   providers: [ToolInventoryService]
 })

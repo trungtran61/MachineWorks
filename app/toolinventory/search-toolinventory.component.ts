@@ -63,6 +63,10 @@ export class SearchToolinventoryComponent implements OnInit {
     })
   }
 
+  onSubmit() {
+
+  }
+
   ngOnInit() {
     this.createFormGroup();
   }

@@ -70,6 +70,10 @@ export class CuttingMethodTemplateEditorComponent implements OnInit {
     this.errorMessage = 'Template Updated.'
   }
 
+  onSubmit() {
+
+  }
+
   ngOnInit() {
     this.createFormGroup();
   }
