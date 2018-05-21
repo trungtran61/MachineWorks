@@ -24,7 +24,7 @@ export class UserAuthRequest {
 }
 
 export class SecurityUserAuth {
-    userId: number;
+    id: number;
     userName: string = "";
     bearerToken: string = "";
     firstName: string = "";

@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-sm">
+    <img id='toolImage' style="height: 160px; border-radius: 50px;" src='' onerror="this.src = './assets/images/no_image.svg'"
+    />
+  </div>
+  <div class="text-wrapper col-sm">
+      <file-drop headertext="Drop image here" (onFileDrop)="dropped($event)" 
+            (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" *ngIf='!isDropped'>           
+      </file-drop> 
+      <img style="height: 160px; border-radius: 0px;" src='' id='uploadedImage' />       
+  </div>
+</div>

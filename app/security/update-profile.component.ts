@@ -40,7 +40,7 @@ export class UpdateProfileComponent implements OnInit {
     this.createFormGroup();
     this.entryForm.get('UserName').disable();
     this.securityObject = this.secSvc.getSecurityObject();   
-    this.secSvc.getUser(this.securityObject.userId)
+    this.secSvc.getUser(this.securityObject.id)
       .subscribe(
         (user: User) => this.onUserRetrieved(user),
         error => {

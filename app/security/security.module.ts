@@ -25,7 +25,12 @@ const routes = [
     component: UpdateProfileComponent,
     canActivate: [AuthGuardService]
   },
-  { path: 'manageusers', component: ManageUsersComponent, canActivate: [AuthGuardService] },
+  { 
+    path: 'manageusers', 
+    component: ManageUsersComponent, 
+    canActivate: [AuthGuardService],
+    data: { claimType: 'ManageUsers', claimValue: true }
+  },
   { path: 'manageusers/:id', component: ManageUserComponent, canActivate: [AuthGuardService],canDeactivate: [PendingChangesGuard] },
   { path: 'manageroles', component: ManageRolesComponent, canActivate: [AuthGuardService] },
   { path: 'manageroles/:id', component: ManageRoleComponent, canActivate: [AuthGuardService] },

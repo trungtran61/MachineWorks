@@ -75,7 +75,7 @@
               </div>
 
               <div class="mb-2">
-                <button class="btn btn-primary btn-md btn-block" type="button" [disabled]="!entryForm.valid || entryForm.pristine" (click)="updateUserProfile()">{{userId != '0' ? 'Update User Profile': 'Create User'}}</button>
+                <button class="btn btn-primary btn-md btn-block" type="button" [disabled]="!entryForm.valid || entryForm.pristine" (click)="updateUserProfile()">{{userId != 0 ? 'Update User Profile': 'Create User'}}</button>
               </div>
               <div class="row">
                 <div class="col-md-3 input-group" [routerLink]="['/manageusers']" [queryParamsHandling]="true" style="height: 40px;">

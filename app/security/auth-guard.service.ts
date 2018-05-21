@@ -12,9 +12,20 @@ export class AuthGuardService implements CanActivate {
     } 
   }    
   
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {                
+  canActivate(
+    route: ActivatedRouteSnapshot, 
+    state: RouterStateSnapshot) {                
 
-    if (this.securityService.securityObject.isAuthenticated) {           
+    let claimType: string = route.data["claimType"];
+
+    // everyone can see the dashboard
+    if (this.securityService.securityObject.isAuthenticated && state.url == '/dashboard') {           
+      return true;
+    }
+
+    console.log(claimType);
+
+    if (this.securityService.securityObject.isAuthenticated) { //} && this.securityService.hasClaim(claimType)) {           
       return true;
     } else {
       this.router.navigate(['/login'], {

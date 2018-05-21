@@ -3,7 +3,7 @@ import { SecurityUserAuth } from '../security/security';
 import { SecurityService } from '../security/security.service';
 
 @Component({
-  selector: 'ptc-dashboard',
+  selector: 'mw-dashboard',
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {

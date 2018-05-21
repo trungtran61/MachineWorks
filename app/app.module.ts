@@ -23,6 +23,7 @@ import { PendingChangesGuard } from './pending-changes-guard';
 import { BsModalService, ModalModule } from 'ngx-bootstrap';
 import { ModalDataService } from './shared/modal-data.service';
 import { HandleErrorService } from './shared/handle-error.service';
+import { HasClaimDirective } from './security/has-claim.directive';
  
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HandleErrorService } from './shared/handle-error.service';
     DashboardComponent,
     LoginComponent,
     PagenotfoundComponent,
-    ConfirmLeaveComponent        
+    ConfirmLeaveComponent,
+    HasClaimDirective        
   ],
   imports: [
     BrowserModule,
