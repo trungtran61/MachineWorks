@@ -287,7 +287,7 @@
         Name: string;
         ItemNumber: string;
         Manufacturer: string;
-        VendorID: string;
+        OrganizationID: string;
         MWID: string;
         Location: string;
         Radius: string;
@@ -332,7 +332,7 @@
         OrderApproved: string;
         Width: string;
         LinkedTools: LinkedTool[];
-        VendorInfo: VendorInfo;
+        OrganizationInfo: OrganizationInfo;
     }
 
     export class ToolInventorySaveRequest
@@ -343,7 +343,7 @@
         Name: string;
         ItemNumber: string;
         Manufacturer: string;
-        VendorID: string;
+        OrganizationID: string;
         MWID: string;
         Location: string;
         Radius: string;
@@ -427,7 +427,7 @@
         Active: boolean;
     }
 
-    export class VendorInfo
+    export class OrganizationInfo
     {
         ID: number;       
         CompanyName: string;

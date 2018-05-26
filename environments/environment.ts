@@ -8,6 +8,6 @@ export const environment = {
   apiUrl1: 'http://localhost/mwwebapi/api/',
   secApiUrl1: 'http://localhost/mwwebapi/api/security/',
   apiUrl: 'http://localhost:5000/api/',
-  secApiUrl: 'http://localhost:5000/api/security/',
+  secApiUrl: 'http://localhost:5000/api/security/',  
   pageSize: 5
 };
