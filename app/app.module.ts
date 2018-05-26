@@ -24,6 +24,7 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap';
 import { ModalDataService } from './shared/modal-data.service';
 import { HandleErrorService } from './shared/handle-error.service';
 import { HasClaimDirective } from './security/has-claim.directive';
+import { OrganizationsModule } from './organizations/organizations.module';
  
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { HasClaimDirective } from './security/has-claim.directive';
     LoginComponent,
     PagenotfoundComponent,
     ConfirmLeaveComponent,
-    HasClaimDirective        
+    HasClaimDirective    
   ],
   imports: [
     BrowserModule,
@@ -42,7 +43,8 @@ import { HasClaimDirective } from './security/has-claim.directive';
     //NgHttpLoaderModule,
     ToolInventoryModule,
     SecurityModule,
-    AppRoutingModule,    
+    OrganizationsModule,
+    AppRoutingModule,       // needs to be last for correct routing
     Ng4LoadingSpinnerModule.forRoot(),
     ModalModule.forRoot(), 
   ],  
