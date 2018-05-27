@@ -8,12 +8,18 @@ import { OrganizationsService } from './organizations.service';
 import { AuthGuardService } from '../security/auth-guard.service';
 import { PendingChangesGuard } from '../pending-changes-guard';
 import { RouterModule } from '@angular/router';
+import { ManageOrganizationComponent } from './manage-organization.component';
 
-const routes = [ 
-  { path: 'manageorganizations/:id', component: ManageOrganizationsComponent, canActivate: [AuthGuardService],canDeactivate: [PendingChangesGuard] },
-  { path: 'manageorganizations/customers', component: ManageOrganizationsComponent, canActivate: [AuthGuardService] },  
-  { path: 'manageorganizations/manufacturers', component: ManageOrganizationsComponent, canActivate: [AuthGuardService] },  
-  { path: 'manageorganizations/vendors', component: ManageOrganizationsComponent, canActivate: [AuthGuardService] }  
+const routes = [   
+  { path: 'manageorganizations',
+  children: [
+      { path: 'customers', component: ManageOrganizationsComponent, canActivate: [AuthGuardService] },  
+      { path: 'customers:id', component: ManageOrganizationComponent, canActivate: [AuthGuardService] },        
+      { path: 'manufacturers', component: ManageOrganizationsComponent, canActivate: [AuthGuardService] },  
+      { path: 'manufacturers:id', component: ManageOrganizationComponent, canActivate: [AuthGuardService] },        
+      { path: 'vendors', component: ManageOrganizationsComponent, canActivate: [AuthGuardService] },  
+      { path: 'vendors:id', component: ManageOrganizationComponent, canActivate: [AuthGuardService] },        
+  ] }  
 ];
 
 @NgModule({
@@ -24,7 +30,8 @@ const routes = [
     RouterModule.forChild(routes),   
   ],
   declarations: [
-    ManageOrganizationsComponent
+    ManageOrganizationsComponent,
+    ManageOrganizationComponent
   ],
   providers: [
     OrganizationsService

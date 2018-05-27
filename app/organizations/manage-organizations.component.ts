@@ -3,6 +3,7 @@ import { Organization, FilterOrganizationsRequest } from './organizations';
 import { environment } from '../../environments/environment';
 import { HandleErrorService } from '../shared/handle-error.service';
 import { OrganizationsService } from './organizations.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-manage-organizations',
@@ -43,7 +44,11 @@ export class ManageOrganizationsComponent implements OnInit {
     this.filterOrganizationsList();
   }
 
-  constructor(private organizationsService: OrganizationsService, private handleErrorService: HandleErrorService) { }
+  constructor(private route: ActivatedRoute, private organizationsService: OrganizationsService, private handleErrorService: HandleErrorService) { 
+    this.route.url.subscribe(params => {
+      console.log(params[0].path);
+    });
+  }
 
   ngOnInit() {
     this._nameFilter = '';
