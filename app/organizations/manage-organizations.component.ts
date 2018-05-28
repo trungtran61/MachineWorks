@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Organization, FilterOrganizationsRequest } from './organizations';
+import { Organization, FilterOrganizationsRequest, OrganizationType } from './organizations';
 import { environment } from '../../environments/environment';
 import { HandleErrorService } from '../shared/handle-error.service';
 import { OrganizationsService } from './organizations.service';
@@ -16,6 +16,7 @@ export class ManageOrganizationsComponent implements OnInit {
   recordCount: number;
   currentPage: number = 1;
   pageSize: number = environment.pageSize;
+  orgType: OrganizationType;
 
   _nameFilter: string;
   get nameFilter(): string {
@@ -46,7 +47,7 @@ export class ManageOrganizationsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private organizationsService: OrganizationsService, private handleErrorService: HandleErrorService) { 
     this.route.url.subscribe(params => {
-      console.log(params[0].path);
+      this.orgType == OrganizationType[params[0].path];
     });
   }
 
@@ -64,6 +65,7 @@ export class ManageOrganizationsComponent implements OnInit {
   getPage(page: number) {
     this.currentPage = page;
     let filterOrganizationsRequest: FilterOrganizationsRequest = new FilterOrganizationsRequest();
+    filterOrganizationsRequest.orgType = this.orgType;
     filterOrganizationsRequest.pageNumber = page;
     filterOrganizationsRequest.nameFilter = this._nameFilter.toLocaleLowerCase();
     filterOrganizationsRequest.typeFilter = this._typeFilter.toLocaleLowerCase();
@@ -79,6 +81,15 @@ export class ManageOrganizationsComponent implements OnInit {
   }
 
   updateOrganizationStatus(organization: Organization) {
+    this.organizationsService.updateOrganizationStatus(organization)
+      .subscribe(res => { },
+        error => {
+          this.errorMessage = this.handleErrorService.handleError(error);
+        }
+      );
+  }
+
+  getOrganization(organization: Organization) {
     this.organizationsService.updateOrganizationStatus(organization)
       .subscribe(res => { },
         error => {
