@@ -11,7 +11,8 @@ export class OrganizationsService {
   constructor(private http: HttpClient) { }
 
   getOrganizations(filterOrganizationsRequest: FilterOrganizationsRequest): Observable<GetOrganizationsResponse> {
-    let params = new HttpParams().append("nameFilter", filterOrganizationsRequest.nameFilter)
+    let params = new HttpParams().append("orgType", filterOrganizationsRequest.orgType)
+      .append("nameFilter", filterOrganizationsRequest.nameFilter)
       .append("typeFilter", filterOrganizationsRequest.typeFilter)
       .append("addressFilter", filterOrganizationsRequest.addressFilter)
       .append("PageSize", environment.pageSize.toString())

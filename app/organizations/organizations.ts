@@ -1,6 +1,7 @@
 export class Organization {
-    type: string;
+    orgtype: string;
     id: number;
+    type: string;
     name: string;
     address: string;
     phone: string;
@@ -13,6 +14,8 @@ export class Organization {
 }
 
 export class FilterOrganizationsRequest {
+    type: string;
+    orgType: OrganizationType;
     nameFilter?: string = '';
     typeFilter?: string = '';
     addressFilter?: string = '';
@@ -26,4 +29,10 @@ export class FilterOrganizationsRequest {
 export class GetOrganizationsResponse {
     recordCount: number;
     organizations: Organization[];
+}
+
+export enum OrganizationType {
+    customer = 'customer',
+    manufacturer= 'manufacturer',
+    vendor = 'manufacturer'
 }
