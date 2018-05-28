@@ -23,8 +23,9 @@ export class OrganizationsService {
     });
   }
 
-  getOrganization(id: number): Observable<Organization> {
-    let params = new HttpParams().set("id", id.toString());
+  getOrganization(id: number, orgType: string): Observable<Organization> {
+    let params = new HttpParams().append("orgType", orgType)
+      .append("id", id.toString());
     return this.http.get<Organization>(this.apiUrl + 'organizations/GetOrganization', {     
       params: params
     });

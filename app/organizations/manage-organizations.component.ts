@@ -45,7 +45,7 @@ export class ManageOrganizationsComponent implements OnInit {
     this.filterOrganizationsList();
   }
 
-  constructor(private route: ActivatedRoute, private organizationsService: OrganizationsService, private handleErrorService: HandleErrorService) { 
+  constructor(private route: ActivatedRoute, private organizationsService: OrganizationsService, private handleErrorService: HandleErrorService) {
     this.route.url.subscribe(params => {
       this.orgType == OrganizationType[params[0].path];
     });
@@ -72,24 +72,15 @@ export class ManageOrganizationsComponent implements OnInit {
     filterOrganizationsRequest.addressFilter = this._addressFilter.toLocaleLowerCase();
 
     this.organizationsService.getOrganizations(filterOrganizationsRequest)
-      .subscribe(getOrganizationsResponse => {       
+      .subscribe(getOrganizationsResponse => {
         this.organizations = getOrganizationsResponse.organizations;
-        this.recordCount = getOrganizationsResponse.recordCount       
+        this.recordCount = getOrganizationsResponse.recordCount
       },
         error => this.errorMessage = <any>error
       );
   }
 
   updateOrganizationStatus(organization: Organization) {
-    this.organizationsService.updateOrganizationStatus(organization)
-      .subscribe(res => { },
-        error => {
-          this.errorMessage = this.handleErrorService.handleError(error);
-        }
-      );
-  }
-
-  getOrganization(organization: Organization) {
     this.organizationsService.updateOrganizationStatus(organization)
       .subscribe(res => { },
         error => {
