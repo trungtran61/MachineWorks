@@ -8,8 +8,9 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { SecurityService } from './security.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/do';
+
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Router } from '@angular/router';
 

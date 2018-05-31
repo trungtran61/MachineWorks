@@ -1,11 +1,11 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/map';
+
+
 import { SecurityService } from './security.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User, UserRole } from './security';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ValidationService } from '../shared/validation.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { ComponentCanDeactivate } from '../component-can-deactivate';

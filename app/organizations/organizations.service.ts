@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Organization, FilterOrganizationsRequest, GetOrganizationsResponse } from './organizations';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class OrganizationsService {

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import 'rxjs/add/operator/map';
+
 import { ToolInventoryService } from './toolinventory.service';
 import { LookUpRequest, Lookup, CuttingMethodTemplate } from './toolinventory';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  Observer } from 'rxjs';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
-import { Observer } from 'rxjs/Observer';
 
 @Component({
   templateUrl: './cutting-method-template-editor.component.html',

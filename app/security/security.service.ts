@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import 'rxjs/add/observable/of';
+import { Observable ,  of ,  Subscription } from 'rxjs';
+
 import { environment } from '../../environments/environment';
-import { tap } from 'rxjs/operators/tap';
+import { tap } from 'rxjs/operators';
 
 //import { LOGIN_MOCKS } from './login-mocks';
 import { SecurityUser } from './security-user';
 import { GetListRequest, User, Role, GetRolesResponse, GetPermissionsResponse, GetUsersResponse, Permission, SecurityUserAuth, UserAuthRequest } from './security';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers, RequestOptions } from '@angular/http';
-import { Subscription } from 'rxjs/Subscription';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
