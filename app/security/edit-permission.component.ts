@@ -3,7 +3,7 @@ import { Permission } from './security';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { SecurityService } from './security.service';
 import { ModalDataService } from '../shared/modal-data.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Route, Router } from '@angular/router';
 import { HandleErrorService } from '../shared/handle-error.service';
 import { CommunicationService } from '../shared/communication.service';

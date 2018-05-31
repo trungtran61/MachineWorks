@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/map';
+
+
 
 import { ToolInventoryService } from './toolinventory.service';
 import { ToolInventorySearch, ToolInventorySearchResults } from './toolinventory';

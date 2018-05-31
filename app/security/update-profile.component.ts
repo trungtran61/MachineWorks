@@ -1,13 +1,15 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/map';
+
+
 import { SecurityService } from './security.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User, UserRole, SecurityUserAuth } from './security';
-import { Observable } from 'rxjs/Observable';
 import { ValidationService } from '../shared/validation.service';
 import { forEach } from '@angular/router/src/utils/collection';
+import { Response } from '@angular/http';
 
 @Component({
   templateUrl: './update-profile.component.html',
@@ -87,6 +89,6 @@ export class UpdateProfileComponent implements OnInit {
 
   private handleError(error: Response): Observable<any> {
     console.error(error);
-    return Observable.throw(error || 'Server error');
+    return observableThrowError(error || 'Server error');
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import 'rxjs/add/operator/map';
+
 import { ToolInventorySearch, ToolInventorySearchResults, LookUpRequest, Lookup, CuttingMethodTemplate, APIResponse } from './toolinventory';
 import { Observable } from 'rxjs/observable';
 import { environment } from '../../environments/environment';

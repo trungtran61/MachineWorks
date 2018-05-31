@@ -1,7 +1,6 @@
 import { CanDeactivate } from '@angular/router';
 import { ComponentCanDeactivate } from './component-can-deactivate';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Observable ,  Subject } from 'rxjs';
 import { BsModalService } from 'ngx-bootstrap';
 import { ConfirmLeaveComponent } from './shared/confirm-leave.component';
 import { Injectable } from '@angular/core';
