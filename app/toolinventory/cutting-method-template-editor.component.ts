@@ -5,6 +5,7 @@ import { ToolInventoryService } from './toolinventory.service';
 import { LookUpRequest, Lookup, CuttingMethodTemplate } from './toolinventory';
 import { Observable ,  Observer } from 'rxjs';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
   templateUrl: './cutting-method-template-editor.component.html',
