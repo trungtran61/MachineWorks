@@ -1,5 +1,5 @@
 <form class="form-inline form-group-sm" novalidate (ngSubmit)="onSubmit()" [formGroup]="searchForm">
-  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+  <div class="container">
       <!--div class="input-group mb-2 mr-sm-2 mb-sm-0">
           <div>
             <mat-form-field class="form-control input-sm col-sm">
@@ -22,34 +22,315 @@
         </mat-option>
       </mat-autocomplete>
     </div -->
-  </div>     
+   
 
-  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<!--div class="input-group mb-2 mr-sm-2 mb-sm-0">
       <input type="text" class="form-control input-sm col-sm" placeholder="Item Number" formControlName="ItemNumber">
     </div>
-  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-    <input type="text" class="form-control input-sm col-sm" placeholder="Category" formControlName="CategoryID">
-  </div>
-  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-    <input type="text" class="form-control" placeholder="MWID" formControlName="MWID">
-  </div>
-  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-    <input type="text" class="form-control input-sm col-sm" placeholder="Radius" formControlName="Radius">
-  </div>
-  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-    <input type="text" class="form-control"  placeholder="Number Of Cutters" formControlName="NumberOfCutters">
-  </div>
-  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-    <input type="text" class="form-control input-sm col-sm"  placeholder="ChipBreaker" formControlName="ChipBreaker">
-  </div>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0"-->
+<div class="card mb-1">
+     <div class="card-heading" *ngIf="parentTool == '0'"><h6>Search</h6></div>
+     <div class="card-heading" *ngIf="parentTool > '0'"><h6>Link Tool for ({{parentTool}})</h6></div>
+ <div class="card-block">  
+  <div class="row card-row">
+   
+      <div class="pb-1 pr-1">
+          <div class="text-center bg-primary col-md">1 Code</div>
+          <input formControlName="code"
+              [value]="selectedCode" (input)="selectedCode = $event.target.value"
+              [typeahead]="codeDataSource"
+              [typeaheadOptionsLimit]="10"
+              typeaheadOptionField="Text"      
+              [typeaheadMinLength]="0"  
+               class="form-control"
+               (keyup.tab)="selectedCode = $event.target.value;
+                      getSelectedCodeColumns()"
+                (blur)="selectedCode = $event.target.value;
+                getSelectedCodeColumns()">
 
-  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-    <button type="button" class="btn btn-primary" (click)="GetSearchResults();">Search</button>
+      </div>
+    <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwCategoryID')">
+        <div class="text-center bg-heading col-md">2 Category</div>
+            <input formControlName="category"
+            [value]="selectedCategory" (input)="selectedCategory = $event.target.value"
+            [typeahead]="categoryDataSource"
+            [typeaheadOptionsLimit]="10"
+            typeaheadOptionField="Text"      
+            [typeaheadMinLength]="0"  
+            (typeaheadOnSelect)="typeaheadOnSelect('categoryID', $event.item.Value)"
+             class="form-control">
+             <input type="hidden" formControlName="categoryID" />
+             
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('ToolGroupNum')">
+        <div class="text-center bg-heading col-md">3 Groups</div>
+        <div><input class="form-control input-sm" type="text" formControlName="groups" /></div>
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwVendorID')">
+          <div class="text-center bg-heading col-md">4 Vendor Item#</div>
+          <div><input class="form-control input-sm"  type="text" formControlName="vendorItem" /></div>
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwName')">
+          <div class="text-center bg-heading col-md">5 Name</div>
+              <input formControlName="name"
+              [value]="selectedName" (input)="selectedName = $event.target.value"
+              [typeahead]="nameDataSource"
+              [typeaheadOptionsLimit]="10"
+              typeaheadOptionField="Text"      
+              [typeaheadMinLength]="0"  
+               class="form-control">
+      </div> 
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('Description')">
+          <div class="text-center bg-heading col-md">6 Description</div>
+          <div><input class="form-control input-sm" type="text" formControlName = "description" id="inputDescription" ></div>
+        </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwExtLocation')">
+          <div class="text-center bg-heading col-md">7 External Location</div>
+              <input formControlName="externalLocation"
+              [value]="selectedExternalLocation" (input)="selectedExternalLocation = $event.target.value"
+              [typeahead]="externalLocationDataSource"
+              [typeaheadOptionsLimit]="10"
+              typeaheadOptionField="Text"      
+              [typeaheadMinLength]="0"  
+               class="form-control">
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwStatusID')">
+          <div class="text-center bg-heading col-md">8 Status</div>
+              <input formControlName="status"
+              [value]="selectedStatus" (input)="selectedStatus = $event.target.value"
+              [typeahead]="statusDataSource"
+              [typeaheadOptionsLimit]="10"
+              typeaheadOptionField="Text"      
+              [typeaheadMinLength]="0"  
+              (typeaheadOnSelect)="typeaheadOnSelect('statusID', $event.item.Value)"
+               class="form-control"/>
+               <input type="hidden" formControlName="statusID" />
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('isLocked')">
+          <div class="text-center bg-heading col-md">9 Locked</div>
+          <div class="border text-center rounded-bottom" style="height: 38px; width:200px">
+            <input formControlName="locked" type="checkbox" id="locked"/>
+          </div>
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('onHand')">
+          <div class="text-center bg-heading col-md">10 On Hand</div>
+          <div class="border text-center rounded-bottom" style="height: 38px; width:200px">
+            <input formControlName="onHand" type="checkbox" id="onHand"/>
+          </div>
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('manufacturerItem')">
+        <div class="text-center bg-heading col-md">11 Manufacturer Item#</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "manufacturerItem" ></div>
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwVendorID')">
+        <div class="text-center bg-heading col-md">12 Vendor Name</div>
+            <input formControlName="vendorName"
+            [typeahead]="vendorNameDataSource"
+            [typeaheadOptionsLimit]="10"
+            typeaheadOptionField="Value"      
+            [typeaheadMinLength]="0"  
+             class="form-control">
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwLocation')">
+        <div class="text-center bg-heading col-md">13 Location</div>
+            <input formControlName="location"
+            [value]="selectedLocation" (input)="selectedLocation = $event.target.value"
+            [typeahead]="locationDataSource"
+            [typeaheadOptionsLimit]="10"
+            typeaheadOptionField="Value"      
+            [typeaheadMinLength]="0"  
+             class="form-control">
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwOrderPoint')">
+        <div class="text-center bg-heading col-md">14 Order Point</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "orderPoint" ></div>
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwInvLevel')">
+        <div class="text-center bg-heading col-md">15 Inventory Level</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "inventoryLevel" ></div>
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwUnitPrice')">
+        <div class="text-center bg-heading col-md">16 Unit Price ($/pack)</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "unitPrice" ></div>
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('PackSize')">
+        <div class="text-center bg-heading col-md">17 Pack Size</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "packSize" ></div>
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwImageCode')">
+        <div class="text-center bg-heading col-md">18 Image</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "imageCode" ></div>
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwManufacturer')">
+        <div class="text-center bg-heading col-md">19 Manufacturer Name</div>
+            <input formControlName="manufacturer"
+            [value]="selectedManufacturer" (input)="selectedManufacturer = $event.target.value"
+            [typeahead]="manufacturerDataSource"
+            [typeaheadOptionsLimit]="10"
+            typeaheadOptionField="Value"      
+            [typeaheadMinLength]="0"  
+             class="form-control">
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('MachineNumber')">
+        <div class="text-center bg-heading col-md">20 Machine#</div>
+            <input formControlName="machineNumber"
+            [value]="selectedMachineNumber" (input)="selectedMachineNumber = $event.target.value"
+            [typeahead]="machineNumberDataSource"
+            [typeaheadOptionsLimit]="10"
+            typeaheadOptionField="Value"      
+            [typeaheadMinLength]="0"  
+             class="form-control">
+      </div>    
+    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('StationNumber')">
+        <div class="text-center bg-heading col-md">21 Station#</div>
+            <input formControlName="stationNumber"
+            [value]="selectedStationNumber" (input)="selectedStationNumber = $event.target.value"
+            [typeahead]="stationNumberDataSource"
+            [typeaheadOptionsLimit]="10"
+            typeaheadOptionField="Value"      
+            [typeaheadMinLength]="0"  
+             class="form-control">
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwComment')">
+        <div class="text-center bg-heading col-md">22 Comment</div>
+        <div><input class="form-control input-sm"  type="text" formControlName="comment" /></div>
+      </div>
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('CuttingMethod')">
+        <div class="text-center bg-heading col-md">23 Cutting Methods</div>
+            <input formControlName="cuttingMethods"
+            [value]="selectedCuttingMethods" (input)="selectedCuttingMethods = $event.target.value"
+            [typeahead]="cuttingMethodsDataSource"
+            [typeaheadOptionsLimit]="10"
+            typeaheadOptionField="Value"      
+            [typeaheadMinLength]="0"  
+             class="form-control">
+      </div>    
+ 
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwMaterial')">
+        <div class="text-center bg-heading col-md">24 Material</div>
+            <input formControlName="material"
+            [value]="selectedMaterial" (input)="selectedMaterial = $event.target.value"
+            [typeahead]="materialDataSource"
+            [typeaheadOptionsLimit]="10"
+            typeaheadOptionField="Value"      
+            [typeaheadMinLength]="0"  
+             class="form-control">
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwGrade')">
+        <div class="text-center bg-heading col-md">25 Grade</div>
+            <input formControlName="grade"
+            [value]="selectedGrade" (input)="selectedGrade = $event.target.value"
+            [typeahead]="gradeDataSource"
+            [typeaheadOptionsLimit]="10"
+            typeaheadOptionField="Value"      
+            [typeaheadMinLength]="0"  
+             class="form-control">
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwHID')">
+        <div class="text-center bg-heading col-md">26 MWID</div>
+        <div><input class="form-control input-sm" type="text" formControlName="mwHid" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwRadius')">
+          <div class="text-center bg-heading col-md">27 Radius</div>
+          <div><input class="form-control input-sm" type="text" formControlName = "radius" id="inputRadius" ></div>
+        </div> 
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwWidth')">
+        <div class="text-center bg-heading col-md">28 Width</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "width" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwNumofCutter')">
+        <div class="text-center bg-heading col-md">29 # of Cutter</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "numberOfCutters" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwDiameter')">
+        <div class="text-center bg-heading col-md" title="Cutting Diameter">30 Diameter</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "cuttingDiameter" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwShankDia')">
+        <div class="text-center bg-heading col-md">31 Shank Diameter</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "shankDiameter" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('NeckDiameter')">
+        <div class="text-center bg-heading col-md">32 Neck Diameter</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "neckDiameter" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwFluteLength')">
+        <div class="text-center bg-heading col-md">33 Flute Length</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "fluteLength" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('LBS')">
+        <div class="text-center bg-heading col-md">34 LBS (Reach)</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "lbs" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwOAL')">
+        <div class="text-center bg-heading col-md">35 O.A.L</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "oal" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwNumofFlutes')">
+        <div class="text-center bg-heading col-md">36 # of Flutes</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "numberOfFlutes" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwAngle')">
+        <div class="text-center bg-heading col-md">37 Angle</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "angle" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwMaxDepthofCut')">
+        <div class="text-center bg-heading col-md">38 Max Depth Cut</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "maxDepthCut" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwChipBreaker')">
+        <div class="text-center bg-heading col-md">39 Chip Breaker</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "chipBreaker" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwDirection')">
+        <div class="text-center bg-heading col-md">40 Direction</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "direction" ></div>
+      </div>    
+      <div class="pb-1 pr-1" [class.d-none]="hideColumn('mwMaterial')">
+        <div class="text-center bg-heading col-md">41 Material Recommended</div>
+        <div><input class="form-control input-sm" type="text" formControlName = "materialRecommended" ></div>
+      </div>    
+    
+</div>
+</div>
+  <div class="card-block">
+      <div class="row card-row">
+        <div>
+            <button type="button" class="btn btn-primary" [class.d-none] = "selectedCode == ''" (click)="getPage(1);">Search</button>
+        </div> 
+      </div>
   </div>
+</div>  
 
-  <table class="table">
-    <tr *ngFor="let item of searchResult">
-      <td>{{ item }}</td>
-    </tr>
-  </table>
+      <div *ngIf="searchResults.length > 0" class="row card-row">
+        <div *ngFor="let item of searchResults" class="col-md-3 bg-light mr-1 mb-1 text-nowrap pop">
+            <div [class.d-none] = "parentTool == 0">
+                <input type="checkbox" 
+                name="linkedTools"
+                value="{{item.mwhid}}"
+                (change)="updateCheckedOptions(item.mwhid, $event)"/>
+            </div>
+          <a href="tooldetail/{{item.mwhid}}" class="toolDetails">
+            <h6 class="text-primary"><small>ID:{{ item.mwhid }}</small></h6>
+              <small>
+                <div>On Hand:{{ item.onHand }}</div>
+                <div>Location:{{ item.location }}</div>
+              </small>
+            <div>{{ item.imagePath }}</div>
+          </a>
+        </div>
+      </div>
+      <div *ngIf="searchResults.length > 0">
+          <button type="button" class="btn btn-secondary mr-1" [class.d-none]="selectedToolHolder.length == 0" (click)="linkTool()">Add</button>
+      </div>
+      <!--div [hidden]='recordCount == 0'>
+        <pagination [totalItems]='recordCount' [(ngModel)]='currentPage' [ngModelOptions]="{standalone: true}" (pageChanged)='getPage($event.page)' [itemsPerPage]='pageSize'></pagination>
+    </div-->
+    <div [hidden]='recordCount == 0'>
+      <pagination [totalItems]='recordCount' currentPage="[currentPage]" (pageChanged)='getPage($event.page)' [itemsPerPage]='pageSize'></pagination>
+  </div>  
+    <!-- <p>Form value {{ searchForm.value | json }} </p>
+    <p> Form status {{ searchForm.status | json}} </p> -->
+</div>  
 </form>

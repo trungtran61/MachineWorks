@@ -1,3 +1,5 @@
+import { inherits } from "util";
+
     export class ToolSetUp
     {
         ID: number;
@@ -270,6 +272,7 @@
         SortColumn?: string;
         SortDirection?: string;
         SelectedToolIDs?: string[];
+        mwHid?: string;
     }
 
     export class LookupCategorySearch
@@ -331,60 +334,61 @@
         StationNumber: string;
         OrderApproved: string;
         Width: string;
+        MWHID: string;
         LinkedTools: LinkedTool[];
         OrganizationInfo: OrganizationInfo;
     }
 
     export class ToolInventorySaveRequest
     {
-        ID: number;
-        Unit: string;
-        Code: string;
-        Name: string;
-        ItemNumber: string;
-        Manufacturer: string;
-        OrganizationID: string;
-        MWID: string;
-        Location: string;
-        Radius: string;
-        NumOfCutters: string;
-        Material: string;
-        Grade: string;
+        iD: number;
+        unit: string;
+        code: string;
+        name: string;
+        itemNumber: string;
+        manufacturer: string;
+        organizationID: string;
+        mWID: string;
+        location: string;
+        radius: string;
+        numOfCutters: string;
+        material: string;
+        grade: string;
 
-        OnHand: string;
-        ChipBreaker: string;
-        CheckedOut: string;
-        Comment: string;
-        Description: string;
-        ExternalLocation: string;
-        CategoryID: string;
-        StatusID: string;
+        onHand: string;
+        chipBreaker: string;
+        checkedOut: string;
+        comment: string;
+        description: string;
+        externalLocation: string;
+        categoryID: string;
+        statusID: string;
         isLocked: string;
-        OrderPoint: string;
-        InventoryLevel: string;
-        ToolGroupNumber: string;
-        UnitPrice: string;
-        PackSize: string;
-        ImagePath: string;
-        Angle: string;
-        Diameter: string;
-        Direction: string;
-        FluteLength: string;
-        ImageCode: string;
+        orderPoint: string;
+        inventoryLevel: string;
+        toolGroupNumber: string;
+        unitPrice: string;
+        packSize: string;
+        imagePath: string;
+        angle: string;
+        diameter: string;
+        direction: string;
+        fluteLength: string;
+        imageCode: string;
         isSent: string;
-        LBS: string;
-        MachineNumber: string;
-        MaxDepthOfCut: string;
-        NewAppDate: string;
-        NumOfFlutes: string;
-        OAL: string;
-        POID: string;
-        ShankDiameter: string;
-        NeckDiameter: string;
-        StationNumber: string;
-        OrderApproved: string;
-        Width: string;
-        CuttingMethodID: string[];    
+        lBS: string;
+        machineNumber: string;
+        maxDepthOfCut: string;
+        newAppDate: string;
+        numOfFlutes: string;
+        oAL: string;
+        pOID: string;
+        shankDiameter: string;
+        neckDiameter: string;
+        stationNumber: string;
+        orderApproved: string;
+        width: string;
+        cuttingMethodID: string[]; 
     }
 
     export class LinkedTool
@@ -402,8 +406,8 @@
     }
     export class ToolInventorySearchResults
     {
-        SearchResults: ToolInventorySearchResult[];
-        RecordCount: number;        
+        searchResults: ToolInventorySearchResult[];
+        recordCount: number;        
     }
 
     export class LookupCategories
