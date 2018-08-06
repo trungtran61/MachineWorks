@@ -1,0 +1,29 @@
+<div class="modal-header bg-primary text-white">
+  <h4 class="modal-title pull-left">Edit Permission</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body clearfix">  
+  <div class="form-group">
+    <label for="Name">Name</label>
+      <input id="name" class="form-control" required [(ngModel)]="permission.name" autofocus="autofocus" />  
+  </div>
+  <div class="form-group">
+    <label for="Name">Display Name</label>
+      <input id="displayname" class="form-control" [(ngModel)]="permission.displayName"  />  
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="Active" [(ngModel)]="permission.active" />
+    <label class="form-check-label" for="Active">Active</label>
+  </div>
+  <div class="row">
+    <label class="alert alert-success" [hidden]="infoMessage == ''">{{ infoMessage }}</label>
+    <label class="alert alert-danger" [hidden]="errorMessage == ''">{{ errorMessage }}</label>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" tooltip="Save Permission" (click)="updatePermission()">Save</button>
+  <button class="btn btn-default right"  tooltip="exit without saving" (click)="closeModal()">Exit</button>
+</div>
+

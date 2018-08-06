@@ -1,0 +1,78 @@
+<div class="panel panel-primary">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      {{pageTitle}}
+    </div>
+    <div class="card-body">
+      <form class="needs-validation" novalidate [formGroup]="entryForm">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4 order-md-2 mb-4">
+              <div class="card">
+                <div class="card-header bg-secondary text-white">
+                  Permissions
+                </div>
+                <div class="card-body" style="height: 400px;overflow-y:auto;">
+                  <div formArrayName="Permissions">
+                    <table>
+                      <tbody>
+                        <tr [formGroupName]="i" *ngFor="let permission of permissions.controls; let i=index">
+                          <td>
+                            <input id="{{ 'chk'+i }}" type="checkbox" formControlName="Assigned" />
+                            <label style="height: 1px;">
+                              <input style="border: 0;" [id]="i" type="text" formControlName="Name" value="{{ permissions.get(i + '.Name')?.value }}" />
+                            </label>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-8 order-md-1">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="name">Name</label>
+                  <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="name" formControlName='Name' placeholder="Name">
+                    <validation-messages [control]="entryForm.controls.Name"></validation-messages>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="Active" formControlName='Active'>
+                    <label class="form-check-label" for="Active">Active</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="firstName">Display Name</label>
+                  <input type="text" class="form-control" id="firstName" placeholder="Display Name" required formControlName='DisplayName'>
+                </div>
+              </div>
+
+              <div class="mb-2">
+                <button class="btn btn-primary btn-md btn-block" type="button" [disabled]="!entryForm.valid || entryForm.pristine" (click)="updateRole()">{{roleId != 0 ? 'Update Role': 'Create Role'}}</button>
+              </div>
+              <div class="row">
+                <div class="col-md-3 input-group" [routerLink]="['/manageroles']" [queryParamsHandling]="true" style="height: 40px;">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i-chevrons-left></i-chevrons-left>
+                    </span>
+                  </div>
+                  <input class="form-control" value="back" />
+                </div>
+                <div class="col-md-9">
+                  <label class="alert alert-success" [hidden]="infoMessage == ''">{{ infoMessage }}</label>
+                  <label class="alert alert-danger" [hidden]="errorMessage == ''">{{ errorMessage }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+          </div>
+        </div>
+      </form>
+    </div>

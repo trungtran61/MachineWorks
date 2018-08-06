@@ -1,0 +1,38 @@
+<div class='panel panel-primary'>
+    <div class='table-responsive'>
+        <table class='table table-bordered table-striped' *ngIf='(users && users.length) || listFilter != "" '>
+            <thead>
+                <tr>
+                    <th>Full Name
+                            <input type='text' class='form-control input-sm'  [(ngModel)]='listFilter'/>
+                    </th>
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let user of users'>
+                    <td>
+                        {{user.firstName + ' ' + user.lastName}}
+                    </td>
+                    <td>
+                        <a [routerLink]="['/manageusers', user.id]">{{ user.userName }}</a>
+                    </td>
+                    <td>{{ user.Email }}</td>
+                    <td>
+                        <input type='checkbox' checked="{{user.active ? 'Checked':''}}" (change)='updateUserStatus(user)' [(ngModel)]='user.active' />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]='recordCount == 0'>
+        <pagination [totalItems]='recordCount' [(ngModel)]='currentPage' (pageChanged)='getPage($event.page)' [itemsPerPage]='pageSize'></pagination>
+    </div>
+    <div class='row'>
+        <div class='col-md-2'>
+            <button class='btn btn-primary btn-md btn-block' type='button' routerLink='/manageusers/0'>Add User</button>
+        </div>
+    </div>
+</div>

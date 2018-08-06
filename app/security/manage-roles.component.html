@@ -1,0 +1,34 @@
+<div class="panel panel-primary">
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped" *ngIf="roles && roles.length">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Display Name</th>
+          <th>Active</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of roles">
+          <td>
+            <a [routerLink]="['/manageroles', role.id]">{{ role.name }}</a>
+          </td>
+          <td>
+            {{ role.displayName }}
+          </td>
+          <td>
+            <input type="checkbox" checked="{{role.active ? 'Checked':''}}" (change)="updateRoleStatus(role)" [(ngModel)]="role.active" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div [hidden]="recordCount == 0">
+      <pagination [totalItems]="recordCount" [(ngModel)]="currentPage" (pageChanged)="getPage($event.page)" [itemsPerPage]="pageSize"></pagination>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <button class="btn btn-primary btn-md btn-block" type="button" routerLink="/manageroles/0">Add Role</button>
+    </div>
+  </div>
+</div>

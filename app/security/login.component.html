@@ -1,0 +1,47 @@
+<div class="panel panel-primary">
+  <form>
+    <div class="row justify-content-center align-items-center">
+      <div class="card" style="width: 18rem;margin-top: 5em">
+        <div class="card-header bg-primary text-white">
+          <h5>Login to MachineWork</h5>
+        </div>
+        <div class="card-body ">
+          <div class="col-xs-12">
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="userName">UserName</label>
+                  <div class="input-group">
+                    <input id="userName" name="userName" class="form-control" required [(ngModel)]="user.userName" autofocus="autofocus" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <div class="input-group">
+                    <input id="password" name="password" class="form-control" required [(ngModel)]="user.password" type="password" />
+                    <span class="input-group-addon">
+                      <i class="glyphicon glyphicon-lock"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-footer">
+                <button class="btn btn-primary" (click)="login()">
+                  Login
+                </button>
+                <div class="row mt-3">
+
+                  <div class="alert alert-danger" *ngIf="securityObject &&
+                           !securityObject.isAuthenticated">
+                    Invalid User Name/Password.
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

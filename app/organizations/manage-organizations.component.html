@@ -1,0 +1,59 @@
+<div class='panel panel-primary'>
+    <div class='table-responsive'>
+        <table class='table table-bordered table-striped' *ngIf='(organizations && organizations.length) || nameFilter != "" || typeFilter != "" || addressFilter != "" '>
+            <thead>
+                <tr>
+                    <th>Name
+                        <input type='text' class='form-control input-sm' [(ngModel)]='nameFilter' />
+                    </th>
+                    <th>Type
+                        <input type='text' class='form-control input-sm' [(ngModel)]='typeFilter' />
+                    </th>
+                    <th>Address
+                        <input type='text' class='form-control input-sm' [(ngModel)]='addressFilter' />
+                    </th>
+                    <th>Phone</th>
+                    <th>Fax</th>
+                    <th>Mobile</th>
+                    <th>Toll Free</th>
+                    <th>Email</th>
+                    <th>Website</th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let organization of organizations'>
+                    <td>
+                        {{ organization.name }}
+                    </td>
+                    <td>
+                        {{ organization.type }}
+                    </td>
+                    <td>
+                        {{ organization.address1 + organization.address2 + '
+                        <br>' + organization.city + ', ' + organization.state + ' ' + organization.zip }}
+                    </td>
+                    <td>{{ organization.phone }}</td>
+                    <td>{{ organization.fax }}</td>
+                    <td>{{ organization.mobile }}</td>
+                    <td>{{ organization.tollfree }}</td>
+                    <td>{{ organization.email }}</td>
+                    <td>{{ organization.website }}</td>
+                    <td>
+                        <input type='checkbox' checked="{{organization.active ? 'Checked':''}}" (change)='updateOrganizationStatus(user)' [(ngModel)]='organization.active'
+                        />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]='recordCount == 0'>
+        <pagination [totalItems]='recordCount' [(ngModel)]='currentPage' (pageChanged)='getPage($event.page)' [itemsPerPage]='pageSize'></pagination>
+    </div>
+    <div class='row'>
+        <div class='col-md-2'>
+            <button class='btn btn-primary btn-md btn-block' type='button' routerLink='/manageorganizations/0'>Add Organization</button>
+        </div>
+    </div>
+</div>

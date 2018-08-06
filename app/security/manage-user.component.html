@@ -1,0 +1,101 @@
+<div class="panel panel-primary">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      {{pageTitle}}
+    </div>
+    <div class="card-body">
+      <form class="needs-validation" novalidate [formGroup]="entryForm">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4 order-md-2 mb-4">
+              <div class="card">
+                <div class="card-header bg-secondary text-white">
+                  Roles
+                </div>
+                <div class="card-body" style="height: 400px;overflow-y:auto;">
+                  <div formArrayName="Roles">
+                    <table>
+                      <tbody>
+                        <tr [formGroupName]="i" *ngFor="let role of roles.controls; let i=index">
+                          <td>
+                            <input id="{{ 'chk'+i }}" type="checkbox" formControlName="Assigned" />
+                            <label style="height: 1px;">
+                              <input style="border: 0;" [id]="i" type="text" formControlName="Name" value="{{ roles.get(i + '.Name')?.value }}" />
+                            </label>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-8 order-md-1">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="username">Username</label>
+                  <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="username" formControlName='UserName' placeholder="User Name">
+                    <validation-messages [control]="entryForm.controls.UserName"></validation-messages>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="Active" formControlName='Active'>
+                    <label class="form-check-label" for="Active">Active</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" required formControlName='Password'>
+                  <validation-messages [control]="entryForm.controls.Password"></validation-messages>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="firstName">First Name</label>
+                  <input type="text" class="form-control" id="firstName" placeholder="First Name" required formControlName='FirstName'>
+                  <validation-messages [control]="entryForm.controls.FirstName"></validation-messages>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" placeholder="Last Name" required formControlName='LastName'>
+                  <validation-messages [control]="entryForm.controls.LastName"></validation-messages>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="email">Email</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                  </div>
+                  <input type="email" class="form-control" id="email" placeholder="you@example.com" formControlName='Email'>
+                </div>
+                <validation-messages [control]="entryForm.controls.Email"></validation-messages>
+              </div>
+
+              <div class="mb-2">
+                <button class="btn btn-primary btn-md btn-block" type="button" [disabled]="!entryForm.valid || entryForm.pristine" (click)="updateUserProfile()">{{userId != 0 ? 'Update User Profile': 'Create User'}}</button>
+              </div>
+              <div class="row">
+                <div class="col-md-3 input-group" [routerLink]="['/manageusers']" [queryParamsHandling]="true" style="height: 40px;">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i-chevrons-left></i-chevrons-left>
+                    </span>
+                  </div>
+                  <input class="form-control" value="back" />
+                </div>
+                <div class="col-md-9">
+                  <label class="alert alert-success" [hidden]="infoMessage == ''">{{ infoMessage }}</label>
+                  <label class="alert alert-danger" [hidden]="errorMessage == ''">{{ errorMessage }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+           
+          </div>
+        </div>
+      </form>
+    </div>

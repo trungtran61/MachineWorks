@@ -1,0 +1,29 @@
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="entryForm">
+  <div class="row">
+    <div class="form-group col-md-3">
+      <label for="cuttingMethod">Cutting Method:</label>      
+      <input formControlName="cuttingMethod"
+        [(ngModel)]="selectedCuttingMethod"
+        [typeahead]="cuttingMethodDataSource"
+        (typeaheadLoading)="cuttingMethodLoading($event)"
+        (typeaheadOnSelect)="cuttingMethodOnSelect($event)"
+        [typeaheadOptionsLimit]="7"
+        typeaheadOptionField="Text"        
+         class="form-control">
+    </div>
+    <div class="form-group col-md-9">
+      <label for="snippet">Template Snippet:</label>
+      <textarea id='snippet' class="form-control  mb-2" rows="30" cols="30" formControlName="snippet"></textarea>
+
+      <div class="row">
+        <div class="col-md-4 mb-2">
+          <button class="btn btn-primary btn-md btn-block" type="button" [disabled]="!entryForm.valid || entryForm.controls.snippet.pristine" (click)="SaveTemplate()">Update Template</button>
+        </div>
+        <div class="col-md-4">
+          <label class="alert alert-success" [hidden]="errorMessage == ''">{{ errorMessage }}</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>

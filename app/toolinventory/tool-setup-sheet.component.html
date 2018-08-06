@@ -1,0 +1,402 @@
+<div class="table-responsive">
+  <table class="table table-borderless table-responsive table-sm">
+    <tbody>
+      <tr>
+        <td class="col-md-1">1-P/N:
+          <input id="txtPN" class="form-control input-sm required" />
+        </td>
+        <td class="col-md-1">2-REV#:
+          <input id="txtRev" class="form-control input-sm required" />
+        </td>
+        <td class="col-md-1">3-OP#:
+          <input id="txtOP" class="form-control input-sm required" />
+        </td>
+        <td class="col-md-3">4-MACHINE#:
+          <input id="txtMachine" class="form-control input-sm required" />
+        </td>
+        <td class="col-md-1">5-DATE:
+          <input id="txtDate" class="form-control input-sm required" disabled="disabled" />
+        </td>
+      </tr>
+      <tr>
+        <td class="col-md-1">6-PROGRAM#:
+          <input id="txtProgramNumber" class="form-control input-sm" disabled="disabled" />
+        </td>
+        <td class="col-md-3">7-LOCATION:
+          <input id="txtLocation" class="form-control input-sm" placeholder="Progam location" />
+        </td>
+        <td>8-UOM:
+          <div class="btn-group">
+            <input id="txtUOM" class="form-control input-sm" />
+            <span class="searchclear glyphicon glyphicon-remove-circle"></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>9-MATERIAL TYPE:
+          <div class="btn-group">
+            <input id="txtMaterialType" class="form-control input-sm">
+            <span class="searchclear glyphicon glyphicon-remove-circle"></span>
+          </div>
+        </td>
+        <td class="col-md-2">10-MATERIAL HEAT TREATED:
+          <div class="btn-group">
+            <input id="txtMaterialHeatTreated" class="form-control input-sm">
+            <span class="searchclear glyphicon glyphicon-remove-circle"></span>
+          </div>
+        </td>
+        <td class="col-md-2">11-MATERIAL FORM:
+          <div class="btn-group">
+            <input id="txtMaterialForm" class="form-control input-sm" />
+            <span class="searchclear glyphicon glyphicon-remove-circle"></span>
+          </div>
+        </td>
+        <td>12-MATERIAL SIZE:
+          <div class="btn-group">
+            <input id="txtMaterialSize" class="form-control input-sm" />
+            <span class="searchclear glyphicon glyphicon-remove-circle"></span>
+          </div>
+        </td>
+        <td>13-MACHINE WORK HOLDING TO:
+          <div class="btn-group">
+            <input id="txtMachineWorkHoldingTo" class="form-control input-sm" />
+            <span class="searchclear glyphicon glyphicon-remove-circle"></span>
+          </div>
+        </td>
+        <td>14-CUT WORK HOLDING TO:
+          <div class="btn-group">
+            <input id="txtCutWorkHoldingTo" class="form-control input-sm" />
+            <span class="searchclear glyphicon glyphicon-remove-circle"></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="col-md-1">15-WORK HOLDING# 1 (ITEM#):
+          <input id="txtWH1Item" class="form-control openToolSearch" />
+          <div class="image left">
+            <img class="small" id="imgWorkHolding1" 
+              alt="WORK HOLDING# 1 Image" />
+          </div>
+        </td>
+        <td class="col-md-1">16-WORK HOLDING# 2 (ITEM#):
+          <input id="txtWH2Item" class="form-control openToolSearch" />
+          <div class="image">
+            <img class="small" id="imgWorkHolding2" 
+              alt="WORK HOLDING# 2 Image" />
+          </div>
+        </td>
+        <td class="col-md-1">17-WORK HOLDING# 3 (ITEM#):
+          <div class="image">
+            <input id="txtWH3Item" class="form-control openToolSearch" />
+            <img class="small" id="imgWorkHolding3"
+              alt="WORK HOLDING# 3 Image" />
+          </div>
+        </td>
+        <td class="col-md-3">18-WORK HOLDINGS COMMENTS:
+          <textarea id="txtWHComments" class="form-control input-sm" cols="20" rows="8"></textarea>
+        </td>
+        <td rowspan="3">
+          <input id="btnimgWHNP" class="WHPartImage btn btn-primary" type="button" value="Work Holdings No Part" />
+          <div class="image">
+            <img class="small" id="imgWHNP" src="/assets/images/select_image_sm.png" 
+              alt="Upload Image" />
+          </div>
+          <a id="lnkWHNP" target="_blank" style="display:none"></a>
+          <input type="hidden" id="hdnWHNP" />
+        </td>
+        <td rowspan="3">
+          <input id="btnimgWHWP" class="WHPartImage btn btn-primary" type="button" value="Work Holdings With Part" />
+          <div class="image">
+            <img class="small" id="imgWHWP" src="/assets/images/select_image_sm.png" 
+              alt="Upload Image" />
+          </div>
+          <a id="lnkWHWP" target="_blank" style="display:none"></a>
+          <input type="hidden" id="hdnWHWP" />
+        </td>
+        <td rowspan="3">
+          <input id="btnimgCP" class="WHPartImage btn btn-primary" type="button" value="Completed Part" />
+          <div class="image">
+            <img class="small" id="imgCP" src="/assets/images/select_image_sm.png" 
+              alt="Upload Image" />
+          </div>
+          <a id="lnkCP" target="_blank" style="display:none"></a>
+          <input type="hidden" id="hdnCP" />
+        </td>
+      </tr>
+      <tr>
+        <td>19-WORK HOLDING# 1 (MWID#):
+          <input id="txtWH1MWID" class="form-control input-sm" disabled="disabled" />
+        </td>
+        <td>20-WORK HOLDING# 2 (MWID#):
+          <input id="txtWH2MWID" class="form-control input-sm" disabled="disabled" />
+        </td>
+        <td>21-WORK HOLDING# 3 (MWID#):
+          <input id="txtWH3MWID" class="form-control input-sm" disabled="disabled" />
+        </td>
+      </tr>
+      <tr>
+        <td>22-WORK HOLDING# 1 (LOCATION):
+          <input id="txtWH1Location" class="form-control input-sm" disabled="disabled" />
+        </td>
+        <td>23-WORK HOLDING# 2 (LOCATION):
+          <input id="txtWH2Location" class="form-control input-sm" disabled="disabled" />
+        </td>
+        <td>24-WORK HOLDING# 3 (LOCATION):
+          <input id="txtWH3Location" class="form-control input-sm" disabled="disabled" />
+        </td>
+      </tr>
+      <tr>
+        <td>25-CHUCK PRESSURE / TORQUE:
+          <input id="txtTorque" class="form-control input-sm" />
+        </td>
+        <td>26-HOLD PART ON:
+          <input id="txtHoldPartOn" class="form-control input-sm" />
+        </td>
+        <td>27-Z0:
+          <input id="txtZ0" class="form-control input-sm" />
+        </td>
+      </tr>
+      <tr>
+        <td>28-BAR STICK OUT FROM COLLET BEFORE BAR PULLED:
+          <input id="txtBarStickOutBefore" class="form-control input-sm" />
+        </td>
+        <td>29-AMOUNT FACE OFF:
+          <input id="txtFaceOff" class="form-control input-sm" />
+        </td>
+        <td>30-CUTOFF TOOL THICKNESS:
+          <input id="txtCutOffToolThickness" class="form-control input-sm" />
+        </td>
+        <td>31-FINISH PART O.A.L:
+          <input id="txtOAL" class="form-control input-sm" />
+        </td>
+        <td>32-BAR STICK OUT FROM COLLET AFTER BAR PULLED:
+          <input id="txtBarStickOutAfter" class="form-control input-sm" />
+        </td>
+      </tr>
+      <tr>
+        <td>33-AMOUNT BAR PULL OUT:
+          <input id="txtBarPullOut" class="form-control input-sm" />
+        </td>
+        <td colspan="3"></td>
+        <td>34-PART STICK OUT FROM JAW MINIMUM:
+          <input id="txtPartStickOutMinimum" class="form-control input-sm" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5">35-GENERAL COMMENTS:
+          <input id="txtComments" class="form-control input-sm" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <input type="hidden" id="hdnSetupSheetId" runat="server" clientidmode="Static" />
+  <input type="hidden" id="hdnGetToolInfo_1" class="hdnGetToolInfo" />
+  <input type="hidden" id="hdnGetToolInfo_2" class="hdnGetToolInfo" />
+  <input type="hidden" id="hdnGetToolInfo_3" class="hdnGetToolInfo" />
+  <input type="hidden" id="hdnFromMachineID" />
+  <input type="hidden" id="hdnNew" />
+  <button type="button" id="addRow" class="btn btn-primary">
+    <span class="glyphicon glyphicon-plus pull-left"></span>Add Tool
+  </button>
+  <button type="button" id="btnSave" class="btn btn-primary">
+    <span class="glyphicon glyphicon-download-alt pull-left"></span>Save Setup Sheet
+  </button>
+  <button type="button" id="btnViewProgram" class="btn btn-primary">
+    <span class="glyphicon glyphicon-eye-open pull-left"></span>View Program
+  </button>
+  <button type="button" id="btnSaveUnprovenProgram" class="btn btn-primary">
+    <span class="glyphicon glyphicon-download pull-left"></span>Save Program
+  </button>
+  <button type="button" id="btnOpenUploadProgramDialog" class="btn btn-primary">
+    <span class="glyphicon glyphicon-upload pull-left"></span>Upload Program
+  </button>
+  <button type="button" id="btnShowConvert" class="btn btn-primary" style="display: none;">
+    <span class="glyphicon glyphicon-new-window pull-left"></span>Convert Program
+  </button>
+  <button type="button" id="btnGroupToolSet" class="btn btn-primary" style="display: none;">
+    <span class="glyphicon glyphicon-folder-open pull-left"></span>Group Toolset
+  </button>
+  <button type="button" id="btnSearchToolSetup" class="btn btn-primary">
+    <span class="glyphicon glyphicon-search pull-left"></span>Search Toolset
+  </button>
+
+  <table id="tblTools" class="table table-borderless">
+    <tbody>
+      <tr>
+        <th colspan="4"></th>
+        <th>36-N#</th>
+        <th>37-TOOL#</th>
+        <th>38-T.O.#</th>
+        <th>39-CUTTING
+          <br /> METHODS
+        </th>
+        <th colspan="2"></th>
+        <th>40-SPECIAL
+          <br /> COMMENT
+        </th>
+        <th>41-PARTS/
+          <br /> CORNER
+        </th>
+        <th>42-SECONDS/
+          <br /> TOOL
+        </th>
+        <th>43-TOOL
+          <br /> ITEM#
+        </th>
+        <th></th>
+        <th>44-TOOL
+          <br /> NAME
+        </th>
+        <th>45-TOOL
+          <br /> DESCRIPTION
+        </th>
+        <th>46-TOOL
+          <br /> LOCATION
+        </th>
+        <th nowrap>47-HOLDER 1
+          <br /> ITEM#
+        </th>
+        <th></th>
+        <th nowrap>48-HOLDER 1
+          <br /> NAME
+        </th>
+        <th nowrap>49-HOLDER 1
+          <br /> MWID#
+        </th>
+        <th nowrap>50-HOLDER 1
+          <br /> LOCATION
+        </th>
+        <th nowrap>51-HOLDER 2
+          <br /> ITEM#
+        </th>
+        <th></th>
+        <th nowrap>52-HOLDER 2
+          <br /> NAME
+        </th>
+        <th nowrap>53-HOLDER 2
+          <br /> MWID#
+        </th>
+        <th nowrap>54-HOLDER 2
+          <br /> LOCATION
+        </th>
+        <th nowrap>55-HOLDER 3
+          <br /> ITEM#
+        </th>
+        <th></th>
+        <th nowrap>56-HOLDER 3
+          <br /> NAME
+        </th>
+        <th nowrap>57-HOLDER 3
+          <br /> MWID#
+        </th>
+        <th nowrap>58-HOLDER 3
+          <br /> LOCATION
+        </th>
+        <th>59-COMMENTS</th>
+      </tr>
+    </tbody>
+  </table>
+  <div id="hiddenFields">
+    <input type="hidden" id="hdnMaterialType" />
+    <input type="hidden" id="hdnUOM" />
+    <input type="hidden" id="hdnPartStickOutMinimum" />
+  </div>
+
+  <div id="dialogConvertProgram" style="display: none;">
+    <div>Select Machine to Convert to</div>
+    <div style="margin-bottom: 5px">
+      <select id="ddlToMachineID" class="form-control input-sm" ></select>
+    </div>
+    <div style="margin: 5px">
+      <textarea id="taConvertProgram" rows="30" cols="65" class='dialog'></textarea>
+    </div>
+    <div style="margin-top: 5px">
+      <input type="button" id="btnConvert" value="Convert" class="btn btn-primary" />
+      <input type="button" id="btnSaveConvert" value="Save" class="btn btn-primary" />
+      <input type="button" id="btnCancelConvert" value="Cancel" class="btn btn-warning" />
+    </div>
+    <div id="dialogConvertProgramMessage" style="display: none">Program converted. Click
+      <a id="dialogConvertProgramLink" href="#">here</a> to view the tool setup sheet.</div>
+  </div>
+
+  <div id="dialogSnippet" style="display: none;">
+    <div style="margin: 5px">
+      <textarea id="taSnippet" rows="40" cols="65" class='dialog'></textarea>
+    </div>
+    <div style="margin-top: 5px">
+      <input type="button" id="btnSaveSnippet" value="Save" class="btn btn-primary" />
+      <input type="button" id="btnReloadSnippet" value="Reload from Template" class="btn btn-warning" />
+      <input type="button" id="btnCancelSnippet" value="Cancel" class="btn btn-warning" />
+    </div>
+  </div>
+
+  <div id="dialogGroupToolSetup" style="display: none;">
+    <div style="margin: 5px">
+      <div>Click on the radio button to select the group name.</div>
+      <table class="table table-borderless" id="tblToolSetupGroup">
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top: 5px">
+      <input type="button" id="btnSaveGroupToolSetup" value="Save" class="btn btn-primary" />
+      <input type="button" id="btnCancelGroupToolSetup" value="Cancel" class="btn btn-warning" />
+    </div>
+  </div>
+
+  <div id="dialogCompleteProgram" style="display: none;">
+    <div style="margin: 5px">
+      <textarea id="taCompleteProgram" rows="30" cols="65" class='dialog'></textarea>
+    </div>
+    <button type="button" id="btnSaveProgram" class="btn btn-primary">
+      <span class="glyphicon glyphicon-download pull-left"></span>Save Program
+    </button>
+    <button type="button" id="btnCloseProgram" class="btn btn-warning">
+      <span class="glyphicon glyphicon-off pull-left"></span>Close
+    </button>
+  </div>
+
+  <div id="dialogSearchToolSetup" style="display: none;">
+    <div style="margin: 5px" id="lblSearchToolSetupMessage">
+    </div>
+    <div style="margin-top: 5px">
+      <input type="text" id="txtToolSetupSearch" placeholder="Enter search term" class="form-control input-sm" />
+    </div>
+    <div style="height: 600px; overflow-y: auto;">
+      <table class="table table-borderless" id="tblToolSetups">
+        <tbody></tbody>
+      </table>
+    </div>
+    <div style="margin-top: 5px">
+      <input type="button" id="btnAddSelectedToolSetup" value="Add Selected Tool Setups" class="btn btn-primary" />
+      <input type="button" id="btnCancelSearchToolSetup" value="Cancel" class="btn btn-warning" />
+    </div>
+  </div>
+
+
+  <div id="dialogUploadProgram" style="display: none;">
+    <div style="margin: 5px">
+      <input type="file" id="uploadedProgram" />
+    </div>
+    <textarea class="form-control" rows="18" cols="150" id="uploadedProgramText"></textarea>
+    <div style="margin-top: 5px">
+      <input type="button" id="btnUploadProgram" value="Upload Program" class="btn btn-primary" />
+      <input type="button" id="btnCloseUploadProgramDialog" value="Close" class="btn btn-warning" />
+    </div>
+    <div style="margin: 3px">
+      <label>
+        <input type="checkbox" value="" id="chkUseExistingSheet" />Update Current Setup Sheet's Program</label>
+    </div>
+    <div style="margin: 3px" id="dialogUploadProgramMessage">
+    </div>
+  </div>
+
+  <div id="dialogMessage" style="display: none;">
+    <div style="margin: 5px" id="lblMessage">
+    </div>
+    <button type="button" id="btnCloseMessage" class="btn btn-warning">
+      <span class="glyphicon glyphicon-off pull-left"></span>Close
+    </button>
+  </div>
+</div>

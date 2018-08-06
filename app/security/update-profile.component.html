@@ -1,0 +1,61 @@
+<div class="panel panel-primary">
+    <div class="row justify-content-center align-items-center">
+        <div class="card" style="width: 48rem;margin-top: 5em">
+    <div class="card-header bg-primary text-white">
+      Update Profile
+    </div>
+    <div class="card-body">
+      <form class="needs-validation" novalidate [formGroup]="entryForm">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="username">Username</label>
+              <div class="input-group mb-2">
+                <input type="text" class="form-control" id="username" formControlName='UserName' placeholder="User Name">
+                <validation-messages [control]="entryForm.controls.UserName"></validation-messages>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" required formControlName='Password'>
+              <validation-messages [control]="entryForm.controls.Password"></validation-messages>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" id="firstName" placeholder="First Name" required formControlName='FirstName'>
+              <validation-messages [control]="entryForm.controls.FirstName"></validation-messages>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" id="lastName" placeholder="Last Name" required formControlName='LastName'>
+              <validation-messages [control]="entryForm.controls.LastName"></validation-messages>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 mb-3">
+              <label for="email">Email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+                </div>
+                <input type="email" class="form-control" id="email" placeholder="you@example.com" formControlName='Email'>
+              </div>
+              <validation-messages [control]="entryForm.controls.Email"></validation-messages>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 mb-2">
+              <button class="btn btn-primary btn-md btn-block" type="button" [disabled]="!entryForm.valid || entryForm.pristine" (click)="updateUserProfile()">Update Profile</button>
+            </div>
+            <div class="col-md-4">
+              <label class="alert alert-success" [hidden]="errorMessage == ''">{{ errorMessage }}</label>
+            </div>
+          </div>
+          <div class="panel-footer">
+          </div>
+        </div>
+      </form>
+    </div>  
+    </div>
